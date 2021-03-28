@@ -1,9 +1,13 @@
 import './sass/main.scss';
+import './js/modal';
+import './js/pagination';
+import './js/search';
+import headerMarkup from './partials/header.html';
+import galleryMarkup from './partials/gallery.html';
+import footerMarkup from './partials/footer.html';
 
-//test
+const body = document.querySelector('body');
 
-// Test FT-07
-
-//test
-
-//test katbr
+body.insertAdjacentHTML('beforeend', headerMarkup);
+body.insertAdjacentHTML('beforeend', galleryMarkup);
+body.insertAdjacentHTML('beforeend', footerMarkup);
