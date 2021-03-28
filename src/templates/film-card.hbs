@@ -1,4 +1,5 @@
 {{#each this}}
+<li class="gallery-list__item">
 <div class="film-card" data-id="{{id}}">
     <img class="poster" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{title}}"
         data-source="https://image.tmdb.org/t/p/w500{{backdrop_path}}" />
@@ -14,4 +15,5 @@
         </p>
     </div>
 </div>
+</li>
 {{/each}}
