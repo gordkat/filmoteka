@@ -1,0 +1,40 @@
+<article class="modal-film-card">
+    <button type="button" class="modal__close-button" data-modal-close>
+        <svg class="close-button__svg"> 
+            <use href="../images/svg/sprite.svg#icon-close"> </use>
+        </svg>
+    </button>
+    <div class="modal-film-card__wrapper">
+        <img class='modal-film-card__poster'src="https://image.tmdb.org/t/p/original{{poster_path}}" alt="{{title}}">
+        <h2 class="modal-film-card__title">{{title}}</h2>
+        <ul class="modal-film-card__info-list">
+          <li class="modal-film-card__info-list-item">
+            <p class="modal-film-card__info-list-category">Vote/Votes</p>
+            <span class="modal-film-card__info-list-data1">{{vote_average}}</span>/ 
+            <span class="modal-film-card__info-list-data2">{{vote_count}}</span>
+          </li>
+          <li class="modal-film-card__info-list-item">
+            <p class="modal-film-card__info-list-category">Popularity</p>
+            <div class="modal-film-card__info-list-data">{{popularity}}</div>
+          </li>
+          <li class="modal-film-card__info-list-item">
+            <p class="modal-film-card__info-list-category">Original Title</p>
+            <div class="modal-film-card__info-list-data">{{original_title}}</div>
+          </li>
+          <li class="modal-film-card__info-list-item">
+            <p class="modal-film-card__info-list-category">Genre</p>
+            {{#each genres}}
+            <div class="modal-film-card__info-list-data">{{this.name}}</div>
+            {{/each}}
+          </li>
+        </ul>
+        <div class="modal-film-card__description">
+          <h3 class="modal-film-card__description-header">ABOUT</h3>
+          <p class="modal-film-card__description-content">{{overview}}</p>
+        </div>
+        <div class="modal-film-card__buttons-wrapper">
+          <button class="add-to-watched-btn" type="button">ADD TO WATCHED</button>
+          <button class="add-to-queue-btn" type="button">ADD TO QUEUE</button>
+        </div>
+    </div>
+</article>
