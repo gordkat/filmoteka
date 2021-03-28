@@ -1,0 +1,65 @@
+.logo {
+  display: flex;
+  text-decoration: none;
+}
+.logo-film {
+  margin-right: 10px;
+  margin-top: 46px;
+}
+.logo-name {
+  margin-top: 41px;
+  font-size: 30px;
+  color: #ffffff;
+}
+.main-container {
+  background-image: url(../images/main.png);
+  height: 230px;
+}
+.header {
+  display: flex;
+
+  background-repeat: no-repeat;
+}
+.form-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+.navigation {
+  margin-top: 58px;
+}
+
+.home-page {
+  margin-right: 39px;
+  color: white;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+}
+.library-page {
+  color: white;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+input::-webkit-input-placeholder {
+  color: #ffffff;
+}
+.form-search {
+  margin-top: 113px;
+  font-size: 14px;
+}
+
+.input-text {
+  color: #ffffff;
+  padding-bottom: 4px;
+  width: 336px;
+  margin-top: 20px;
+  background-color: transparent;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  border-bottom: 0.5px solid #ffffff;
+}
