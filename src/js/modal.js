@@ -1,7 +1,8 @@
 import modalMarkup from '../templates/modal-film-card.hbs';
 import * as basicLightbox from 'basiclightbox';
 
-const mainRef = document.querySelector('main');
+const mainRef = document.querySelector('.gallery-list');
+
 mainRef.addEventListener('click', openModal)
 
 function openModal(event) {
@@ -13,17 +14,14 @@ function openModal(event) {
             return fetch(baseUrl)
               .then(res => res.json())
               .then(data => {
-                modalMarkup(data);
+                return modalMarkup(data);
               })
-              .then(data => {
-                basicLightbox.create(data).show();
+              .then(result => {
+
+               return basicLightbox.create(result).show();
              })
-            .catch(err => console.log(err));
         }
 
-        apiMovieCard(event.target.dataset.id);
+        return apiMovieCard(event.target.dataset.id);
     }
 }
-
-
-  

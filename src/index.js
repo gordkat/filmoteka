@@ -4,3 +4,4 @@ import './js/pagination';
 import './js/search';
 import './js/apiService';
 import './js/modalTeam';
+import './js/myLibrary';
