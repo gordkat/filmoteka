@@ -1,5 +1,3 @@
-
-
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = 'be2bb7fd29eddf6e05cfa10ca2e7b19c';
 
@@ -18,6 +16,15 @@ export default class MovieApiService {
       .catch(error => console.log(error));
   }
 
+  fetchMovieBySearch() {
+    const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en&query=${this.searchQuery}`;
+    console.log(this.searchQuery);
+    return fetch(url)
+      .then(response => response.json())
+      .then(response => response.results)
+      .catch(error => console.log(error));
+  }
+
   // получает промис с парой id-жанра/имя жанра
   fetchGenres() {
     const url = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=en-US`;
@@ -28,16 +35,16 @@ export default class MovieApiService {
       .catch(error => console.log(error));
   }
 
-  //добавление имя жанра в промис с популярными фильмами
-  normalizedMovies() {
-    return this.fetchPopularMovies().then(response => {
+  //метод для приведение промиса к одному виду (с жанраами) вне зависимости от запроса
+  fetchNormalizer(fetchedData) {
+    return fetchedData.then(response => {
       //Затем делам запрос к жанрам
       return this.fetchGenres().then(genres => {
         return response.map(movie => ({
           ...movie,
           genres: movie.genre_ids
             //Для каждого id находим жанр
-            .map(id => genres.filter(el => el.id === id))
+            .map(id => genres.filter(genre => genre.id === id))
             //Делаем один array
             .flat(),
           //Обрезам дату
@@ -47,13 +54,6 @@ export default class MovieApiService {
     });
   }
 
-  increamentPage() {
-    this.page += 1;
-  }
-
-  resetPage() {
-    this.page = 1;
-  }
   get query() {
     return this.searchQuery;
   }
@@ -61,11 +61,22 @@ export default class MovieApiService {
   set query(newQuery) {
     this.searchQuery = newQuery;
   }
+
+  // популярные фильмы, готовые к рендеру
+  getPopularMovies() {
+    return this.fetchNormalizer(this.fetchPopularMovies());
+  }
+
+  // фильмы из поиска, готовые к рендеру
+  searchMovie() {
+    return this.fetchNormalizer(this.fetchMovieBySearch());
+  }
+
+  increamentPage() {
+    this.page += 1;
+  }
+
+  resetPage() {
+    this.page = 1;
+  }
 }
-
-
-
-// const movieApiServie = new MovieApiService();
-
-// movieApiServie.normalizedMovies().then(renderMovieCard);
-
