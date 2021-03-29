@@ -64,6 +64,8 @@ export default class MovieApiService {
 }
 
 
+
 // const movieApiServie = new MovieApiService();
 
 // movieApiServie.normalizedMovies().then(renderMovieCard);
+
