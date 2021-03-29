@@ -10,14 +10,17 @@ export default class MovieApiService {
   }
   // получает промис популярных фильмов, но без названия жанров (только с id-номером жанра)
   fetchPopularMovies() {
-    const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}`;
+    const url = `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${this.page}`;
 
     return fetch(url)
       .then(response => response.json())
       .then(response => response.results)
       .catch(error => console.log(error));
   }
-
+  fetchSearchArticlesPages() {
+    const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${this.page}&query=${this.searchQuery}`;
+    return fetch(url).then(response => response.json());
+  }
   // получает промис с парой id-жанра/имя жанра
   fetchGenres() {
     const url = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=en-US`;
@@ -46,7 +49,24 @@ export default class MovieApiService {
       });
     });
   }
-
+  insertGenresToSearchObj() {
+    return this.fetchSearchArticles().then(data => {
+      return this.fetchGenres().then(genresList => {
+        let release_date;
+        return data.map(movie => ({
+          ...movie,
+          release_date: movie.release_date
+            ? movie.release_date.split('-')[0]
+            : 'n/a',
+          genres: movie.genre_ids
+            ? movie.genre_ids
+                .map(id => genresList.filter(el => el.id === id))
+                .flat()
+            : 'n/a',
+        }));
+      });
+    });
+  }
   increamentPage() {
     this.page += 1;
   }

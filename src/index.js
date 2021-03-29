@@ -6,3 +6,4 @@ import './js/apiService';
 import './js/renderPopularMovies';
 import './js/modalTeam';
 import './js/myLibrary';
+import './js/pagination';
