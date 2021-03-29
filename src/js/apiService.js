@@ -28,8 +28,7 @@ export default class MovieApiService {
       .catch(error => console.log(error));
   }
 
-
-  //добавление имя жанра в промис с популярными фильмами  
+  //добавление имя жанра в промис с популярными фильмами
   addGenresToMovieObj() {
     return this.fetchPopularMovies().then(response => {
       return this.fetchGenres().then(genresList => {
@@ -63,4 +62,3 @@ export default class MovieApiService {
 const movieApiServie = new MovieApiService();
 
 movieApiServie.addGenresToMovieObj().then(renderMovieCard);
-

@@ -1,4 +1,3 @@
-
 import galleryTemplate from '../templates/film-card.hbs';
 
 export const galleryRef = document.querySelector('.gallery-list');
