@@ -6,24 +6,6 @@
     margin-right: 10px;
     fill: $accent-color;
   }
-
-  @media screen and (min-width: 280px) {
-    width: 280px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  @media screen and (min-width: 618px) {
-    width: 618px;
-    padding-left: 75px;
-    padding-right: 75px;
-  }
-
-  @media screen and (min-width: 1024px) {
-    width: 1024px;
-    padding-left: 71px;
-    padding-right: 71px;
-  }
 }
 
 footer {
@@ -42,7 +24,7 @@ footer {
   .developers {
     margin: 0px;
     display: flex;
-    justify-content: center;
+    align-items: center;
     padding-bottom: 30px;
   }
   .footer__page {
@@ -54,7 +36,7 @@ footer {
 @media screen and (min-width: 768px) {
   .footer__page {
     display: flex;
-    justify-content: center;
+    align-items: center;
   }
 
   .copyright {
