@@ -1,4 +1,4 @@
-import { renderMovieCard } from './renderPopularMovies';
+
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = 'be2bb7fd29eddf6e05cfa10ca2e7b19c';
@@ -29,15 +29,19 @@ export default class MovieApiService {
   }
 
   //добавление имя жанра в промис с популярными фильмами
-  addGenresToMovieObj() {
+  normalizedMovies() {
     return this.fetchPopularMovies().then(response => {
-      return this.fetchGenres().then(genresList => {
+      //Затем делам запрос к жанрам
+      return this.fetchGenres().then(genres => {
         return response.map(movie => ({
           ...movie,
-          release_date: movie.release_date.split('-')[0],
           genres: movie.genre_ids
-            .map(id => genresList.filter(el => el.id === id))
+            //Для каждого id находим жанр
+            .map(id => genres.filter(el => el.id === id))
+            //Делаем один array
             .flat(),
+          //Обрезам дату
+          release_date: movie.release_date.split('-')[0],
         }));
       });
     });
@@ -59,6 +63,9 @@ export default class MovieApiService {
   }
 }
 
-const movieApiServie = new MovieApiService();
 
-movieApiServie.addGenresToMovieObj().then(renderMovieCard);
+
+// const movieApiServie = new MovieApiService();
+
+// movieApiServie.normalizedMovies().then(renderMovieCard);
+
