@@ -1,3 +1,21 @@
+.current {
+  // display: flex;
+  justify-content: center;
+  // color: yellow;
+  position: relative;
+  margin-bottom: 10px;
+}
+  .current::after {
+    display: flex;
+    position: absolute;
+    content: '';
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: $accent-color;
+    border-radius: 2px;
+    }
 .logo {
   display: flex;
   text-decoration: none;
@@ -13,12 +31,12 @@
 }
 .main-container {
   background-image: url(../images/main.png);
+  background-size: cover;
   height: 230px;
+  //  background-repeat: no-repeat;
 }
 .header {
   display: flex;
-
-  background-repeat: no-repeat;
 }
 .form-search {
   display: flex;
@@ -29,16 +47,12 @@
 .navigation {
   margin-top: 58px;
 }
-.home-page {
+.home {
   margin-right: 39px;
-  background-color: transparent;
-  color: white;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  border: none;
+  
 }
-.library-page {
+.page{
+  padding-bottom: 3px;
   border: none;
   background-color: transparent;
   color: white;
@@ -67,4 +81,5 @@ input::-webkit-input-placeholder {
   border-bottom: 0.5px solid #ffffff;
   outline: none;
 }
+
 
