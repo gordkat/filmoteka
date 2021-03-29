@@ -8,7 +8,7 @@ export default class MovieApiService {
   }
   // получает промис популярных фильмов, но без названия жанров (только с id-номером жанра)
   fetchPopularMovies() {
-    const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}`;
+    const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
 
     return fetch(url)
       .then(response => response.json())
@@ -17,8 +17,7 @@ export default class MovieApiService {
   }
 
   fetchMovieBySearch() {
-    const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en&query=${this.searchQuery}`;
-    console.log(this.searchQuery);
+    const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&page=${this.page}&language=en&query=${this.searchQuery}`;
     return fetch(url)
       .then(response => response.json())
       .then(response => response.results)

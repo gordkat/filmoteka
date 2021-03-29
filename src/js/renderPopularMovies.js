@@ -25,9 +25,12 @@ movieApiServie.getPopularMovies().then(renderMovieCard);
 // function onSearch() {
 
 //   if (!inputRef.value) {
+//     galleryRef.innerHTML = '';
+//     movieApiServie.getPopularMovies().then(renderMovieCard);
 //     return
 //   }
 //   movieApiServie.query = inputRef.value;
 //   galleryRef.innerHTML = '';
 //   movieApiServie.searchMovie().then(renderMovieCard);
+
 // }
