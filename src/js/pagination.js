@@ -1,3 +1,7 @@
+import MovieApiService from './apiService'
+
+
+const movieApiServie = new MovieApiService();
 const listElement = document.querySelector('.cards-container');
 const paginationElement = document.getElementById('pagination');
 const arrowLeft = document.querySelector('.arrow_left');
@@ -11,6 +15,7 @@ let rows = 20;
 function resetCurrentPage() {
   currentPage = 1;
 }
+
 
 // главная функция для рендера pagination. Callback - функция для работы с fetch (зависит от раздела, где рисуем pagination)
 export function renderPagination(totalPages, listItems, callback, searchQuery) {
