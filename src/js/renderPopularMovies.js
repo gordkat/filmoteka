@@ -11,7 +11,9 @@ export function renderMovieCard(results) {
   galleryRef.insertAdjacentHTML('beforeend', galleryTemplate(results));
 }
 
-// movieApiServie.getPopularMovies().then(renderMovieCard);
+console.log(movieApiServie.getPopularMovies())
+
+
 
 
 
