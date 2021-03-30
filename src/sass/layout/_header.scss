@@ -27,12 +27,7 @@
 }
 .header {
   display: flex;
-}
-.form-search {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
+  justify-content: space-between;
 }
 .navigation {
   // margin-top: 58px;
@@ -61,7 +56,6 @@ input::-webkit-input-placeholder {
   color: $white-color;
 }
 .form-search {
-  // margin-top: 113px;
   padding-top: 113px;
   font-size: 14px;
 }
@@ -70,7 +64,6 @@ input::-webkit-input-placeholder {
   color: $white-color;
   padding-bottom: 4px;
   width: 336px;
-  margin-top: 20px;
   background-color: transparent;
   border-top: transparent;
   border-left: transparent;
