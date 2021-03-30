@@ -3,37 +3,202 @@
 .modal-film-card {
     width: 280px;
     background-color: $white-color;
+    padding-top: 48px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 40px;
+    font-family: $font;
+    font-size: $size;
+    font-weight: $weight;
 
     @media screen and (min-width: 768px) {
         width: 618px;
+        padding-top: 42px;
+        padding-left: 29px;
+        padding-right: 29px;
+    
     }
 
     @media screen and (min-width: 1024px) {
         width: 882px;
+        padding-top: 50px;
+        padding-left: 30px;
+        padding-right: 30px;
+   
+    
     }
-
 }
 
 .modal-film-card__poster {
     width: 240px;
     height: 356.57px;
+    object-fit: cover;
+
+
+
+    @media screen and (max-width: 767px) {
+        margin-bottom: 30px;
+    }
 
     @media screen and (min-width: 768px) {
         width: 264px;
-        height: 373.55px
+        height: 373.55px;
+        margin-right: 32px;
     }
 
     @media screen and (min-width: 1024px) {
         width: 396px;
         height: 477.8px;
+        margin-right: 30px;
     }
 }
 
 .modal-film-card__wrapper {
+
+
     @media screen and (min-width: 768px) {
         display: flex;
     }
+}
 
+.modal-film-card__title {
+    text-transform: uppercase;
+    font-size: 20px;
+    margin-bottom: 20px;
+    
+    @media screen and (min-width: 1024px) {
+        font-weight: 30px;
+    }
+}
+
+.modal-info-wrapper {
+    display:block;
+
+    @media screen and (min-width: 768px){
+        width: 264px
+    }
+
+    @media screen and (min-width: 1024px){
+        width: 396px
+    }
+}
+
+.modal-film-card__info-list {
+    margin-bottom: 20px;
+}
+
+.modal-film-card__info-list-item {
+    display: flex;
+    font-size: 12px;
 
 }
 
+.modal-film-card__info-list-item:not(:last-child) {
+    margin-bottom:10px;
+}
+
+
+.modal-film-card__info-list-category {
+    width: 69px;
+    color: $modal-item;
+    margin-right: 39px;
+
+    @media screen and (min-width: 1024px) {
+        margin-right: 83px;
+    }
+
+}
+
+.modal-film-card__info-list-data {
+    width:132px;
+
+    @media screen and (min-width: 768px) {
+        width:156px;
+    }
+
+    @media screen and (min-width: 1024px) {
+        width:244px;
+    }
+
+}
+
+.genre-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:flex-start
+}
+
+// .genre-list__item {
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content:flex-start
+// }
+
+.modal-film-card__description{
+    margin-bottom: 21px;
+}
+
+.modal-film-card__description-header {
+    margin-bottom: 10px;
+
+}
+
+.modal-film-card__description-content{
+    line-height: 20px;
+}
+.modal-film-card__buttons-wrapper{
+    display: flex;
+}
+
+.modal-btn {
+    width: 112.58px;
+    height: 44px;
+    background-color: $white-color;
+    border: 1px solid #000000;
+    box-sizing: border-box;
+    border-radius: 5px;
+
+
+    @media screen and (min-width: 768px) {
+        width: 125.03px;
+    }
+
+    @media screen and (min-width: 1024px) {
+        width: 136px;
+    }
+}
+
+.add-to-watched-btn {
+    margin-right: 14.85px;
+
+    @media screen and (min-width: 768px) {
+        margin-right: 14.94px;
+    }
+
+    @media screen and (min-width: 1024px) {
+        margin-right: 15px;
+    }
+}
+
+
+
+.modal-btn:hover {
+    background-color: $accent-color;
+    color: $white-color;
+    border: none;
+}
+
+.close-button {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    // background-color: #FFFFFF;
+    cursor: pointer;
+  }
