@@ -1,8 +1,7 @@
-import MovieApiService from './apiService'
+import MovieApiService from './apiService';
 
-
-const movieApiServie = new MovieApiService();
-const listElement = document.querySelector('.cards-container');
+const movieApiService = new MovieApiService();
+const galleryRef = document.querySelector('.list');
 const paginationElement = document.getElementById('pagination');
 const arrowLeft = document.querySelector('.arrow_left');
 const arrowRight = document.querySelector('.arrow_right');
@@ -16,15 +15,13 @@ function resetCurrentPage() {
   currentPage = 1;
 }
 
-
-// главная функция для рендера pagination. Callback - функция для работы с fetch (зависит от раздела, где рисуем pagination)
-export function renderPagination(totalPages, listItems, callback, searchQuery) {
+function renderPagination(totalPages, listItems, callback, searchQuery) {
   paginationElement.innerHTML = '';
   resetCurrentPage();
   arrowLeft.removeEventListener('click', onArrowLeftClick);
   arrowRight.removeEventListener('click', onArrowRightClick);
 
-  function setupPagination(items, wrapper, rowsPerPage) {
+  function setupPagination(items, wrapper, rowsPage) {
     wrapper.innerHTML = '';
 
     pageCount = totalPages;
@@ -61,7 +58,6 @@ export function renderPagination(totalPages, listItems, callback, searchQuery) {
         wrapper.appendChild(btn);
       }
 
-      // добавляет троеточие в pagination в зависимости от текущей страницы и общего к-ва страниц
       if (
         totalPages >= 6 &&
         i == 1 &&
@@ -84,10 +80,8 @@ export function renderPagination(totalPages, listItems, callback, searchQuery) {
         wrapper.insertBefore(threeDotsEl, wrapper[1]);
       }
     }
-
-    //placeholder.spinner.close();
   }
-  // создает троеточия для pagination
+  // создает ... для pagination
   function addThreeDotsBlock() {
     const threeDots = document.createElement('div');
     threeDots.classList.add('threeDots');
@@ -103,58 +97,47 @@ export function renderPagination(totalPages, listItems, callback, searchQuery) {
 
     button.addEventListener('click', function () {
       warningField.textContent = ``;
-      //placeholder.spinner.show();
-      //window.scrollTo({ top: 0, behavior: 'smooth' });
       currentPage = page;
-      callback(listElement, currentPage, searchQuery);
+      callback(galleryRef, currentPage, searchQuery);
 
       let current_btn = document.querySelector('.pagenumbers button.active');
       current_btn.classList.remove('active');
 
       button.classList.add('active');
       setupPagination(listItems, paginationElement, rows);
-      //hideExtremeButtons(totalPages);
     });
 
     return button;
   }
 
-  // ф-кция для отслеживания кликов по стрелке влево
+  // для отслеживания кликов по стрелке влево
   function onArrowLeftClick() {
     if (currentPage > 1) {
-      //placeholder.spinner.show();
-      // window.scrollTo({ top: 0, behavior: 'smooth' });
       currentPage--;
       setupPagination(listItems, paginationElement, rows);
-      callback(listElement, currentPage, searchQuery);
+      callback(galleryRef, currentPage, searchQuery);
     }
 
     disableArrowBtn(totalPages);
-    //hideExtremeButtons(totalPages);
   }
 
-  // ф-кция для отслеживания кликов по стрелке вправо
+  // для отслеживания кликов по стрелке вправо
   function onArrowRightClick() {
     if (currentPage < totalPages) {
-      //placeholder.spinner.show();
-      //window.scrollTo({ top: 0, behavior: 'smooth' });
       currentPage++;
       setupPagination(listItems, paginationElement, rows);
-      callback(listElement, currentPage, searchQuery);
+      callback(galleryRef, currentPage, searchQuery);
     }
     disableArrowBtn(totalPages);
-    //hideExtremeButtons(totalPages);
   }
 
   setupPagination(listItems, paginationElement, rows);
   arrowLeft.onclick = onArrowLeftClick;
   arrowRight.onclick = onArrowRightClick;
-
-  //hideExtremeButtons(totalPages);
   disableArrowBtn(totalPages);
 }
 
-// прячет первую и последнюю страницу по бокам для мобильных гаджетов с маленьким экраном
+// прячет первую и последнюю страницу для мобильных гаджетов
 
 paginationElement.addEventListener('click', disableArrowBtnAfterPageClick);
 
@@ -166,7 +149,7 @@ function disableArrowBtnAfterPageClick(e) {
   }
 }
 
-// делает неактивными кнопки-стрелки на первой и последней  странице
+// делает неактивными стрелки на первой и последней  страницах
 function disableArrowBtn(totalPages) {
   if (currentPage === 1) {
     arrowLeft.classList.add('disabled-arrow');
@@ -181,3 +164,59 @@ function disableArrowBtn(totalPages) {
   }
 }
 
+//подключение пагинации
+function displayGallery(wrapper, page) {
+  wrapper.innerHTML = '';
+  fetchPopularFilmsOnPage(page)
+    .then(response => response.json())
+    .then(response => response.results)
+    .catch(err => {
+      console.log('error in displayGallery', err);
+    });
+
+  function fetchPopularFilmsOnPage(page) {
+    movieApiService.pageNum = page;
+    return movieApiService.fetchGenres();
+  }
+}
+function fetchDataPopularFilms() {
+  movieApiService
+    .fetchPopularMovies()
+    .then(results => {
+      renderPagination(results.totalPages, results.results, displayGallery);
+    })
+    .catch(err => {
+      console.log('error in function fetchDataPopularFilms', err);
+    });
+}
+function displaySearchListByPage(wrapper, page, searchQuery) {
+  wrapper.innerHTML = '';
+  fetchMovieBySearch(page, searchQuery)
+    .then(response => response.json())
+    .then(response => response.results)
+    .catch(err => {
+      console.log('error in function displaySearchListByPage');
+    });
+}
+function fetchDataOfSearchFilms(searchQuery) {
+  movieApiService.query = searchQuery;
+
+  movieApiService
+    .fetchMovieBySearch()
+    .then(results => {
+      renderPagination(
+        results.totalPages,
+        results.results,
+        displaySearchListByPage,
+        searchQuery,
+      );
+      if (results.pages === 0) {
+        return;
+      }
+    })
+    .catch(err => {
+      console.log('error in function fetchMovieBySearch');
+    });
+}
+fetchDataPopularFilms();
+fetchDataOfSearchFilms();

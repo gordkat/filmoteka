@@ -22,12 +22,11 @@ export default class MovieApiService {
 
   async fetchMovieBySearch() {
     const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&page=${this.page}&language=en&query='${this.searchQuery}'`;
-      const response = await fetch(url);
+    const response = await fetch(url);
     const searchedMoviesObj = await response.json();
 
     const searchedMovies = await searchedMoviesObj.results;
     return searchedMovies;
-
   }
 
   async fetchGenres() {
@@ -62,7 +61,13 @@ export default class MovieApiService {
   set query(newQuery) {
     this.searchQuery = newQuery;
   }
-
+  //для отображения страниц
+  /*get pageNum() {
+ return this.page;
+}
+set pageNum(newPage) {
+  this.page = newPage;
+}*/
   // // популярные фильмы, готовые к рендеру
   getPopularMovies() {
     return this.fetchNormalizer(this.fetchPopularMovies());
@@ -72,7 +77,6 @@ export default class MovieApiService {
   searchMovie() {
     return this.fetchNormalizer(this.fetchMovieBySearch());
   }
-
 
   increamentPage() {
     this.page += 1;
@@ -88,8 +92,6 @@ export default class MovieApiService {
     this.getPopularMovies().then(this.renderMovieCard);
   }
 }
-
-
 
 /////////////////////////////////////////// Without Async
 
@@ -175,5 +177,3 @@ export default class MovieApiService {
 //     this.getPopularMovies().then(this.renderMovieCard);
 //   }
 // }
-
-
