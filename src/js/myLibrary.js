@@ -1,8 +1,13 @@
+import galleryTemplate from '../templates/film-card.hbs';
+
 const refs = {
   btnMyLibrary: document.querySelector('.library-page'),
   btnHome: document.querySelector('.home-page'),
   formSearch: document.querySelector('.form-search'),
   btnAction: document.querySelector('.btn-my-library'),
+  btnWatched: document.querySelector('.watched'),
+  btnQueue: document.querySelector('.queue'),
+  gallery: document.querySelector('.gallery-list')
 };
 
 const isClassListContain = () => {
@@ -42,5 +47,29 @@ const onMyLibrary = event => {
     refs.btnAction.classList.remove('btn-my-library--hidden');
   }
 };
+
+const onWatched = () => {
+  clearAll();
+  const watchedMovieArray = JSON.parse(localStorage.getItem('movie-to-watch'))
+  renderMovieCard(watchedMovieArray);
+}
+
+const onQueue = () => {
+  clearAll();
+  const queueMovieArray = JSON.parse(localStorage.getItem('movie-to-queue'))
+  renderMovieCard(queueMovieArray);
+}
+
+const clearAll = () => {
+  refs.gallery.innerHTML = '';
+}
+
+function renderMovieCard(results) {
+  refs.gallery.insertAdjacentHTML('beforeend', galleryTemplate(results));
+}
+
 refs.btnHome.addEventListener('click', onHome);
 refs.btnMyLibrary.addEventListener('click', onMyLibrary);
+refs.btnWatched.addEventListener('click', onWatched);
+refs.btnQueue.addEventListener('click', onQueue);
+

@@ -31,6 +31,7 @@ function openModal(event) {
                   addedToWatchArray.push(addedMovie);
                   console.log(addedToWatchArray);
                   localStorage.setItem("movie-to-watch", JSON.stringify(addedToWatchArray));
+                  addToWatchBtnRef.disabled = true;
                 }
 
                 addToQueueBtnRef.addEventListener('click', handleAddToQueueBtn);
@@ -39,6 +40,7 @@ function openModal(event) {
                   addedToQueueArray.push(addedMovie);
                   console.log(addedToQueueArray);
                   localStorage.setItem("movie-to-queue", JSON.stringify(addedToQueueArray));
+                  addToQueueBtnRef.disabled = true;
                 }
              })
         }
