@@ -18,6 +18,15 @@ export default class MovieApiService {
       .catch(error => console.log(error));
   }
 
+
+  fetchMovieBySearch() {
+    const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&page=${this.page}&language=en&query=${this.searchQuery}`;
+    return fetch(url)
+      .then(response => response.json())
+      .then(response => response.results)
+      .catch(error => console.log(error));
+  }
+
   fetchMovieBySearch() {
     const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&page=${this.page}&language=en&query=${this.searchQuery}`;
     return fetch(url)
@@ -73,6 +82,7 @@ export default class MovieApiService {
     return this.fetchNormalizer(this.fetchMovieBySearch());
   }
 
+
   increamentPage() {
     this.page += 1;
   }
@@ -87,3 +97,4 @@ export default class MovieApiService {
     this.getPopularMovies().then(this.renderMovieCard);
   }
 }
+

@@ -1,8 +1,15 @@
+import galleryTemplate from '../templates/film-card.hbs';
+// import { renderMovies, renderMovieCard } from './renderPopularMovies';
+import MovieApiService from './apiService';
+
 const refs = {
   btnMyLibrary: document.querySelector('.library-page'),
   btnHome: document.querySelector('.home-page'),
   formSearch: document.querySelector('.form-search'),
   btnAction: document.querySelector('.btn-my-library'),
+  btnWatched: document.querySelector('.watched'),
+  btnQueue: document.querySelector('.queue'),
+  gallery: document.querySelector('.gallery-list'),
 };
 
 const isClassListContain = () => {
@@ -17,6 +24,14 @@ const isClassListContain = () => {
   return { isHiddenForm, isVisibleForm, isVisibleBtnAction, isHiddenBtnAction };
 };
 
+const renderMovieCard = results => {
+  refs.gallery.insertAdjacentHTML('beforeend', galleryTemplate(results));
+};
+
+const clearAll = () => {
+  refs.gallery.innerHTML = '';
+};
+
 const onHome = event => {
   console.log('рендерятся популярные фильмы, резетится форма');
   refs.formSearch.reset();
@@ -27,6 +42,8 @@ const onHome = event => {
   if (isVisibleBtnAction) {
     refs.btnAction.classList.add('btn-my-library--hidden');
   }
+  const movieApiServie = new MovieApiService();
+  movieApiServie.renderMovies();
 };
 
 const onMyLibrary = event => {
@@ -41,6 +58,22 @@ const onMyLibrary = event => {
   if (isHiddenBtnAction) {
     refs.btnAction.classList.remove('btn-my-library--hidden');
   }
+  onWatched();
 };
+
+const onWatched = () => {
+  clearAll();
+  const watchedMovieArray = JSON.parse(localStorage.getItem('movie-to-watch'));
+  renderMovieCard(watchedMovieArray);
+};
+
+const onQueue = () => {
+  clearAll();
+  const queueMovieArray = JSON.parse(localStorage.getItem('movie-to-queue'));
+  renderMovieCard(queueMovieArray);
+};
+
 refs.btnHome.addEventListener('click', onHome);
 refs.btnMyLibrary.addEventListener('click', onMyLibrary);
+refs.btnWatched.addEventListener('click', onWatched);
+refs.btnQueue.addEventListener('click', onQueue);

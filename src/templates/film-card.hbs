@@ -1,11 +1,10 @@
 {{#each this}}
-<li class="gallery-list__item">
-<div class="film-card">
+<li class="gallery-list__item" data-id="{{id}}" >
     <img class="poster" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{title}}"
-        data-source="https://image.tmdb.org/t/p/w500{{backdrop_path}}" data-id="{{id}}"/>
+        data-source="https://image.tmdb.org/t/p/w500{{backdrop_path}}"  />
 
     <div class="film-card__info">
-        <h3 class="film-card__name">
+        <h3 class="film-card__name ">
             {{title}}
         </h3>
         <p class="film-card__genre">
@@ -14,6 +13,6 @@
             {{/each}}| {{release_date}}
         </p>
     </div>
-</div>
+
 </li>
 {{/each}}

@@ -6,10 +6,11 @@ const mainRef = document.querySelector('.gallery-list');
 let addedToWatchArray = [];
 let addedToQueueArray = [];
 
-mainRef.addEventListener('click', openModal)
+mainRef.addEventListener('click', openModal);
+
 
 function openModal(event) {
-    if (event.target.localName === 'img') {
+    if (event.target.parentNode.nodeName === 'LI') {
 
         function apiMovieCard (movieId) {
             const keyApi = 'be2bb7fd29eddf6e05cfa10ca2e7b19c';
@@ -21,7 +22,21 @@ function openModal(event) {
                 return modalMarkup(data);
               })
               .then(result => {
-               basicLightbox.create(result).show();
+                const instance = basicLightbox.create(result);
+                instance.show();
+                const mRef = document.querySelector('article')
+                mRef.classList.add('modal-film-card-active')
+
+                function escapeBtn(event) {
+                  if (event.code === 'Escape' && mRef.classList.contains('modal-film-card-active')) {
+                      instance.close();
+                      mRef.classList.remove('modal-film-card-active');
+                  }
+                }
+
+                window.addEventListener('keydown', escapeBtn) ;
+
+
                const addToWatchBtnRef = document.querySelector('.add-to-watched-btn');
                const addToQueueBtnRef = document.querySelector('.add-to-queue-btn');
 
@@ -31,6 +46,7 @@ function openModal(event) {
                   addedToWatchArray.push(addedMovie);
                   console.log(addedToWatchArray);
                   localStorage.setItem("movie-to-watch", JSON.stringify(addedToWatchArray));
+                  addToWatchBtnRef.disabled = true;
                 }
 
                 addToQueueBtnRef.addEventListener('click', handleAddToQueueBtn);
@@ -39,11 +55,17 @@ function openModal(event) {
                   addedToQueueArray.push(addedMovie);
                   console.log(addedToQueueArray);
                   localStorage.setItem("movie-to-queue", JSON.stringify(addedToQueueArray));
+                  addToQueueBtnRef.disabled = true;
                 }
              })
         }
 
-        return apiMovieCard(event.target.dataset.id);
+        return apiMovieCard(event.target.parentNode.dataset.id);
+
+
+      }
+
+
     }
-}
+
 
