@@ -14,9 +14,9 @@
 .main-container {
   background-image: url(../images/desktop-home.jpg);
   height: 230px;
-  background: center;
+  // background: center;
   background-size: contain;
-  background-repeat: no-repeat;
+  // background-repeat: no-repeat;
 }
 @media screen and (min-device-pixel-ratio: 2),
   screen and (min-resolution: 192dpi),
@@ -30,7 +30,8 @@
   justify-content: space-between;
 }
 .navigation {
-  margin-top: 58px;
+  // margin-top: 58px;
+  padding-top: 58px;
 }
 .home-page {
   margin-right: 39px;

@@ -1,5 +1,7 @@
+import galleryTemplate from '../templates/film-card.hbs';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = 'be2bb7fd29eddf6e05cfa10ca2e7b19c';
+const galleryRef = document.querySelector('.gallery-list');
 
 export default class MovieApiService {
   constructor() {
@@ -77,5 +79,11 @@ export default class MovieApiService {
 
   resetPage() {
     this.page = 1;
+  }
+  renderMovieCard(results) {
+    galleryRef.insertAdjacentHTML('beforeend', galleryTemplate(results));
+  }
+  renderMovies() {
+    this.getPopularMovies().then(this.renderMovieCard);
   }
 }
