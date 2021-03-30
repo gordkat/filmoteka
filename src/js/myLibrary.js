@@ -42,7 +42,7 @@ const onHome = event => {
   if (isVisibleBtnAction) {
     refs.btnAction.classList.add('btn-my-library--hidden');
   }
-  const movieApiServie = new MovieApiService('.gallery-list');
+  const movieApiServie = new MovieApiService();
   movieApiServie.renderMovies();
 };
 
