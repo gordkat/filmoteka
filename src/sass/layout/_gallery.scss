@@ -1,5 +1,19 @@
+.error-message {
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+  color: #ff001b;
+  text-align: center;
+  margin-top: 18px;
+  letter-spacing: 0.03em;
+}
+
 .gallery-list {
   margin: 0 auto;
+  padding-top: 20px;
 }
 
 .film-card__info {
@@ -44,6 +58,7 @@
   .gallery-list {
     display: flex;
     flex-wrap: wrap;
+    padding-top: 60px;
   }
 
   .gallery-list__item {
@@ -67,6 +82,7 @@
   .gallery-list {
     display: flex;
     flex-wrap: wrap;
+    padding-top: 60px;
   }
   .gallery-list__item {
     width: 274px;
