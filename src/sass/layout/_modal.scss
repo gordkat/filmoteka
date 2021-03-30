@@ -29,7 +29,7 @@
     }
 }
 
-.modal-film-card__poster {
+.modal__poster {
     width: 240px;
     height: 356.57px;
     object-fit: cover;
@@ -53,7 +53,7 @@
     }
 }
 
-.modal-film-card__wrapper {
+.modal__card-wrapper {
 
 
     @media screen and (min-width: 768px) {
@@ -61,8 +61,7 @@
     }
 }
 
-.modal-film-card__title {
-    text-transform: uppercase;
+.modal__film-title {
     font-size: 20px;
     margin-bottom: 20px;
     
@@ -71,7 +70,7 @@
     }
 }
 
-.modal-info-wrapper {
+.modal__info-wrapper {
     display:block;
 
     @media screen and (min-width: 768px){
@@ -83,22 +82,22 @@
     }
 }
 
-.modal-film-card__info-list {
+.modal__info-list {
     margin-bottom: 20px;
 }
 
-.modal-film-card__info-list-item {
+.modal__info-list-item {
     display: flex;
     font-size: 12px;
 
 }
 
-.modal-film-card__info-list-item:not(:last-child) {
+.modal__info-list-item:not(:last-child) {
     margin-bottom:10px;
 }
 
 
-.modal-film-card__info-list-category {
+.modal__info-list-category {
     width: 69px;
     color: $modal-item;
     margin-right: 39px;
@@ -109,8 +108,10 @@
 
 }
 
-.modal-film-card__info-list-data {
+.modal__info-list-data {
+    display: flex;
     width:132px;
+    align-items: center;
 
     @media screen and (min-width: 768px) {
         width:156px;
@@ -128,35 +129,31 @@
     justify-content:flex-start
 }
 
-// .genre-list__item {
-//     display: flex;
-//     flex-wrap: wrap;
-//     justify-content:flex-start
-// }
 
-.modal-film-card__description{
+.modal__description{
     margin-bottom: 21px;
 }
 
-.modal-film-card__description-header {
+.modal__description-header {
     margin-bottom: 10px;
 
 }
 
-.modal-film-card__description-content{
+.modal__description-content{
     line-height: 20px;
 }
-.modal-film-card__buttons-wrapper{
+.modal__buttons-wrapper{
     display: flex;
 }
 
-.modal-btn {
+.modal__btn {
     width: 112.58px;
     height: 44px;
     background-color: $white-color;
     border: 1px solid #000000;
     box-sizing: border-box;
     border-radius: 5px;
+    font-weight: 500;
 
 
     @media screen and (min-width: 768px) {
@@ -180,9 +177,12 @@
     }
 }
 
+.upper-case {
+    text-transform: uppercase;
+}
 
 
-.modal-btn:hover {
+.modal__btn:hover {
     background-color: $accent-color;
     color: $white-color;
     border: none;
@@ -202,3 +202,31 @@
     // background-color: #FFFFFF;
     cursor: pointer;
   }
+
+
+.modal__info-list-data-va {
+    display: block;
+    width:36px;
+    height: 16px;
+    background-color: $accent-color;
+    border-radius: 5px;
+    text-align: center;
+    color: $white-color;
+    padding-top: 1.5px;
+}
+
+.line {
+    color: $modal-item;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+.modal__info-list-data-vc {
+    display: block;
+    width:36px;
+    height: 16px;
+    background-color: #F7F7F7;
+    border-radius: 5px;
+    text-align: center;
+    padding-top: 1.5px;
+}
