@@ -26,6 +26,7 @@ export default class MovieApiService {
 
     const searchedMovies = await searchedMoviesObj.results;
     return searchedMovies;
+
   }
 
   async fetchGenres() {
@@ -75,6 +76,7 @@ export default class MovieApiService {
     return this.fetchNormalizer(this.fetchMovieBySearch());
   }
 
+
   increamentPage() {
     this.page += 1;
   }
@@ -89,6 +91,7 @@ export default class MovieApiService {
     this.getPopularMovies().then(this.renderMovieCard);
   }
 }
+
 
 /////////////////////////////////////////// Without Async
 
@@ -174,3 +177,4 @@ export default class MovieApiService {
 //     this.getPopularMovies().then(this.renderMovieCard);
 //   }
 // }
+
