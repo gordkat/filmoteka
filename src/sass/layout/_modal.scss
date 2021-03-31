@@ -229,19 +229,15 @@
   border: none;
 }
 
-.close-button {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  // background-color: #ffffff;
-  cursor: pointer;
+
+.close-button__svg{
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+
 }
 
 .modal__info-list-data-va {
@@ -262,11 +258,14 @@
 }
 
 .modal__info-list-data-vc {
-  display: block;
-  width: 36px;
-  height: 16px;
-  background-color: #f7f7f7;
-  border-radius: 5px;
-  text-align: center;
-  padding-top: 1.5px;
+
+    display: block;
+    width:36px;
+    height: 16px;
+    background-color: #F7F7F7;
+    border-radius: 5px;
+    text-align: center;
+    padding-top: 1.5px;
 }
+
+

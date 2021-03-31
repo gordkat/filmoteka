@@ -64,13 +64,13 @@ const onMyLibrary = event => {
 
 const onWatched = () => {
   clearAll();
-  const watchedMovieArray = JSON.parse(localStorage.getItem('movie-to-watch'));
+  const watchedMovieArray = JSON.parse(localStorage.getItem('movie-to-watch')).slice(1);
   renderMovieCard(watchedMovieArray);
 };
 
 const onQueue = () => {
   clearAll();
-  const queueMovieArray = JSON.parse(localStorage.getItem('movie-to-queue'));
+  const queueMovieArray = JSON.parse(localStorage.getItem('movie-to-queue')).slice(1);
   renderMovieCard(queueMovieArray);
 };
 

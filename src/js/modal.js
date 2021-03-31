@@ -1,10 +1,10 @@
 import modalMarkup from '../templates/modal-film-card.hbs';
 import * as basicLightbox from 'basiclightbox';
-import noposter from '../images/no-poster.png';
+
 const mainRef = document.querySelector('.gallery-list');
 
-let addedToWatchArray = [];
-let addedToQueueArray = [];
+let addedToWatchArray = [...JSON.parse(localStorage.getItem('movie-to-watch'))];
+let addedToQueueArray = [...JSON.parse(localStorage.getItem('movie-to-queue'))];
 
 mainRef.addEventListener('click', openModal);
 
@@ -16,13 +16,9 @@ function openModal(event) {
       return fetch(baseUrl)
         .then(res => res.json())
         .then(data => {
-          console.log(data);
-          const poster_path = data.poster_path
-            ? 'https://image.tmdb.org/t/p/w500' + data.poster_path
-            : noposter;
           const modifiedData = {
             id: data.id,
-            poster_path: poster_path,
+            poster_path: data.poster_path,
             title: data.title,
             backdrop_path: data.backdrop_path,
             genres: data.genres,
@@ -30,27 +26,38 @@ function openModal(event) {
             release_date: data.release_date,
           };
 
-          data = { ...data, poster_path };
           localStorage.setItem('movie', JSON.stringify(modifiedData));
           return modalMarkup(data);
         })
         .then(result => {
           const instance = basicLightbox.create(result);
           instance.show();
-          const mRef = document.querySelector('article');
-          mRef.classList.add('modal-film-card-active');
+          const imgRef = document.querySelector('.modal__poster');
+          imgRef.setAttribute('src', event.target.src);
+          const articleRef = document.querySelector('article');
+          const btnRef = document.querySelector('.close-button');
+          articleRef.classList.add('modal-film-card-active');
+          btnRef.addEventListener('click', closeModal);
+          window.addEventListener('keydown', escapeBtn);
+
+          function closeModal() {
+            instance.close();
+            articleRef.classList.remove('modal-film-card-active');
+          }
 
           function escapeBtn(event) {
             if (
               event.code === 'Escape' &&
-              mRef.classList.contains('modal-film-card-active')
+              articleRef.classList.contains('modal-film-card-active')
             ) {
-              instance.close();
-              mRef.classList.remove('modal-film-card-active');
+              closeModal();
             }
           }
 
-          window.addEventListener('keydown', escapeBtn);
+          if (!articleRef.classList.contains('modal-film-card-active')) {
+            window.removeEventListener('click', escapeBtn);
+            btnRef.removeEventListener('click', closeModal);
+          }
 
           const addToWatchBtnRef = document.querySelector(
             '.add-to-watched-btn',
@@ -58,10 +65,11 @@ function openModal(event) {
           const addToQueueBtnRef = document.querySelector('.add-to-queue-btn');
 
           addToWatchBtnRef.addEventListener('click', handleAddToWatchBtn);
+          addToQueueBtnRef.addEventListener('click', handleAddToQueueBtn);
+
           function handleAddToWatchBtn() {
             const addedMovie = JSON.parse(localStorage.getItem('movie'));
             addedToWatchArray.push(addedMovie);
-            console.log(addedToWatchArray);
             localStorage.setItem(
               'movie-to-watch',
               JSON.stringify(addedToWatchArray),
@@ -69,11 +77,9 @@ function openModal(event) {
             addToWatchBtnRef.disabled = true;
           }
 
-          addToQueueBtnRef.addEventListener('click', handleAddToQueueBtn);
           function handleAddToQueueBtn() {
             const addedMovie = JSON.parse(localStorage.getItem('movie'));
             addedToQueueArray.push(addedMovie);
-            console.log(addedToQueueArray);
             localStorage.setItem(
               'movie-to-queue',
               JSON.stringify(addedToQueueArray),
