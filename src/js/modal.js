@@ -16,15 +16,20 @@ function openModal(event) {
       return fetch(baseUrl)
         .then(res => res.json())
         .then(data => {
+          const poster_path = data.poster_path
+            ? 'https://image.tmdb.org/t/p/w500' + data.poster_path
+            : noposter;
           const modifiedData = {
             id: data.id,
-            poster_path: data.poster_path,
+            poster_path: poster_path,
             title: data.title,
             backdrop_path: data.backdrop_path,
             genres: data.genres,
             name: data.name,
             release_date: data.release_date,
           };
+
+          data = { ...data, poster_path };
 
           localStorage.setItem('movie', JSON.stringify(modifiedData));
           return modalMarkup(data);
