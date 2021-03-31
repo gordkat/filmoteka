@@ -3,8 +3,8 @@ import * as basicLightbox from 'basiclightbox';
 
 const mainRef = document.querySelector('.gallery-list');
 
-let addedToWatchArray = [];
-let addedToQueueArray = [];
+let addedToWatchArray = [...JSON.parse(localStorage.getItem("movie-to-watch"))];
+let addedToQueueArray = [...JSON.parse(localStorage.getItem("movie-to-queue"))];
 
 mainRef.addEventListener('click', openModal);
 
@@ -18,7 +18,18 @@ function openModal(event) {
             return fetch(baseUrl)
               .then(res => res.json())
               .then(data => {
-                localStorage.setItem("movie", JSON.stringify(data));
+
+                const modifiedData = {
+                  id: data.id,
+                  poster_path: data.poster_path,
+                  title: data.title,
+                  backdrop_path: data.backdrop_path,
+                  genres: data.genres,
+                  name: data.name,
+                  release_date: data.release_date,
+                };
+
+                localStorage.setItem("movie", JSON.stringify(modifiedData));
                 return modalMarkup(data);
               })
               .then(result => {
@@ -56,19 +67,18 @@ function openModal(event) {
                const addToQueueBtnRef = document.querySelector('.add-to-queue-btn');
 
                 addToWatchBtnRef.addEventListener('click', handleAddToWatchBtn);
-                function handleAddToWatchBtn(){
+                addToQueueBtnRef.addEventListener('click', handleAddToQueueBtn);
+
+                function handleAddToWatchBtn() {
                   const addedMovie = JSON.parse(localStorage.getItem("movie"));
                   addedToWatchArray.push(addedMovie);
-                  console.log(addedToWatchArray);
                   localStorage.setItem("movie-to-watch", JSON.stringify(addedToWatchArray));
                   addToWatchBtnRef.disabled = true;
                 }
 
-                addToQueueBtnRef.addEventListener('click', handleAddToQueueBtn);
                 function handleAddToQueueBtn() {
                   const addedMovie = JSON.parse(localStorage.getItem("movie"));
                   addedToQueueArray.push(addedMovie);
-                  console.log(addedToQueueArray);
                   localStorage.setItem("movie-to-queue", JSON.stringify(addedToQueueArray));
                   addToQueueBtnRef.disabled = true;
                 }
@@ -76,11 +86,7 @@ function openModal(event) {
         }
 
         return apiMovieCard(event.target.parentNode.dataset.id);
-
-
       }
-
-
     }
 
 
