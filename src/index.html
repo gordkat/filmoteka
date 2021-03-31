@@ -40,12 +40,14 @@
           </svg>
         </form>
         <div class="btn-my-library btn-my-library--hidden">
-          <button class="watched">whatched</button>
-          <button class="queue">queue</button>
+          <div class="wrapper-btn">
+            <button class="btn-action watched">watched</button>
+            <button class="btn-action queue">queue</button>
+          </div>
         </div>
 
         <nav class="navigation">
-          <button class="home-page">HOME</button>
+          <button class="home-page current">HOME</button>
           <button class="library-page">MY LIBRARY</button>
         </nav>
       </header>
@@ -54,12 +56,26 @@
 
     <!-- Gallery -->
     <main>
-      <section class="cards-container">
+      <section class="container cards-container">
         <ul class="gallery-list list"></ul>
       </section>
     </main>
     <!-- End Gallery -->
-
+    <!-- Pagination-->
+    <div class="pagination__container">
+      <div class="pagination__container_pages">
+        <div
+          class="pag-arrow arrow_left"
+          href="./images/sprite.svg#icon-arrow-left"
+        ></div>
+        <div class="pagenumbers" id="pagination"></div>
+        <div
+          class="pag-arrow arrow_right"
+          href="./images/sprite.svg#icon-arrow-right"
+        ></div>
+      </div>
+    </div>
+    <!-- End Pagination-->
     <!-- Footer -->
     <footer class="footer">
       <div class="container">

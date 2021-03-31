@@ -1,47 +1,78 @@
-import { renderMovieCard } from './renderPopularMovies';
-
-const BASE_URL = 'https://api.themoviedb.org/3';
-const API_KEY = 'be2bb7fd29eddf6e05cfa10ca2e7b19c';
+import galleryTemplate from '../templates/film-card.hbs';
+import { BASE_URL, API_KEY } from './settings';
+import noposter from '../images/no-poster.png';
+const galleryRef = document.querySelector('.gallery-list');
 
 export default class MovieApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
   }
-  // получает промис популярных фильмов, но без названия жанров (только с id-номером жанра)
-  fetchPopularMovies() {
-    const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}`;
 
-    return fetch(url)
-      .then(response => response.json())
-      .then(response => response.results)
-      .catch(error => console.log(error));
+  async fetchPopularMovies() {
+    const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
+    const response = await fetch(url);
+    const popularMoviesObj = await response.json();
+
+    const popularMovies = await popularMoviesObj.results;
+
+    return popularMovies;
   }
 
-  // получает промис с парой id-жанра/имя жанра
-  fetchGenres() {
+  async fetchMovieBySearch() {
+    const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&page=${this.page}&language=en&query='${this.searchQuery}'`;
+    const response = await fetch(url);
+    const searchedMoviesObj = await response.json();
+
+    const searchedMovies = await searchedMoviesObj.results;
+    return searchedMovies;
+  }
+
+  async fetchGenres() {
     const url = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=en-US`;
-
-    return fetch(url)
-      .then(response => response.json())
-      .then(response => response.genres)
-      .catch(error => console.log(error));
+    const response = await fetch(url);
+    const genresObj = await response.json();
+    const genres = await genresObj.genres;
+    return genres;
   }
 
-
-  //добавление имя жанра в промис с популярными фильмами  
-  addGenresToMovieObj() {
-    return this.fetchPopularMovies().then(response => {
-      return this.fetchGenres().then(genresList => {
+  //метод для приведение промиса к одному виду (с жанраами) вне зависимости от запроса
+  fetchNormalizer(fetchedData) {
+    return fetchedData.then(response => {
+      //Затем делам запрос к жанрам
+      return this.fetchGenres().then(genres => {
         return response.map(movie => ({
           ...movie,
-          release_date: movie.release_date.split('-')[0],
           genres: movie.genre_ids
-            .map(id => genresList.filter(el => el.id === id))
-            .flat(),
+            //Для каждого id находим жанр и делаем один array
+            .flatMap(id => genres.filter(genre => genre.id === id)),
+          //Обрезам дату
+          release_date: movie.release_date.split('-')[0],
+          // подгружаем noPosterImg если с бэкэнда не прихожит картинка
+          poster_path: movie.poster_path
+            ? 'https://image.tmdb.org/t/p/w500' + movie.poster_path
+            : noposter,
         }));
       });
     });
+  }
+
+  get query() {
+    return this.searchQuery;
+  }
+
+  set query(newQuery) {
+    this.searchQuery = newQuery;
+  }
+
+  // // популярные фильмы, готовые к рендеру
+  getPopularMovies() {
+    return this.fetchNormalizer(this.fetchPopularMovies());
+  }
+
+  // // фильмы из поиска, готовые к рендеру
+  searchMovie() {
+    return this.fetchNormalizer(this.fetchMovieBySearch());
   }
 
   increamentPage() {
@@ -51,16 +82,96 @@ export default class MovieApiService {
   resetPage() {
     this.page = 1;
   }
-  get query() {
-    return this.searchQuery;
+  renderMovieCard(results) {
+    galleryRef.insertAdjacentHTML('beforeend', galleryTemplate(results));
+    console.log(results);
   }
-
-  set query(newQuery) {
-    this.searchQuery = newQuery;
+  renderMovies() {
+    this.getPopularMovies().then(this.renderMovieCard);
   }
 }
 
-const movieApiServie = new MovieApiService();
+/////////////////////////////////////////// Without Async
 
-movieApiServie.addGenresToMovieObj().then(renderMovieCard);
+// export default class MovieApiService {
+//   constructor() {
+//     this.searchQuery = '';
+//     this.page = 1;
+//   }
+//   // получает промис популярных фильмов, но без названия жанров (только с id-номером жанра)
+//   fetchPopularMovies() {
+//     const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
 
+//     return fetch(url)
+//       .then(response => response.json())
+//       .then(response => response.results)
+//       .catch(error => console.log(error));
+//   }
+
+//   fetchMovieBySearch() {
+//     const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&page=${this.page}&language=en&query=${this.searchQuery}`;
+//     return fetch(url)
+//       .then(response => response.json())
+//       .then(response => response.results)
+//       .catch(error => console.log(error));
+//   }
+
+//   // получает промис с парой id-жанра/имя жанра
+//   fetchGenres() {
+//     const url = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=en-US`;
+
+//     return fetch(url)
+//       .then(response => response.json())
+//       .then(response => response.genres)
+//       .catch(error => console.log(error));
+//   }
+
+//   //метод для приведение промиса к одному виду (с жанраами) вне зависимости от запроса
+//   fetchNormalizer(fetchedData) {
+//     return fetchedData.then(response => {
+//       //Затем делам запрос к жанрам
+//       return this.fetchGenres().then(genres => {
+//         return response.map(movie => ({
+//           ...movie,
+//           genres: movie.genre_ids
+//             //Для каждого id находим жанр и делаем  один array
+//             .flatMap(id => genres.filter(genre => genre.id === id)),
+//           //Обрезам дату
+//           release_date: movie.release_date.split('-')[0],
+//         }));
+//       });
+//     });
+//   }
+
+//   get query() {
+//     return this.searchQuery;
+//   }
+
+//   set query(newQuery) {
+//     this.searchQuery = newQuery;
+//   }
+
+//   // популярные фильмы, готовые к рендеру
+//   getPopularMovies() {
+//     return this.fetchNormalizer(this.fetchPopularMovies());
+//   }
+
+//   // фильмы из поиска, готовые к рендеру
+//   searchMovie() {
+//     return this.fetchNormalizer(this.fetchMovieBySearch());
+//   }
+
+//   increamentPage() {
+//     this.page += 1;
+//   }
+
+//   resetPage() {
+//     this.page = 1;
+//   }
+//   renderMovieCard(results) {
+//     galleryRef.insertAdjacentHTML('beforeend', galleryTemplate(results));
+//   }
+//   renderMovies() {
+//     this.getPopularMovies().then(this.renderMovieCard);
+//   }
+// }
