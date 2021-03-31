@@ -28,23 +28,24 @@
           <li class="modal__info-list-item">
             <p class="modal__info-list-category">Genre</p>
             <div class="modal__info-list-data genre-list">
+
             {{#each genres}}
             {{this.name }}
-            {{/each}} 
-            </div>
+            {{/each}}
+          </div>
 
-          </li>
-        </ul>
-        <div class="modal__description">
-          <h3 class="modal__description-header">ABOUT</h3>
-          <p class="modal__description-content">{{overview}}</p>
-        </div>
-        <div class="modal__buttons-wrapper">
-          <button class="modal__btn add-to-watched-btn" type="button">ADD TO WATCHED</button>
-          <button class="modal__btn add-to-queue-btn" type="button">ADD TO QUEUE</button>
-        </div>
+        </li>
+      </ul>
+      <div class="modal__description">
+        <h3 class="modal__description-header">ABOUT</h3>
+        <p class="modal__description-content">{{overview}}</p>
       </div>
-
-        
+      <div class="modal__buttons-wrapper">
+        <button class="modal__btn add-to-watched-btn" type="button">ADD TO WATCHED</button>
+        <button class="modal__btn add-to-queue-btn" type="button">ADD TO QUEUE</button>
+      </div>
     </div>
+
+
+  </div>
 </article>

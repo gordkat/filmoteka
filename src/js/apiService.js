@@ -1,6 +1,6 @@
 import galleryTemplate from '../templates/film-card.hbs';
-const BASE_URL = 'https://api.themoviedb.org/3';
-const API_KEY = 'be2bb7fd29eddf6e05cfa10ca2e7b19c';
+import { BASE_URL, API_KEY } from './settings';
+import noposter from '../images/no-poster.png';
 const galleryRef = document.querySelector('.gallery-list');
 
 export default class MovieApiService {
@@ -12,7 +12,6 @@ export default class MovieApiService {
   async fetchPopularMovies() {
     const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
     const response = await fetch(url);
-    // console.log(response);
     const popularMoviesObj = await response.json();
 
     const popularMovies = await popularMoviesObj.results;
@@ -22,12 +21,11 @@ export default class MovieApiService {
 
   async fetchMovieBySearch() {
     const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&page=${this.page}&language=en&query='${this.searchQuery}'`;
-      const response = await fetch(url);
+    const response = await fetch(url);
     const searchedMoviesObj = await response.json();
 
     const searchedMovies = await searchedMoviesObj.results;
     return searchedMovies;
-
   }
 
   async fetchGenres() {
@@ -46,10 +44,14 @@ export default class MovieApiService {
         return response.map(movie => ({
           ...movie,
           genres: movie.genre_ids
-            //Для каждого id находим жанр и делаем  один array
+            //Для каждого id находим жанр и делаем один array
             .flatMap(id => genres.filter(genre => genre.id === id)),
           //Обрезам дату
           release_date: movie.release_date.split('-')[0],
+          // подгружаем noPosterImg если с бэкэнда не прихожит картинка
+          poster_path: movie.poster_path
+            ? 'https://image.tmdb.org/t/p/w500' + movie.poster_path
+            : noposter,
         }));
       });
     });
@@ -73,7 +75,6 @@ export default class MovieApiService {
     return this.fetchNormalizer(this.fetchMovieBySearch());
   }
 
-
   increamentPage() {
     this.page += 1;
   }
@@ -83,13 +84,12 @@ export default class MovieApiService {
   }
   renderMovieCard(results) {
     galleryRef.insertAdjacentHTML('beforeend', galleryTemplate(results));
+    console.log(results);
   }
   renderMovies() {
     this.getPopularMovies().then(this.renderMovieCard);
   }
 }
-
-
 
 /////////////////////////////////////////// Without Async
 
@@ -175,5 +175,3 @@ export default class MovieApiService {
 //     this.getPopularMovies().then(this.renderMovieCard);
 //   }
 // }
-
-
