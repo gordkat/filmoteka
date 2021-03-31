@@ -1,15 +1,23 @@
-// import galleryTemplate from '../templates/film-card.hbs';
+import galleryTemplate from '../templates/film-card.hbs';
 import MovieApiService from './apiService';
 import debounce from 'lodash';
+const galleryRef = document.querySelector('.gallery-list');
+
 
 const movieApiServie = new MovieApiService();
 movieApiServie.renderMovies();
 
-// export function renderMovieCard(results) {
-//   galleryRef.insertAdjacentHTML('beforeend', galleryTemplate(results));
-// }
+export function renderMovieCard(results) {
+  galleryRef.insertAdjacentHTML('beforeend', galleryTemplate(results));
+}
 
-// movieApiServie.getPopularMovies().then(renderMovieCard);
+console.log(movieApiServie.getPopularMovies())
+
+
+
+
+
+  
 
 // Пример для Марии. показывает, что отрисовывает по поиску
 
