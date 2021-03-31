@@ -2,11 +2,14 @@
   overflow: scroll;
 }
 
+.team__modal {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .team__wrapper {
   display: flex;
   flex-wrap: wrap;
-
-  margin: -20px;
 
   @media screen and (max-width: (618px - 1)) {
     margin-top: 70px;
@@ -24,12 +27,15 @@
   }
 
   @media screen and (min-width: 1024px) {
-    margin: -30px;
-
     width: 800px;
   }
 }
-
+.team__lead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(100% / 1);
+}
 .team__card {
   position: relative;
 
@@ -37,16 +43,16 @@
   flex-direction: column;
   align-items: center;
 
-  margin: 20px;
+  margin: 10px 30px;
 
-  width: calc((100% - 80px) / 2);
+  width: calc((100% - 80px) / 1);
 
   @media screen and (min-width: 768px) {
-    width: calc((100% - 160px) / 4);
+    width: calc((100% - 160px) / 2);
   }
 
   @media screen and (min-width: 1024px) {
-    margin: 30px;
+    margin: 15px 30px;
 
     width: calc((100% - 240px) / 4);
   }
@@ -55,14 +61,15 @@
 .team__image {
   margin-bottom: 10px;
 
-  width: 100%;
+  height: 140px;
+  width: 140px;
 
   border-radius: 50%;
-  box-shadow: 5px 5px 11px -2px $primary-text-color;
 }
 
 .team__name {
   margin-bottom: 5px;
+  text-align: center;
 
   font-family: $font;
   font-weight: 700;
@@ -70,6 +77,8 @@
 
 .team__role {
   font-family: $font;
+  text-align: center;
+  margin-bottom: 10px;
 
   @media screen and (max-width: (768px - 1)) {
     font-size: 14px;
@@ -79,37 +88,13 @@
 }
 .team__modal {
   text-decoration: underline;
-
-  cursor: pointer;
 }
 
-// .team-git {
-//   position: absolute;
+.team__git {
+  transform: scale(1);
 
-//   top: 65px;
-//   right: -10px;
-
-//   @media screen and (min-width: $tablet) {
-//     top: 100px;
-//   }
-
-//   @media screen and (min-width: $desktop) {
-//     top: 120px;
-//   }
-
-//   transform: scale(1);
-//   @include transition(transform);
-
-//   &:hover,
-//   &:focus {
-//     transform: scale(1.5);
-//   }
-// }
-
-// footer
-
-.team__modal {
-  text-decoration: underline;
-
-  cursor: pointer;
+  &:hover,
+  &:focus {
+    transform: scale(1.5);
+  }
 }
