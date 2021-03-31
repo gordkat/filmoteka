@@ -82,10 +82,12 @@
 
 .arrow_left {
     background-repeat: no-repeat;
+    background-image: url('../images/sprite.svg#icon-arrow-left');
 }
 
 .arrow_right { 
     background-repeat: no-repeat;
+    background-image: url('../images/sprite.svg#icon-arrow-right');
 }
 
 .pagination__container_pages {
@@ -147,5 +149,5 @@
 
 .disabled-arrow {
     pointer-events: none;
-    background-color: #c4c0c0;
+    background-color: #c2c0c4;
 }
