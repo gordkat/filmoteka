@@ -1,33 +1,35 @@
 <article class="modal-film-card">
-    <button type="button" class="close-button">
-<svg  class="close-button__svg" xmlns="http://www.w3.org/2000/svg" width="30" height="30"><path fill="none" stroke-width="2.133" stroke="#000" d="M8.533 8.533l14.933 14.933M8.533 23.467L23.466 8.534"/></svg>
-    </button>
-    <div class="modal__card-wrapper">
-      <div class="modal__poster-wrapper">
-        <img class='modal__poster'src= alt="{{title}}">
-      </div>
-      <div class="modal__info-wrapper">
-        <h2 class="modal__film-title upper-case">{{title}}</h2>
-        <ul class="modal__info-list list">
-          <li class="modal__info-list-item">
-            <p class="modal__info-list-category">Vote / Votes</p>
-            <div class="modal__info-list-data">
-              <span class="modal__info-list-data-va">{{vote_average}}</span> 
-              <span class="line">/</span> 
-              <span class="modal__info-list-data-vc">{{vote_count}}</span>
-            </div>
-          </li>
-          <li class="modal__info-list-item">
-            <p class="modal__info-list-category">Popularity</p>
-            <div class="modal__info-list-data">{{popularity}}</div>
-          </li>
-          <li class="modal__info-list-item">
-            <p class="modal__info-list-category">Original Title</p>
-            <div class="modal__info-list-data upper-case">{{original_title}}</div>
-          </li>
-          <li class="modal__info-list-item">
-            <p class="modal__info-list-category">Genre</p>
-            <div class="modal__info-list-data genre-list">
+  <button type="button" class="close-button">
+    <svg class="close-button__svg" xmlns="http://www.w3.org/2000/svg" width="30" height="30">
+      <path fill="none" stroke-width="2.133" stroke="#000" d="M8.533 8.533l14.933 14.933M8.533 23.467L23.466 8.534" />
+    </svg>
+  </button>
+  <div class="modal__card-wrapper">
+    <div class="modal__poster-wrapper">
+      <img class='modal__poster' src={{poster_path}} alt=" {{title}}">
+    </div>
+    <div class="modal__info-wrapper">
+      <h2 class="modal__film-title upper-case">{{title}}</h2>
+      <ul class="modal__info-list list">
+        <li class="modal__info-list-item">
+          <p class="modal__info-list-category">Vote / Votes</p>
+          <div class="modal__info-list-data">
+            <span class="modal__info-list-data-va">{{vote_average}}</span>
+            <span class="line">/</span>
+            <span class="modal__info-list-data-vc">{{vote_count}}</span>
+          </div>
+        </li>
+        <li class="modal__info-list-item">
+          <p class="modal__info-list-category">Popularity</p>
+          <div class="modal__info-list-data">{{popularity}}</div>
+        </li>
+        <li class="modal__info-list-item">
+          <p class="modal__info-list-category">Original Title</p>
+          <div class="modal__info-list-data upper-case">{{original_title}}</div>
+        </li>
+        <li class="modal__info-list-item">
+          <p class="modal__info-list-category">Genre</p>
+          <div class="modal__info-list-data genre-list">
 
             {{#each genres}}
             {{this.name }}
