@@ -1,50 +1,143 @@
 import * as basicLightbox from 'basiclightbox';
+import Kateryna from '../images/team/Kateryna.jpg';
+import Zoya from '../images/team/Zoya.jpg';
+import Anna from '../images/team/Anna.jpg';
+import Anatoliy from '../images/team/Anatoliy.jpg';
+import Liubov from '../images/team/Liubov.jpg';
+import Maria from '../images/team/Maria.jpg';
+import Andrey from '../images/team/Andrey.jpg';
+import Elena from '../images/team/Elena.jpg';
+import Andrii from '../images/team/Andrii.jpg';
+import social from '../images/sprite.svg';
 
-const markup = `<div class="team__wrapper">
-<div class="team__card">
-    <img src=" " alt="Kateryna" class="team__image">
+const markup = `<ul class="team__wrapper">
+
+
+<li class="team__lead list">
+<img src="${Kateryna}" alt="Kateryna" class="team__image">
     <p class="team__name">Kateryna</p>
     <p class="team__role">Team Lead / Developer </p>
-    
-</div>
-<div class="team__card">
-    <img src=" " alt="Zoya" class="team__image">
+  <ul class="team__git">
+  <a class="" href="https://github.com/gordkat" target="_blank" ><svg class="logo__icon" width="24" height="24">
+  <use href="${social}#github"></use>
+  </svg></a>
+  <a class="" href="https://linkedin.com" target="_blank" ><svg class="logo__icon" width="24" height="24">
+  <use href="${social}#linkedin"></use>
+</svg></a>
+</ul>
+</li>
+
+<li class="team__card">
+    <img src="${Zoya}" alt="Zoya" class="team__image">
     <p class="team__name">Zoya</p>
-    <p class="team__role">Scrum Master / Developer</p>
-</div>
-<div class="team__card">
-    <img src=" " alt="Anna" class="team__image">
+    <p class="team__role">Scrum/Developer</p>
+
+     <ul class="team__git">
+    <a class="" href="https://github.com/apostoloska-z" target="_blank" ><svg class="logo__icon" width="24" height="24">
+      <use href="${social}#github"></use>
+    </svg></a>
+    <a class="" href="https://linkedin.com" target="_blank" ><svg class="logo__icon" width="24" height="24">
+      <use href="${social}#linkedin"></use>
+    </svg></a>
+    </ul>
+</li>
+
+<li class="team__card">
+    <img src="${Anna}" alt="Anna" class="team__image">
     <p class="team__name">Anna</p>
     <p class="team__role">Developer</p>
-</div>
-<div class="team__card">
-    <img src=" " alt="Anatoliy" class="team__image">
+
+    <ul class="team__git">
+    <a class="" href="https://github.com/Uaskoa" target="_blank" ><svg class="logo__icon" width="24" height="24">
+      <use href="${social}#github"></use>
+    </svg></a>
+    <a class="" href="https://linkedin.com" target="_blank" ><svg class="logo__icon" width="24" height="24">
+      <use href="${social}#linkedin"></use>
+    </svg></a>
+    </ul>
+</li>
+
+<li class="team__card">
+    <img src="${Anatoliy}" alt="Anatoliy" class="team__image">
     <p class="team__name">Anatoliy</p>
     <p class="team__role">Developer</p>
-</div>
-<div class="team__card">
-    <img src=" " alt="Liubov" class="team__image">
+    <ul class="team__git">
+    <a class="" href="https://github.com/AnatoliiYarovyi" target="_blank" ><svg class="logo__icon" width="24" height="24">
+      <use href="${social}#github"></use>
+    </svg></a>
+    <a class="" href="https://linkedin.com" target="_blank" ><svg class="logo__icon" width="24" height="24">
+      <use href="${social}#linkedin"></use>
+    </svg></a>
+    </ul>
+</li>
+
+<li class="team__card">
+    <img src="${Liubov}" alt="Liubov" class="team__image">
     <p class="team__name">Liubov</p>
     <p class="team__role">Developer</p>
-</div>
-<div class="team__card">
-    <img src=" " alt="Iryna" class="team__image">
-    <p class="team__name">Iryna</p>
+    <ul class="team__git">
+    <a class="" href="https://github.com/Lubasia" target="_blank" ><svg class="logo__icon" width="24" height="24">
+      <use href="${social}#github"></use>
+    </svg></a>
+    <a class="" href="https://linkedin.com" target="_blank" ><svg class="logo__icon" width="24" height="24">
+      <use href="${social}#linkedin"></use>
+    </svg></a>
+    </ul>
+</li>
+<li class="team__card">
+    <img src="${Maria}" alt="Mariya" class="team__image">
+    <p class="team__name">Mariya</p>
     <p class="team__role">Developer</p>
-</div>
-<div class="team__card">
-    <img src=" " alt="Andrey" class="team__image">
+    <ul class="team__git">
+    <a class="" href="https://github.com/Narmony" target="_blank" ><svg class="logo__icon" width="24" height="24">
+      <use href="${social}#github"></use>
+    </svg></a>
+    <a class="" href="https://linkedin.com" target="_blank" ><svg class="logo__icon" width="24" height="24">
+      <use href="${social}#linkedin"></use>
+    </svg></a>
+    </ul>
+</li>
+<li class="team__card">
+    <img src="${Andrey}" alt="Andrey" class="team__image">
     <p class="team__name">Andrey</p>
     <p class="team__role">Developer</p>
-</div>
-<div class="team__card">
-    <img src=" " alt="Elena" class="team__image">
+    <ul class="team__git">
+    <a class="" href="https://github.com/koval-andrey" target="_blank" ><svg class="logo__icon" width="24" height="24">
+      <use href="${social}#github"></use>
+    </svg></a>
+    <a class="" href="https://linkedin.com" target="_blank" ><svg class="logo__icon" width="24" height="24">
+      <use href="${social}#linkedin"></use>
+    </svg></a>
+    </ul>
+</li>
+<li class="team__card">
+    <img src="${Elena}" alt="Elena" class="team__image">
     <p class="team__name">Elena</p>
     <p class="team__role">Developer</p>
-</div></div>`;
+    <ul class="team__git">
+    <a class="" href="https://github.com/el-ki" target="_blank" ><svg class="logo__icon" width="24" height="24">
+      <use href="${social}#github"></use>
+    </svg></a>
+    <a class="" href="https://linkedin.com" target="_blank" ><svg class="logo__icon" width="24" height="24">
+      <use href="${social}#linkedin"></use>
+    </svg></a>
+    </ul>
+</li>
+<li class="team__card">
+    <img src="${Andrii}" alt="Andrii" class="team__image">
+    <p class="team__name">Andrii</p>
+    <p class="team__role">Developer</p>
+    <ul class="team__git">
+    <a class="" href="https://github.com/Kondes" target="_blank" ><svg class="logo__icon" width="24" height="24">
+      <use href="${social}#github"></use>
+    </svg></a>
+    <a class="" href="https://linkedin.com" target="_blank" ><svg class="logo__icon" width="24" height="24">
+      <use href="${social}#linkedin"></use>
+    </svg></a>
+    </ul>
+</li></ul>`;
 
 const container = document.querySelector('.js-team__modal');
-// const markup2 = `<img src=" "/>`;
 
 container.addEventListener('click', openModal);
 
