@@ -42,6 +42,7 @@ const onHome = event => {
   if (isVisibleBtnAction) {
     refs.btnAction.classList.add('btn-my-library--hidden');
   }
+  clearAll();
   const movieApiServie = new MovieApiService();
   movieApiServie.renderMovies();
 };
