@@ -24,17 +24,32 @@ function openModal(event) {
               .then(result => {
                 const instance = basicLightbox.create(result);
                 instance.show();
-                const mRef = document.querySelector('article')
-                mRef.classList.add('modal-film-card-active')
+                const imgRef = document.querySelector('.modal__poster')
+                imgRef.setAttribute('src', event.target.src);
+                const articleRef = document.querySelector('article');
+                const btnRef = document.querySelector('.close-button');
+                articleRef.classList.add('modal-film-card-active');
+                btnRef.addEventListener('click', closeModal);
+                window.addEventListener('keydown', escapeBtn);
+                
+               
 
-                function escapeBtn(event) {
-                  if (event.code === 'Escape' && mRef.classList.contains('modal-film-card-active')) {
-                      instance.close();
-                      mRef.classList.remove('modal-film-card-active');
-                  }
+                function closeModal() {
+                  instance.close();
+                  articleRef.classList.remove('modal-film-card-active');
                 }
 
-                window.addEventListener('keydown', escapeBtn) ;
+                function escapeBtn(event) {
+                  if (event.code === 'Escape' && articleRef.classList.contains('modal-film-card-active')) {
+                      closeModal();
+                  }
+                }
+                
+
+                if  (!articleRef.classList.contains('modal-film-card-active')) {
+                  window.removeEventListener('click', escapeBtn);
+                  btnRef.removeEventListener('click', closeModal);
+                }
 
 
                const addToWatchBtnRef = document.querySelector('.add-to-watched-btn');
