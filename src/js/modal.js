@@ -3,8 +3,8 @@ import * as basicLightbox from 'basiclightbox';
 
 const mainRef = document.querySelector('.gallery-list');
 
-let addedToWatchArray = [...JSON.parse(localStorage.getItem('movie-to-watch'))];
-let addedToQueueArray = [...JSON.parse(localStorage.getItem('movie-to-queue'))];
+const addedToWatchArray = [...JSON.parse(localStorage.getItem('movie-to-watch'))];
+const addedToQueueArray = [...JSON.parse(localStorage.getItem('movie-to-queue'))];
 
 mainRef.addEventListener('click', openModal);
 
@@ -74,6 +74,15 @@ function openModal(event) {
 
           function handleAddToWatchBtn() {
             const addedMovie = JSON.parse(localStorage.getItem('movie'));
+            const idArray = addedToWatchArray.map((movie) => {
+              if (!movie) {
+                return;
+              }
+              return movie.id;  
+            })
+            if (idArray.includes(addedMovie.id)) {
+              return;
+            }
             addedToWatchArray.push(addedMovie);
             localStorage.setItem(
               'movie-to-watch',
@@ -84,6 +93,15 @@ function openModal(event) {
 
           function handleAddToQueueBtn() {
             const addedMovie = JSON.parse(localStorage.getItem('movie'));
+            const idArray = addedToQueueArray.map((movie) => {
+              if (!movie) {
+                return;
+              }
+              return movie.id;  
+            })
+            if (idArray.includes(addedMovie.id)) {
+              return;
+            }
             addedToQueueArray.push(addedMovie);
             localStorage.setItem(
               'movie-to-queue',
