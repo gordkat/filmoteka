@@ -1,6 +1,6 @@
 import modalMarkup from '../templates/modal-film-card.hbs';
 import * as basicLightbox from 'basiclightbox';
-
+import noposter from '../images/no-poster.png';
 const mainRef = document.querySelector('.gallery-list');
 
 const addedToWatchArray = [...JSON.parse(localStorage.getItem('movie-to-watch'))];
