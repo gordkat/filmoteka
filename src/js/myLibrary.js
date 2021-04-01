@@ -1,5 +1,4 @@
 import galleryTemplate from '../templates/film-card.hbs';
-// import { renderMovies, renderMovieCard } from './renderPopularMovies';
 import MovieApiService from './apiService';
 
 const refs = {
@@ -12,72 +11,66 @@ const refs = {
   gallery: document.querySelector('.gallery-list'),
 };
 
-const isClassListContain = () => {
-  const isHiddenForm = refs.formSearch.classList.contains(
-    'form-search--hidden',
-  );
-  const isVisibleForm = !isHiddenForm;
-  const isVisibleBtnAction = !refs.btnAction.classList.contains(
-    'btn-my-library--hidden',
-  );
-  const isHiddenBtnAction = !isVisibleBtnAction;
-  return { isHiddenForm, isVisibleForm, isVisibleBtnAction, isHiddenBtnAction };
-};
-
+//Рендерим фильмы из массива объектов
 const renderMovieCard = results => {
   refs.gallery.insertAdjacentHTML('beforeend', galleryTemplate(results));
 };
 
+//Очищаем галлерею
 const clearAll = () => {
   refs.gallery.innerHTML = '';
 };
 
+//Колбек для кнопки Home
 const onHome = event => {
   console.log('рендерятся популярные фильмы, резетится форма');
   refs.formSearch.reset();
-  const { isHiddenForm, isVisibleBtnAction } = isClassListContain();
-  if (isHiddenForm) {
-    refs.formSearch.classList.remove('form-search--hidden');
-  }
-  if (isVisibleBtnAction) {
-    refs.btnAction.classList.add('btn-my-library--hidden');
-  }
   clearAll();
+  refs.formSearch.classList.remove('form-search--hidden');
+  refs.btnAction.classList.add('btn-my-library--hidden');
+  refs.btnMyLibrary.classList.remove('current');
+  refs.btnHome.classList.add('current');
   const movieApiServie = new MovieApiService();
   movieApiServie.renderMovies();
 };
 
+//Колбек для кнопки My library
 const onMyLibrary = event => {
   console.log(
     'рендерятся из локалстораж просмотренные фильмы, скрывается поиск, появляются кнопки, меняется фон',
   );
-  isClassListContain();
-  const { isVisibleForm, isHiddenBtnAction } = isClassListContain();
-  if (isVisibleForm) {
-    refs.formSearch.classList.add('form-search--hidden');
-  }
-  if (isHiddenBtnAction) {
-    refs.btnAction.classList.remove('btn-my-library--hidden');
-  }
+  refs.formSearch.classList.add('form-search--hidden');
+  refs.btnAction.classList.remove('btn-my-library--hidden');
+  refs.btnMyLibrary.classList.add('current');
+  refs.btnHome.classList.remove('current');
   onWatched();
 };
 
+//Колбек для кнопки Watched
 const onWatched = () => {
   clearAll();
-  const watchedMovieArray = JSON.parse(localStorage.getItem('movie-to-watch')).slice(1);
+  refs.btnWatched.classList.add('active');
+  refs.btnQueue.classList.remove('active');
+  const watchedMovieArray = JSON.parse(
+    localStorage.getItem('movie-to-watch'),
+  ).slice(1);
   renderMovieCard(watchedMovieArray);
 };
 
+//Колбек для кнопки Queue
 const onQueue = () => {
   clearAll();
-  const queueMovieArray = JSON.parse(localStorage.getItem('movie-to-queue')).slice(1);
+  refs.btnQueue.classList.add('active');
+  refs.btnWatched.classList.remove('active');
+  const queueMovieArray = JSON.parse(
+    localStorage.getItem('movie-to-queue'),
+  ).slice(1);
   renderMovieCard(queueMovieArray);
 };
 
+//Вешаем слушателей событий на кнопки
 refs.btnHome.addEventListener('click', onHome);
 refs.btnMyLibrary.addEventListener('click', onMyLibrary);
 refs.btnWatched.addEventListener('click', onWatched);
 refs.btnQueue.addEventListener('click', onQueue);
-
-
 

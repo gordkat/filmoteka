@@ -2,6 +2,9 @@
 import MovieApiService from './apiService';
 import galleryTemplate from '../templates/film-card.hbs';
 import '@pnotify/core/dist/BrightTheme.css';
+
+import spinnerModal from './spinner'; //Функция которая добавляет или убирает клас is-hidden (toggle)
+
 // import { notice, error } from '@pnotify/core';
 
 const searchMovie = new MovieApiService();
@@ -16,20 +19,21 @@ const refs = {
 refs.form.addEventListener('submit', onSearch);
 
 function onSearch(e) {
+  spinnerModal() //Убирает клас is-hidden
     e.preventDefault();
       if (refs.inputForm.value === '') {
-          refs.gallery.innerHTML = '';
+        refs.gallery.innerHTML = '';
         //  window.location.reload();
         return  searchMovie.getPopularMovies().then(renderMovieCard);
       }
    
-   searchMovie.resetPage();
-    searchMovie.query = refs.inputForm.value.trim();
-    const find = searchMovie.query;
+  searchMovie.resetPage();
+  searchMovie.query = refs.inputForm.value.trim();
+  const find = searchMovie.query;
   
-   refs.gallery.innerHTML = '';
-    searchMovie.searchMovie().then(renderMovieCard);
-
+  refs.gallery.innerHTML = '';
+  searchMovie.searchMovie().then(renderMovieCard);
+  
 }
 export function renderMovieCard(results) {
     if (results.length == 0) {
@@ -47,9 +51,11 @@ export function renderMovieCard(results) {
          }, 2300)
         
           setTimeout(() => {
+            spinnerModal() //Убирает клас is-hidden
             searchMovie.getPopularMovies().then(renderMovieCard);
          }, 2500)
      }
   refs.gallery.insertAdjacentHTML('beforeend', galleryTemplate(results));
+  spinnerModal() //Добавляет клас is-hidden
 }
 

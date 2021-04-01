@@ -52,6 +52,7 @@
     "@pnotify/core": "^5.2.0",
     "basiclightbox": "^5.0.4",
     "core-js": "^3.6.5",
-    "handlebars": "^4.7.6"
+    "handlebars": "^4.7.6",
+    "spin.js": "^4.1.0"
   }
 }
