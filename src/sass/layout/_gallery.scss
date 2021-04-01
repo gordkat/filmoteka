@@ -90,10 +90,10 @@
   }
 }
 @media screen and (min-width: 768px) and (max-width: 1199px) {
-  .container {
-    width: 618px;
-    margin: 0 auto;
-  }
+  // .container {
+  //   width: 618px;
+  //   margin: 0 auto;
+  // }
   .gallery-list {
     display: flex;
     flex-wrap: wrap;
@@ -101,7 +101,8 @@
   }
 
   .gallery-list__item {
-    width: 294px;
+    // width: 294px;
+    width: 274px;
     margin-bottom: 25px;
 
     &:nth-child(even) {

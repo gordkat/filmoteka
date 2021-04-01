@@ -1,6 +1,7 @@
 .logo {
   display: flex;
   text-decoration: none;
+  height: 0;
 }
 .logo-film {
   margin-right: 10px;
@@ -14,9 +15,9 @@
 .main-container {
   background-image: url(../images/desktop-home.jpg);
   height: 230px;
-  // background: center;
+  background-position: center;
   background-size: contain;
-  // background-repeat: no-repeat;
+  background-repeat: no-repeat;
 }
 @media screen and (min-device-pixel-ratio: 2),
   screen and (min-resolution: 192dpi),
@@ -30,8 +31,8 @@
   justify-content: space-between;
 }
 .navigation {
-  // margin-top: 58px;
   padding-top: 58px;
+  height: 0;
  
 }
 .home-page {
@@ -60,7 +61,8 @@ input::-webkit-input-placeholder {
   color: $white-color;
 }
 .form-search {
-  padding-top: 113px;
+  display: flex;
+  margin-top: 113px;
   font-size: 14px;
 }
 
@@ -83,20 +85,42 @@ input::-webkit-input-placeholder {
   display: none;
 }
 
-// .current, button:active {
-//   outline: none;
-//   padding-bottom: 3px;
-//   position: relative;
-//   &::after {
-//     position: absolute;
-//     content: '';
-//     bottom: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 3px;
-//     background-color: $accent-color;
-//     border-radius: 2px;
-//   }
-// }
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .main-container {
+    background-image: url(../images/tablet-home.jpg);
+  }
+  @media screen and (min-device-pixel-ratio: 2),
+  screen and (min-resolution: 192dpi),
+  screen and (min-resolution: 2dppx) {
+  .main-container {
+    background-image: url(../images/tablet-home@2x.jpg);
+  }
+}
+  .navigation{
+    display: flex;
+    
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .main-container {
+    background-image: url(../images/mobile-home.jpg);
+  }
+  @media screen and (min-device-pixel-ratio: 2),
+  screen and (min-resolution: 192dpi),
+  screen and (min-resolution: 2dppx) {
+  .main-container {
+    background-image: url(../images/mobile-home@2x.jpg);
+  }
+}
+  .input-text {
+    width: 280px;
+  }
+  .logo-name{
+    display: none;
+  }
+  
+}
+
 
 

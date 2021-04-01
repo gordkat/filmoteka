@@ -80,10 +80,4 @@ refs.btnWatched.addEventListener('click', onWatched);
 refs.btnQueue.addEventListener('click', onQueue);
 
 
-// let buttons = document.querySelectorAll('nav > button')
-// buttons.forEach(button =>{
-//     button.addEventListener('click',function(){
-//         buttons.forEach(btn=>btn.classList.remove('current'))
-//         this.classList.add('current')
-//     })
-// })
+
