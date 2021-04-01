@@ -77,11 +77,13 @@
   text-decoration: underline;
 }
 .film-card__genre:not(:last-child) {
-  margin-right: 3px;
   &:after {
     content: ', ';
     color: $accent-color;
   }
+}
+.film-card__genre {
+  margin-right: 3px;
 }
 
 @media screen and (max-width: 767px) {
