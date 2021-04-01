@@ -187,6 +187,7 @@
 }
 .modal__buttons-wrapper {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .modal__btn {
@@ -197,6 +198,8 @@
   box-sizing: border-box;
   border-radius: 5px;
   font-weight: 500;
+  margin-right: 14.85px;
+  margin-bottom: 14.85px;
 
   @media screen and (min-width: 768px) {
     width: 125.03px;
@@ -208,7 +211,7 @@
 }
 
 .add-to-watched-btn {
-  margin-right: 14.85px;
+  
 
   @media screen and (min-width: 768px) {
     margin-right: 14.94px;
@@ -266,6 +269,15 @@
     border-radius: 5px;
     text-align: center;
     padding-top: 1.5px;
+}
+
+
+
+.trailer-link{
+  display: block;
+  width: 100%;
+  text-align: center;
+  line-height: 44px;
 }
 
 
