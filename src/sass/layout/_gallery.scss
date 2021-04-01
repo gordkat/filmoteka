@@ -56,7 +56,9 @@
   overflow: visible;
   white-space: normal;
 }
-
+.film-card__genres {
+  display: flex;
+}
 .film-card__genres,
 .film-card__genre {
   color: $accent-color;
@@ -70,10 +72,16 @@
   overflow: visible;
   white-space: normal;
 }
-
-.film-card__genre:not(:last-child):after {
-  content: ', ';
-  color: $accent-color;
+.film-card__genre:hover,
+.film-card__genre:focus {
+  text-decoration: underline;
+}
+.film-card__genre:not(:last-child) {
+  margin-right: 3px;
+  &:after {
+    content: ', ';
+    color: $accent-color;
+  }
 }
 
 @media screen and (max-width: 767px) {

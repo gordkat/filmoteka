@@ -14,9 +14,13 @@ const refs = {
     inputForm: document.querySelector('.input-text'),
     gallery:  document.querySelector('.gallery-list'),
     form: document.querySelector('.form-search'),
+    lensSearch: document.querySelector('.logo-search'),
+    
 }
-
+refs.lensSearch.addEventListener('click', onSearch);
 refs.form.addEventListener('submit', onSearch);
+
+
 
 function onSearch(e) {
   spinnerModal() //Убирает клас is-hidden
