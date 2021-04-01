@@ -26,7 +26,7 @@
     background-image: url(../images/desktop-home@2x.jpg);
   }
 }
-.library-page{
+.library-main{
   background-image: url(../images/desktop-library.jpg);
   height: 230px;
   background-position: center;
@@ -36,7 +36,7 @@
 @media screen and (min-device-pixel-ratio: 2),
   screen and (min-resolution: 192dpi),
   screen and (min-resolution: 2dppx) {
-  .library-page {
+  .library-main {
     background-image: url(../images/desktop-library@2x.jpg);
   }
 }
@@ -109,13 +109,13 @@ input::-webkit-input-placeholder {
     background-image: url(../images/tablet-home@2x.jpg);
   }
 }
-.library-page{
+.library-main{
   background-image: url(../images/tablet-library.jpg);
 }
 @media screen and (min-device-pixel-ratio: 2),
   screen and (min-resolution: 192dpi),
   screen and (min-resolution: 2dppx) {
-  .library-page {
+  .library-main{
     background-image: url(../images/tablet-library@2x.jpg);
   }
 }
@@ -136,13 +136,13 @@ input::-webkit-input-placeholder {
     background-image: url(../images/mobile-home@2x.jpg);
   }
 }
-.library-page{
+.library-main{
   background-image: url(../images/mobile-library.jpg);
 }
 @media screen and (min-device-pixel-ratio: 2),
   screen and (min-resolution: 192dpi),
   screen and (min-resolution: 2dppx) {
-  .library-page {
+  .library-main {
     background-image: url(../images/mobile-library@2x.jpg);
   }
 }
