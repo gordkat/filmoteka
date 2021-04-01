@@ -7,13 +7,11 @@
         <h3 class="film-card__name ">
             {{title}}
         </h3>
-        <ul class="film-card__genres">
+        <p class="film-card__genres">
             {{#each genres}}
-
-            <li class="film-card__genre">{{ name}}</li>
-
+            <span class="film-card__genre">{{name}}</span>
             {{/each}}| {{release_date}}
-        </ul>
+        </p>
     </div>
 
 </li>

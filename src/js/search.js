@@ -17,6 +17,12 @@ const refs = {
     lensSearch: document.querySelector('.logo-search'),
     
 }
+
+// const item = document.querySelector('{{genres}}');
+// console.dir(item);
+
+console.dir('.gallery-list__item');
+
 refs.lensSearch.addEventListener('click', onSearch);
 refs.form.addEventListener('submit', onSearch);
 
