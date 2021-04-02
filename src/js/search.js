@@ -18,12 +18,6 @@ const refs = {
     
 }
 
-
-// const item = document.querySelector('{{genres}}');
-// console.dir(item);
-
-console.dir('.gallery-list__item');
-
 refs.lensSearch.addEventListener('click', onSearch);
 refs.form.addEventListener('submit', onSearch);
 
@@ -44,6 +38,7 @@ function onSearch(e) {
 
   refs.gallery.innerHTML = '';
   searchMovie.searchMovies().then(renderMovieCard);
+  
 }
 export function renderMovieCard(results) {
   if (results.length == 0) {
@@ -68,4 +63,8 @@ export function renderMovieCard(results) {
   }
   refs.gallery.insertAdjacentHTML('beforeend', galleryTemplate(results));
   spinnerModal(); //Добавляет клас is-hidden
+ 
 }
+
+
+
