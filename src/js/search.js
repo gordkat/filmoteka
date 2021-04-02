@@ -16,11 +16,6 @@ const refs = {
   lensSearch: document.querySelector('.logo-search'),
 };
 
-// const item = document.querySelector('{{genres}}');
-// console.dir(item);
-
-console.dir('.gallery-list__item');
-
 refs.lensSearch.addEventListener('click', onSearch);
 refs.form.addEventListener('submit', onSearch);
 
@@ -38,10 +33,7 @@ function onSearch(e) {
   const find = searchMovie.query;
 
   refs.gallery.innerHTML = '';
-  searchMovie.searchMovies().then(res => {
-    renderMovieCard(res);
-    console.log(res);
-  });
+  searchMovie.searchMovies().then(renderMovieCard);
 }
 export function renderMovieCard(results) {
   if (results.length == 0) {
