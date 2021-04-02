@@ -3,8 +3,6 @@ import { BASE_URL, API_KEY } from './settings';
 import noposter from '../images/no-poster.png';
 const galleryRef = document.querySelector('.gallery-list');
 
-
-
 export default class MovieApiService {
   constructor() {
     this.searchQuery = '';
@@ -40,7 +38,6 @@ export default class MovieApiService {
     const url = `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`;
     const response = await fetch(url);
     const movieById = await response.json();
-    console.log(movieById);
     return movieById;
   }
 
@@ -143,6 +140,7 @@ export default class MovieApiService {
 
   renderMovieCard(results) {
     const moviesMarkup = galleryTemplate(results);
+
     galleryRef.insertAdjacentHTML('beforeend', moviesMarkup);
   }
 
@@ -154,4 +152,3 @@ export default class MovieApiService {
     this.page = 1;
   }
 }
-
