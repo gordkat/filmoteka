@@ -2,6 +2,7 @@ import galleryTemplate from '../templates/film-card.hbs';
 import MovieApiService from './apiService';
 
 const refs = {
+  headerContainer: document.querySelector('.main-container'),
   btnMyLibrary: document.querySelector('.library-page'),
   btnHome: document.querySelector('.home-page'),
   formSearch: document.querySelector('.form-search'),
@@ -29,9 +30,10 @@ const onHome = event => {
   refs.btnAction.classList.add('btn-my-library--hidden');
   refs.btnMyLibrary.classList.remove('current');
   refs.btnHome.classList.add('current');
+  refs.headerContainer.classList.remove('library-main');
   const movieApiServie = new MovieApiService();
   movieApiServie.renderPopularMovies();
-  movieApiServie.fetchMovieById(464052);
+  // movieApiServie.fetchMovieById(464052);
 };
 
 //Колбек для кнопки My library
@@ -40,6 +42,7 @@ const onMyLibrary = event => {
   refs.btnAction.classList.remove('btn-my-library--hidden');
   refs.btnMyLibrary.classList.add('current');
   refs.btnHome.classList.remove('current');
+  refs.headerContainer.classList.add('library-main');
   onWatched();
 };
 
