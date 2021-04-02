@@ -59,13 +59,29 @@ function renderFilmsCard(articles) {
   listElement.innerHTML = filmsCardTpl(articles);
 }
 
+// function displayList(wrapper, page) {
+//   wrapper.innerHTML = '';
+//   fetchPopularFilmsByPage(page).then(renderFilmsCard);
+// }
+// function displaySearchListByPage(wrapper, page) {
+//   wrapper.innerHTML = '';
+//   fetchSearchFilmsByPage(page).then(renderFilmsCard);
+// }
+
+////////пропустила через нормалайз, пр пагинации всё подгружается
 function displayList(wrapper, page) {
   wrapper.innerHTML = '';
-  fetchPopularFilmsByPage(page).then(renderFilmsCard);
+  //Call normalizer списка жанры, год, noposter
+  movieApiService
+    .fetchNormalizer(fetchPopularFilmsByPage(page))
+    .then(renderFilmsCard);
 }
 function displaySearchListByPage(wrapper, page) {
   wrapper.innerHTML = '';
-  fetchSearchFilmsByPage(page).then(renderFilmsCard);
+  //Call normalizer списка жанры, год, noposter
+  movieApiService
+    .fetchNormalizer(fetchPopularFilmsByPage(page))
+    .then(renderFilmsCard);
 }
 
 function renderPagination(totalPages, listItems, callback) {
