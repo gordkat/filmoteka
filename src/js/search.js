@@ -97,19 +97,19 @@ export function renderMovieCard(results) {
 
 function Auto(str)
 {
-  var search = new Array(
+  const search = new Array(
   "й","ц","у","к","е","н","г","ш","щ","з","х","ъ",
   "ф","ы","в","а","п","р","о","л","д","ж","э",
   "я","ч","с","м","и","т","ь","б","ю"
   );
-  var replace = new Array(
+  const replace = new Array(
       "q","w","e","r","t","y","u","i","o","p","\\[","\\]",
       "a","s","d","f","g","h","j","k","l",";","'",
       "z","x","c","v","b","n","m",",","\\."
       );
      
-    for (var i = 0; i < replace.length; i++) {
-        var reg = new RegExp(replace[i], 'mig');
+    for (let i = 0; i < replace.length; i++) {
+        let reg = new RegExp(replace[i], 'mig');
         str = str.replace(reg, function (a) {
             return a == a.toLowerCase() ? search[i] : search[i].toUpperCase();
         })
@@ -118,19 +118,19 @@ function Auto(str)
     }
     
     function AutofromRus(str){
-  var search = new Array(
+  const search = new Array(
     "q","w","e","r","t","y","u","i","o","p","\\[","\\]",
     "a","s","d","f","g","h","j","k","l",";","'",
     "z","x","c","v","b","n","m",",","\\."
   );
-  var replace = new Array(
+  const replace = new Array(
     "й","ц","у","к","е","н","г","ш","щ","з","х","ъ",
     "ф","ы","в","а","п","р","о","л","д","ж","э",
     "я","ч","с","м","и","т","ь","б","ю"
       );
      
-    for (var i = 0; i < replace.length; i++) {
-        var reg = new RegExp(replace[i], 'mig');
+    for (let i = 0; i < replace.length; i++) {
+        let reg = new RegExp(replace[i], 'mig');
         str = str.replace(reg, function (a) {
             return a == a.toLowerCase() ? search[i] : search[i].toUpperCase();
         })
