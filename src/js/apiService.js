@@ -3,7 +3,7 @@ import { BASE_URL, API_KEY } from './settings';
 import noposter from '../images/no-poster.png';
 const galleryRef = document.querySelector('.gallery-list');
 
-// const baseUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${keyApi}`;
+
 
 export default class MovieApiService {
   constructor() {
