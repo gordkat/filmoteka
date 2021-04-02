@@ -192,11 +192,11 @@
   box-sizing: border-box;
   border-radius: 5px;
   font-weight: 500;
-  margin-right: 14.85px;
+
   margin-bottom: 30px;
 
   @media screen and (min-width: 768px) {
-    width: 125.03px;
+    width: 124.5px;
   }
 
   @media screen and (min-width: 1024px) {
@@ -206,7 +206,8 @@
 
 .add-to-watched-btn {
   
-
+  margin-right: 14.85px;
+  
   @media screen and (min-width: 768px) {
     margin-right: 14.94px;
   }
