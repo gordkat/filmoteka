@@ -17,6 +17,7 @@ function openModal(event) {
     function apiMovieCard(movieId) {
       const keyApi = 'be2bb7fd29eddf6e05cfa10ca2e7b19c';
       const baseUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${keyApi}`;
+ 
       return fetch(baseUrl)
         .then(res => res.json())
         .then(data => {
@@ -47,6 +48,7 @@ function openModal(event) {
           articleRef.classList.add('modal-film-card-active');
           btnRef.addEventListener('click', closeModal);
           window.addEventListener('keydown', escapeBtn);
+          enableTrailerLink();
 
           function closeModal() {
             instance.close();
@@ -67,6 +69,27 @@ function openModal(event) {
             btnRef.removeEventListener('click', closeModal);
           }
 
+
+          function enableTrailerLink() {
+            const targetName = document.querySelector('.title').textContent;
+            const trailerLinkRef = document.querySelector('.trailer-link');
+
+            const youtubeKeyApi = 'AIzaSyDJJjQz7c6w4qaiZdybkdQTYOdfJPDLMsE';
+            const baseYoutubeUrl = `https://www.googleapis.com/youtube/v3/search?q=${targetName}+official+trailer&key=${youtubeKeyApi}&part=snippet,id&kind='youtube#video'order=date&maxResults=1`
+            fetch(baseYoutubeUrl)
+              .then(response => response.json())
+              .then(data => {
+                const movieId = data.items[0].id.videoId
+                    return movieId;
+              })
+              .then(data => {
+                trailerLinkRef.addEventListener('click', function() {
+                  trailerLinkRef.href = `https://www.youtube.com/embed/${data}?enablejsapi=1`
+                })
+              })
+          }
+
+          
           const addToWatchBtnRef = document.querySelector(
             '.add-to-watched-btn',
           );

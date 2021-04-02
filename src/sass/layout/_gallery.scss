@@ -84,16 +84,16 @@
       width: 280px;
     }
 
-    &_item:not(:last-child) {
+    &__item:not(:last-child) {
       margin-bottom: 15px;
     }
   }
 }
 @media screen and (min-width: 768px) and (max-width: 1199px) {
-  // .container {
-  //   width: 618px;
-  //   margin: 0 auto;
-  // }
+  .container {
+    width: 618px;
+    margin: 0 auto;
+  }
   .gallery-list {
     display: flex;
     flex-wrap: wrap;

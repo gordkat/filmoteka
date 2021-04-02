@@ -9,13 +9,25 @@ import spinnerModal from './spinner'; //Функция которая добав
 const searchMovie = new MovieApiService();
 
 const refs = {
-  heder: document.querySelector('.main-container'),
-  inputForm: document.querySelector('.input-text'),
-  gallery: document.querySelector('.gallery-list'),
-  form: document.querySelector('.form-search'),
-};
 
+    heder: document.querySelector('.main-container'),
+    inputForm: document.querySelector('.input-text'),
+    gallery:  document.querySelector('.gallery-list'),
+    form: document.querySelector('.form-search'),
+    lensSearch: document.querySelector('.logo-search'),
+    
+}
+
+
+// const item = document.querySelector('{{genres}}');
+// console.dir(item);
+
+console.dir('.gallery-list__item');
+
+refs.lensSearch.addEventListener('click', onSearch);
 refs.form.addEventListener('submit', onSearch);
+
+
 
 function onSearch(e) {
   spinnerModal(); //Убирает клас is-hidden
