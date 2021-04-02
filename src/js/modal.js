@@ -3,8 +3,12 @@ import * as basicLightbox from 'basiclightbox';
 import noposter from '../images/no-poster.png';
 const mainRef = document.querySelector('.gallery-list');
 
-const addedToWatchArray = [...JSON.parse(localStorage.getItem('movie-to-watch'))];
-const addedToQueueArray = [...JSON.parse(localStorage.getItem('movie-to-queue'))];
+const addedToWatchArray = [
+  ...JSON.parse(localStorage.getItem('movie-to-watch')),
+];
+const addedToQueueArray = [
+  ...JSON.parse(localStorage.getItem('movie-to-queue')),
+];
 
 mainRef.addEventListener('click', openModal);
 
@@ -30,7 +34,6 @@ function openModal(event) {
           };
 
           data = { ...data, poster_path };
-
           localStorage.setItem('movie', JSON.stringify(modifiedData));
           return modalMarkup(data);
         })
@@ -74,12 +77,12 @@ function openModal(event) {
 
           function handleAddToWatchBtn() {
             const addedMovie = JSON.parse(localStorage.getItem('movie'));
-            const idArray = addedToWatchArray.map((movie) => {
+            const idArray = addedToWatchArray.map(movie => {
               if (!movie) {
                 return;
               }
-              return movie.id;  
-            })
+              return movie.id;
+            });
             if (idArray.includes(addedMovie.id)) {
               return;
             }
@@ -93,12 +96,12 @@ function openModal(event) {
 
           function handleAddToQueueBtn() {
             const addedMovie = JSON.parse(localStorage.getItem('movie'));
-            const idArray = addedToQueueArray.map((movie) => {
+            const idArray = addedToQueueArray.map(movie => {
               if (!movie) {
                 return;
               }
-              return movie.id;  
-            })
+              return movie.id;
+            });
             if (idArray.includes(addedMovie.id)) {
               return;
             }

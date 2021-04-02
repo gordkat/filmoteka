@@ -3,21 +3,12 @@ import MovieApiService from './apiService';
 import debounce from 'lodash';
 const galleryRef = document.querySelector('.gallery-list');
 
-
 const movieApiServie = new MovieApiService();
-movieApiServie.renderMovies();
+movieApiServie.renderPopularMovies();
 
 export function renderMovieCard(results) {
   galleryRef.insertAdjacentHTML('beforeend', galleryTemplate(results));
 }
-
-console.log(movieApiServie.getPopularMovies())
-
-
-
-
-
-  
 
 // Пример для Марии. показывает, что отрисовывает по поиску
 

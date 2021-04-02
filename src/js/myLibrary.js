@@ -23,7 +23,6 @@ const clearAll = () => {
 
 //Колбек для кнопки Home
 const onHome = event => {
-  console.log('рендерятся популярные фильмы, резетится форма');
   refs.formSearch.reset();
   clearAll();
   refs.formSearch.classList.remove('form-search--hidden');
@@ -31,14 +30,12 @@ const onHome = event => {
   refs.btnMyLibrary.classList.remove('current');
   refs.btnHome.classList.add('current');
   const movieApiServie = new MovieApiService();
-  movieApiServie.renderMovies();
+  movieApiServie.renderPopularMovies();
+  movieApiServie.fetchMovieById(464052);
 };
 
 //Колбек для кнопки My library
 const onMyLibrary = event => {
-  console.log(
-    'рендерятся из локалстораж просмотренные фильмы, скрывается поиск, появляются кнопки, меняется фон',
-  );
   refs.formSearch.classList.add('form-search--hidden');
   refs.btnAction.classList.remove('btn-my-library--hidden');
   refs.btnMyLibrary.classList.add('current');
@@ -73,4 +70,3 @@ refs.btnHome.addEventListener('click', onHome);
 refs.btnMyLibrary.addEventListener('click', onMyLibrary);
 refs.btnWatched.addEventListener('click', onWatched);
 refs.btnQueue.addEventListener('click', onQueue);
-
