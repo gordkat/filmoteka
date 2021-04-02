@@ -53,6 +53,7 @@ function onSearch(e) {
 export function checkedResult(results){
   if (results.length == 0) {
     searchMovie.query = Auto(searchMovie.query);
+    refs.inputForm.value = searchMovie.query;
     
 }
 searchMovie.searchMovies().then(secondCheckedResult);
@@ -61,6 +62,7 @@ searchMovie.searchMovies().then(secondCheckedResult);
 export function secondCheckedResult(results){
   if (results.length == 0) {
     searchMovie.query = AutofromRus(searchMovie.query);
+    refs.inputForm.value = searchMovie.query;
     
 }
 searchMovie.searchMovies().then(renderMovieCard);
@@ -95,19 +97,19 @@ export function renderMovieCard(results) {
 
 function Auto(str)
 {
-  const search = new Array(
+  var search = new Array(
   "й","ц","у","к","е","н","г","ш","щ","з","х","ъ",
   "ф","ы","в","а","п","р","о","л","д","ж","э",
   "я","ч","с","м","и","т","ь","б","ю"
   );
-  const replace = new Array(
+  var replace = new Array(
       "q","w","e","r","t","y","u","i","o","p","\\[","\\]",
       "a","s","d","f","g","h","j","k","l",";","'",
       "z","x","c","v","b","n","m",",","\\."
       );
      
-    for (let i = 0; i < replace.length; i++) {
-        let reg = new RegExp(replace[i], 'mig');
+    for (var i = 0; i < replace.length; i++) {
+        var reg = new RegExp(replace[i], 'mig');
         str = str.replace(reg, function (a) {
             return a == a.toLowerCase() ? search[i] : search[i].toUpperCase();
         })
@@ -116,19 +118,19 @@ function Auto(str)
     }
     
     function AutofromRus(str){
-  const search = new Array(
+  var search = new Array(
     "q","w","e","r","t","y","u","i","o","p","\\[","\\]",
     "a","s","d","f","g","h","j","k","l",";","'",
     "z","x","c","v","b","n","m",",","\\."
   );
-  const replace = new Array(
+  var replace = new Array(
     "й","ц","у","к","е","н","г","ш","щ","з","х","ъ",
     "ф","ы","в","а","п","р","о","л","д","ж","э",
     "я","ч","с","м","и","т","ь","б","ю"
       );
      
-    for (let i = 0; i < replace.length; i++) {
-        let reg = new RegExp(replace[i], 'mig');
+    for (var i = 0; i < replace.length; i++) {
+        var reg = new RegExp(replace[i], 'mig');
         str = str.replace(reg, function (a) {
             return a == a.toLowerCase() ? search[i] : search[i].toUpperCase();
         })
