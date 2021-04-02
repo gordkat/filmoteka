@@ -38,7 +38,6 @@ export default class MovieApiService {
     const url = `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`;
     const response = await fetch(url);
     const movieById = await response.json();
-    console.log(movieById);
     return movieById;
   }
 
@@ -77,7 +76,6 @@ export default class MovieApiService {
 
     // Обновляем информацию фильмов в массиве
     const updatedMoviesarr = moviesArr.map(movie => updateMovie(movie));
-    console.log(updatedMoviesarr);
     return updatedMoviesarr;
   }
 
@@ -132,7 +130,6 @@ export default class MovieApiService {
 
   async renderPopularMovies() {
     const normalizedMovies = await this.getPopularMovies();
-    // console.log(normalizedMovies);
     this.renderMovieCard(normalizedMovies);
   }
 
@@ -143,7 +140,7 @@ export default class MovieApiService {
 
   renderMovieCard(results) {
     const moviesMarkup = galleryTemplate(results);
-    console.log(moviesMarkup);
+
     galleryRef.insertAdjacentHTML('beforeend', moviesMarkup);
   }
 
@@ -155,4 +152,3 @@ export default class MovieApiService {
     this.page = 1;
   }
 }
-
