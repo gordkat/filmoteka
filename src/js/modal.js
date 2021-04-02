@@ -21,6 +21,8 @@ function openModal(event) {
       return fetch(baseUrl)
         .then(res => res.json())
         .then(data => {
+
+          //Сохраняет в массиве local storage только необходимые свойства объекта
           const poster_path = data.poster_path
             ? 'https://image.tmdb.org/t/p/w500' + data.poster_path
             : noposter;
@@ -89,55 +91,103 @@ function openModal(event) {
               })
           }
 
-          
-          const addToWatchBtnRef = document.querySelector(
-            '.add-to-watched-btn',
-          );
+          // Выбирает кнопки "watch" и "queue" в модальном окне
+          const addToWatchBtnRef = document.querySelector('.add-to-watched-btn');
           const addToQueueBtnRef = document.querySelector('.add-to-queue-btn');
 
+          //Вешает слушателей событий на кнопки "watch" и "queue" в модальном окне
           addToWatchBtnRef.addEventListener('click', handleAddToWatchBtn);
           addToQueueBtnRef.addEventListener('click', handleAddToQueueBtn);
 
           function handleAddToWatchBtn() {
             const addedMovie = JSON.parse(localStorage.getItem('movie'));
-            const idArray = addedToWatchArray.map(movie => {
+            if (addToWatchBtnRef.classList.contains("add-to-watched-btn")) {
+            // Сохраняет фильм в local storage при нажатии на кнопку "Add to watched"
+    
+              addToWatchBtnRef.classList.remove("add-to-watched-btn")
+              addToWatchBtnRef.classList.add("remove-from-watched-btn")
+              addToWatchBtnRef.innerText = "REMOVE FROM WATCHED"
+              const idArray = addedToWatchArray.map(movie => {
+                if (!movie) {
+                  return;
+                }
+                return movie.id;
+              });
+
+              if (idArray.includes(addedMovie.id)) {
+                return;
+              }
+              
+              addedToWatchArray.push(addedMovie);
+              localStorage.setItem(
+              'movie-to-watch',
+              JSON.stringify(addedToWatchArray));
+            // addToWatchBtnRef.disabled = true;
+            } else {
+               // Удаляет фильм из local storage при нажатии на кнопку "Remove from watched"
+
+              addToWatchBtnRef.classList.add("add-to-watched-btn");
+              addToWatchBtnRef.classList.remove("remove-from-watched-btn");
+              addToWatchBtnRef.innerText = "ADD TO WATCHED";
+
+              const idArray = addedToWatchArray.map(movie => {
+                 console.log(movie);
               if (!movie) {
                 return;
               }
               return movie.id;
             });
-            if (idArray.includes(addedMovie.id)) {
-              return;
-            }
-            addedToWatchArray.push(addedMovie);
-            localStorage.setItem(
-              'movie-to-watch',
-              JSON.stringify(addedToWatchArray),
-            );
-            addToWatchBtnRef.disabled = true;
-          }
+
+              const index = idArray.indexOf(addedMovie.id)
+              addedToWatchArray.splice(index, 1);
+              localStorage.setItem('movie-to-watch', JSON.stringify(addedToWatchArray));
+                // addToWatchBtnRef.disabled = true;
+            };        
+          };
 
           function handleAddToQueueBtn() {
             const addedMovie = JSON.parse(localStorage.getItem('movie'));
-            const idArray = addedToQueueArray.map(movie => {
-              if (!movie) {
-                return;
-              }
-              return movie.id;
-            });
-            if (idArray.includes(addedMovie.id)) {
-              return;
+
+            if (addToQueueBtnRef.classList.contains("add-to-queue-btn")) {
+              // Сохраняет фильм в local storage при нажатии на кнопку "Add to queue"
+              addToQueueBtnRef.classList.remove("add-to-queue-btn");
+              addToQueueBtnRef.classList.add("remove-from-queue-btn");
+              addToQueueBtnRef.innerText = "REMOVE FROM QUEUE";
+              const idArray = addedToQueueArray.map(movie => {
+                if (!movie) {
+                  return;
+                }
+                  return movie.id;
+                });
+                if (idArray.includes(addedMovie.id)) {
+                  return;
+                }
+              addedToQueueArray.push(addedMovie);
+              localStorage.setItem(
+                'movie-to-queue',
+                JSON.stringify(addedToQueueArray),
+              );
             }
-            addedToQueueArray.push(addedMovie);
-            localStorage.setItem(
-              'movie-to-queue',
-              JSON.stringify(addedToQueueArray),
-            );
-            addToQueueBtnRef.disabled = true;
+            else {
+              // Удаляет фильм из local storage при нажатии на кнопку "Remove from queue"
+              addToQueueBtnRef.classList.add("add-to-queue-btn");
+              addToQueueBtnRef.classList.remove("remove-from-queue-btn");
+              addToQueueBtnRef.innerText = "ADD TO QUEUE";
+              const idArray = addedToQueueArray.map(movie => {
+                console.log(movie);
+                if (!movie) {
+                  return;
+                }
+                return movie.id;
+              });
+              const index = idArray.indexOf(addedMovie.id)
+              console.log(index);
+              addedToQueueArray.splice(index, 1);
+              localStorage.setItem('movie-to-queue', JSON.stringify(addedToQueueArray));
+            }
           }
         });
     }
-
     return apiMovieCard(event.target.parentNode.dataset.id);
   }
 }
