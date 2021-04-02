@@ -1,5 +1,6 @@
 import galleryTemplate from '../templates/film-card.hbs';
 import MovieApiService from './apiService';
+//import { renderPagination } from './pagination';
 
 const refs = {
   headerContainer: document.querySelector('.main-container'),
@@ -10,6 +11,8 @@ const refs = {
   btnWatched: document.querySelector('.watched'),
   btnQueue: document.querySelector('.queue'),
   gallery: document.querySelector('.gallery-list'),
+  /*пагинация
+  paginationContainer: document.querySelector('.pagination__container'),*/
 };
 
 //Рендерим фильмы из массива объектов
@@ -54,6 +57,14 @@ const onWatched = () => {
   const watchedMovieArray = JSON.parse(
     localStorage.getItem('movie-to-watch'),
   ).slice(1);
+  /*пагинация 
+  if(localStorage.getItem('movie-to-watch').lenght) 
+  {renderMovieCard(localStorage.getItem('movie-to-watch').slice(0, 20))
+  .then(results => {
+      renderMovieCard(results);
+      refs.paginationContainer.style.display = 'block';})}
+      else {refs.paginationContainer.style.display = 'none';}*/
+
   renderMovieCard(watchedMovieArray);
 };
 
@@ -65,6 +76,14 @@ const onQueue = () => {
   const queueMovieArray = JSON.parse(
     localStorage.getItem('movie-to-queue'),
   ).slice(1);
+ /*пагинация 
+  if(localStorage.getItem('movie-to-queue').lenght) 
+  {renderMovieCard(localStorage.getItem('movie-to-queue').slice(0, 20))
+  .then(results => {
+      renderMovieCard(results);
+      refs.paginationContainer.style.display = 'block';})}
+      else {refs.paginationContainer.style.display = 'none';}*/
+  
   renderMovieCard(queueMovieArray);
 };
 
