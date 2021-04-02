@@ -3,8 +3,6 @@ import { BASE_URL, API_KEY } from './settings';
 import noposter from '../images/no-poster.png';
 const galleryRef = document.querySelector('.gallery-list');
 
-
-
 export default class MovieApiService {
   constructor() {
     this.searchQuery = '';
@@ -79,6 +77,7 @@ export default class MovieApiService {
 
     // Обновляем информацию фильмов в массиве
     const updatedMoviesarr = moviesArr.map(movie => updateMovie(movie));
+    console.log(updatedMoviesarr);
     return updatedMoviesarr;
   }
 
@@ -127,6 +126,7 @@ export default class MovieApiService {
 
   async renderPopularMovies() {
     const normalizedMovies = await this.getPopularMovies();
+    // console.log(normalizedMovies);
     this.renderMovieCard(normalizedMovies);
   }
 
@@ -137,6 +137,7 @@ export default class MovieApiService {
 
   renderMovieCard(results) {
     const moviesMarkup = galleryTemplate(results);
+    console.log(moviesMarkup);
     galleryRef.insertAdjacentHTML('beforeend', moviesMarkup);
   }
 
