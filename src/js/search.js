@@ -9,19 +9,15 @@ import spinnerModal from './spinner'; //Функция которая добав
 const searchMovie = new MovieApiService();
 
 const refs = {
-
-    heder: document.querySelector('.main-container'),
-    inputForm: document.querySelector('.input-text'),
-    gallery:  document.querySelector('.gallery-list'),
-    form: document.querySelector('.form-search'),
-    lensSearch: document.querySelector('.logo-search'),
-    
-}
+  heder: document.querySelector('.main-container'),
+  inputForm: document.querySelector('.input-text'),
+  gallery: document.querySelector('.gallery-list'),
+  form: document.querySelector('.form-search'),
+  lensSearch: document.querySelector('.logo-search'),
+};
 
 refs.lensSearch.addEventListener('click', onSearch);
 refs.form.addEventListener('submit', onSearch);
-
-
 
 function onSearch(e) {
   spinnerModal(); //Убирает клас is-hidden
@@ -40,6 +36,7 @@ function onSearch(e) {
   refs.gallery.innerHTML = '';
   searchMovie.searchMovies().then(checkedResult);
   
+
 }
 
 // export function checkedResult(results){
@@ -92,8 +89,8 @@ export function renderMovieCard(results) {
   }
   refs.gallery.insertAdjacentHTML('beforeend', galleryTemplate(results));
   spinnerModal(); //Добавляет клас is-hidden
- 
 }
+
 
 function Auto(str)
 {
@@ -137,3 +134,4 @@ function Auto(str)
     }
       return str
     }
+
