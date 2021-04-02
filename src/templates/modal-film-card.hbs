@@ -6,46 +6,45 @@
   </button>
   <div class="modal__card-wrapper">
     <div class="modal__poster-wrapper">
-      <img class='modal__poster' src={{poster_path}} alt=" {{title}}">
+      <img class='modal__poster' src={{this.poster_path}} alt=" {{this.title}}">
     </div>
     <div class="modal__info-wrapper">
-      <h2 class="modal__film-title title upper-case">{{title}}</h2>
+      <h2 class="modal__film-title title upper-case">{{this.title}}</h2>
       <ul class="modal__info-list list">
         <li class="modal__info-list-item">
           <p class="modal__info-list-category">Vote / Votes</p>
           <div class="modal__info-list-data">
-            <span class="modal__info-list-data-va">{{vote_average}}</span>
+            <span class="modal__info-list-data-va">{{this.vote_average}}</span>
             <span class="line">/</span>
-            <span class="modal__info-list-data-vc">{{vote_count}}</span>
+            <span class="modal__info-list-data-vc">{{this.vote_count}}</span>
           </div>
         </li>
         <li class="modal__info-list-item">
           <p class="modal__info-list-category">Popularity</p>
-          <div class="modal__info-list-data">{{popularity}}</div>
+          <div class="modal__info-list-data">{{this.popularity}}</div>
         </li>
         <li class="modal__info-list-item">
           <p class="modal__info-list-category">Original Title</p>
-          <div class="modal__info-list-data orig-title upper-case">{{original_title}}</div>
+          <div class="modal__info-list-data orig-title upper-case">{{this.original_title}}</div>
         </li>
         <li class="modal__info-list-item">
           <p class="modal__info-list-category">Genre</p>
-          <div class="modal__info-list-data genre-list">
-
-            {{#each genres}}
-            {{this.name }}
+        <p class="film-card__genres">
+            {{#each this.genres}}
+            <span class="film-card__genre">{{this.name}}</span>
             {{/each}}
-          </div>
+        </p>
 
         </li>
       </ul>
       <div class="modal__description">
         <h3 class="modal__description-header">ABOUT</h3>
-        <p class="modal__description-content">{{overview}}</p>
+        <p class="modal__description-content">{{this.overview}}</p>
       </div>
       <div class="modal__buttons-wrapper">
         <button class="modal__btn add-to-watched-btn" type="button">ADD TO WATCHED</button>
         <button class="modal__btn add-to-queue-btn" type="button">ADD TO QUEUE</button>
-        <a class="modal__btn trailer-link" href="">WATCH THE TRAILER ON YOUTUBE</a>
+        <a class="trailer-link" href="">WATCH THE TRAILER ON YOUTUBE</a>
       </div>
       <div class="player-container">
         
