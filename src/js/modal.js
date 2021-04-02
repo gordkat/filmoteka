@@ -1,6 +1,8 @@
 import modalMarkup from '../templates/modal-film-card.hbs';
 import * as basicLightbox from 'basiclightbox';
 import noposter from '../images/no-poster.png';
+import MovieApiService from './apiService';
+
 const mainRef = document.querySelector('.gallery-list');
 
 const addedToWatchArray = [
@@ -15,11 +17,9 @@ mainRef.addEventListener('click', openModal);
 function openModal(event) {
   if (event.target.parentNode.nodeName === 'LI') {
     function apiMovieCard(movieId) {
-      const keyApi = 'be2bb7fd29eddf6e05cfa10ca2e7b19c';
-      const baseUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${keyApi}`;
- 
-      return fetch(baseUrl)
-        .then(res => res.json())
+      const movieApiService = new MovieApiService();
+      movieApiService
+        .fetchMovieById(movieId)
         .then(data => {
 
           //Сохраняет в массиве local storage только необходимые свойства объекта
