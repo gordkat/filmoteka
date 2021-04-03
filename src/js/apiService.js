@@ -7,12 +7,14 @@ export default class MovieApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
+    this.totalPages = 0;
   }
 
   async fetchPopularMovies() {
     const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
     const response = await fetch(url);
     const popularMoviesObj = await response.json();
+    this.totalPages = popularMoviesObj.total_pages;
     const popularMovies = await popularMoviesObj.results;
     return popularMovies;
   }

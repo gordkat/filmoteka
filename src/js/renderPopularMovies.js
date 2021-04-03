@@ -9,4 +9,3 @@ movieApiServie.renderPopularMovies();
 export function renderMovieCard(results) {
   galleryRef.insertAdjacentHTML('beforeend', galleryTemplate(results));
 }
-
