@@ -7,5 +7,8 @@ import './js/search';
 import './js/modalTeam';
 import './js/myLibrary';
 import './js/pagination';
+import './js/theme';
+import './js/up-btn';
 import './js/spinner';
 import './js/genresSearch';
+

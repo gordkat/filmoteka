@@ -1,0 +1,113 @@
+body.light-theme {
+  background-color: $white-color;
+}
+
+body.dark-theme {
+  background-color: $svg-header-color;
+}
+/* THEME SWITCH */
+.theme-switch {
+  position: absolute;
+  top: 205px;
+  left: 205px;
+  display: flex;
+  align-items: center;
+
+  @media screen and (min-width: 767px) {
+    top: 250px;
+    left: 0;
+  }
+  @media screen and (min-width: 1024px) {
+    top: 250px;
+  }
+}
+.theme-switch__toggle {
+  display: none;
+}
+
+.theme-switch__toggle + label {
+  display: inline-block;
+  position: relative;
+  width: $switchWidthMob;
+  height: $switchHeightMob;
+  background: linear-gradient(
+      to right,
+      $accent-color 0,
+      #fc8b34 45%,
+      #7fd03e 55%,
+      $green 100%
+    )
+    0 0;
+  background-size: (($switchWidthMob * 2) + 50) 100%;
+  border-radius: 70px;
+  padding: $paddingMob;
+  cursor: pointer;
+  transition: all 500ms ease;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2) inset;
+
+  @media screen and (min-width: 768px) {
+    width: $switchWidth;
+    height: $switchHeight;
+    background-size: (($switchWidth * 2) + 50) 100%;
+    padding: $padding;
+  }
+
+  &:before {
+    content: 'Off';
+    width: $btnWidthMob;
+    height: $btnWidthMob;
+    position: absolute;
+    left: $paddingMob;
+    right: $paddingMob;
+    border-radius: 100%;
+    background: #fff;
+    text-align: center;
+    line-height: 16px;
+    font-family: 'Cabin', sans-serif;
+    font-size: 8px;
+    font-weight: bold;
+    color: $accent-color;
+    text-transform: $text-links--movieTitles;
+    transition: left 500ms ease, color 500ms ease, transform 150ms ease;
+
+    @media screen and (min-width: 768px) {
+      width: $btnWidth;
+      height: $btnWidth;
+      left: $padding;
+      right: $padding;
+      line-height: ($switchHeight - ($padding * 2));
+      font-size: 14px;
+    }
+  }
+
+  &:active &:before {
+    transform: scale(0.95);
+  }
+}
+.theme-switch__toggle:checked + label {
+  background-position-x: -($switchWidthMob + 50);
+  @media screen and (min-width: 768px) {
+    background-position-x: -($switchWidth + 50);
+  }
+  &:before {
+    content: 'On';
+    color: $green;
+    left: ($switchWidthMob - $btnWidthMob - $paddingMob);
+    @media screen and (min-width: 768px) {
+      left: ($switchWidth - $btnWidth - $padding);
+    }
+  }
+}
+
+.theme-switch__icon {
+  height: 15px;
+  width: 15px;
+  margin-right: 4px;
+  margin-left: 4px;
+  @media screen and (min-width: 768px) {
+    height: 30px;
+    width: 30px;
+    margin-right: 8px;
+    margin-left: 8px;
+  }
+}
