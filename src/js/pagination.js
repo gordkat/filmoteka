@@ -178,7 +178,7 @@ function renderPagination(totalPages, listItems, callback) {
     if (currentPage > 1) {
       currentPage--;
       setupPagination(listItems, paginationElement, rows);
-      callback(listElement, currentPage, searchQuery);
+      callback(listElement, currentPage);
     }
   }
 
@@ -186,7 +186,7 @@ function renderPagination(totalPages, listItems, callback) {
     if (currentPage < totalPages) {
       currentPage++;
       setupPagination(listItems, paginationElement, rows);
-      callback(listElement, currentPage, searchQuery);
+      callback(listElement, currentPage);
     }
   }
 
@@ -194,3 +194,72 @@ function renderPagination(totalPages, listItems, callback) {
   arrowLeft.addEventListener('click', onArrowLeftClick);
   arrowRight.addEventListener('click', onArrowRightClick);
 }
+
+/*
+примерный вариант с использованием библиотеки
+
+import MovieApiService from './apiService';
+const movieApiService = new MovieApiService();
+
+import pagination from 'pagination';
+
+
+const paginationElement = document.querySelector('.pagination');
+const galleryRef = document.querySelector('.gallery-list');
+const btnActionRef = document.querySelector('.btn-my-library');
+const formRef = document.querySelector('.form-search');
+const Pagination = {
+  items: null,
+  init() {
+    movieApiService.getPopularMovies().then(data => this.items = data.total_pages).then(() => {
+      const paginationWrapper = document.createElement('div');
+      paginationWrapper.classList.add('pagination__wrapper');
+      paginationElement.append(paginationWrapper);
+
+      const options = {
+        currentPage: 1,
+        totalItems: this.items,
+        itemsPerPage: 1,
+        step: 2,
+        onInit: loadContent,
+      }
+
+      const loadContent = (currentPage) => {
+        onPaginationClick(currentPage);
+      }
+
+      const pag1 = new pagination(paginationWrapper, options);
+      paginationWrapper.querySelector('.arrowLeft').innerHTML = '';
+      paginationWrapper.querySelector('.arrowRight').innerHTML = '';
+      pag1.onPageChanged(loadContent);
+
+    })
+  },
+
+  clear() {
+    paginationElement.innerHTML = '';
+  }
+}
+
+
+const onPaginationClick = (page) => {
+  movieApiService
+    .fetchRated(page)
+    .then((data) => {
+      homePageMarkUp(data, galleryRef);
+    }).then(() => clickListener()).then(() => stop())
+    .catch((error) => console.log(error));
+}
+
+const homePageMarkUp = function (data, target) {
+  const newData = data.map((item) => {
+    return item;
+  });
+  target.innerHTML = "";
+  const markUp = homepage(newData);
+  btnActionRef.innerHTML = "";
+  formRef.classList.remove("none");
+  target.innerHTML = markUp;
+};
+export default Pagination;
+*/
