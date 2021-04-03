@@ -6,7 +6,7 @@ const galleryRef = document.querySelector('.gallery-list');
 const movieApiServie = new MovieApiService();
 movieApiServie.renderPopularMovies();
 
+
 export function renderMovieCard(results) {
   galleryRef.insertAdjacentHTML('beforeend', galleryTemplate(results));
 }
-
