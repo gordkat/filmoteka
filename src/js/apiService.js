@@ -1,7 +1,19 @@
 import galleryTemplate from '../templates/film-card.hbs';
 import { BASE_URL, API_KEY } from './settings';
 import noposter from '../images/no-poster.png';
+import { error } from '@pnotify/core';
+import '@pnotify/core/dist/BrightTheme.css';
+import '@pnotify/core/dist/PNotify.css';
+
 const galleryRef = document.querySelector('.gallery-list');
+
+const notice = message => {
+  error({
+    text: message,
+    maxTextHeight: null,
+    delay: 2000,
+  });
+};
 
 export default class MovieApiService {
   constructor() {
@@ -13,9 +25,13 @@ export default class MovieApiService {
   async fetchPopularMovies() {
     const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
     const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error();
+    }
     const popularMoviesObj = await response.json();
     this.totalPages = popularMoviesObj.total_pages;
     const popularMovies = await popularMoviesObj.results;
+
     return popularMovies;
   }
 
@@ -24,7 +40,6 @@ export default class MovieApiService {
     const response = await fetch(url);
     const searchedMoviesObj = await response.json();
     const searchedMovies = await searchedMoviesObj.results;
-    // console.log(searchedMovies);
     return searchedMovies;
   }
 
@@ -131,8 +146,12 @@ export default class MovieApiService {
   }
 
   async renderPopularMovies() {
-    const normalizedMovies = await this.getPopularMovies();
-    this.renderMovieCard(normalizedMovies);
+    try {
+      const normalizedMovies = await this.getPopularMovies();
+      this.renderMovieCard(normalizedMovies);
+    } catch {
+      notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
+    }
   }
 
   async renderSerchedMovies() {
