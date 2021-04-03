@@ -8,4 +8,4 @@ import './js/modalTeam';
 import './js/myLibrary';
 import './js/pagination';
 import './js/spinner';
-
+import '/js/genresSearch';

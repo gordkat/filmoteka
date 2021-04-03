@@ -67,6 +67,11 @@
   overflow: hidden;
 }
 
+.film-card__genre:hover,
+.film-card__genre:focus {
+  text-decoration: underline;
+}
+
 .film-card__genres:hover {
   overflow: visible;
   white-space: normal;
