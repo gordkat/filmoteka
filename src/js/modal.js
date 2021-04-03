@@ -4,7 +4,6 @@ import noposter from '../images/no-poster.png';
 import MovieApiService from './apiService';
 
 const mainRef = document.querySelector('.gallery-list');
-import MovieApiService from './apiService';
 
 const addedToWatchArray = [
   ...JSON.parse(localStorage.getItem('movie-to-watch')),
