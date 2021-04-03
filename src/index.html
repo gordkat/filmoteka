@@ -18,17 +18,31 @@
     <!-- Header -->
     <div class="main-container">
       <header class="header container">
-        <a href="" class="logo">
-          <svg width="24" height="24" class="logo-film">
-            <use class="icon-cross" href="./images/sprite.svg#icon-film"></use>
-          </svg>
-          <p class="logo-name">Filmoteka</p>
-        </a>
-
+        <div class="header-nav">
+          <a href="" class="logo">
+            <svg width="24" height="24" class="logo-film">
+              <use
+                class="icon-cross"
+                href="./images/sprite.svg#icon-film"
+              ></use>
+            </svg>
+            <span class="logo-name">Filmoteka</span>
+          </a>
+          <nav class="navigation">
+            <button class="home-page current">HOME</button>
+            <button class="library-page">MY LIBRARY</button>
+          </nav>
+        </div>
+        <div class="btn-my-library btn-my-library--hidden">
+          <div class="wrapper-btn">
+            <button class="btn-action watched active">watched</button>
+            <button class="btn-action queue">queue</button>
+          </div>
+        </div>
         <form class="form-search">
           <input
             type="search"
-            placeholder="Поиск фильмов"
+            placeholder="Search"
             name="search"
             class="input-text"
           />
@@ -39,17 +53,6 @@
             ></use>
           </svg>
         </form>
-        <div class="btn-my-library btn-my-library--hidden">
-          <div class="wrapper-btn">
-            <button class="btn-action watched active">watched</button>
-            <button class="btn-action queue">queue</button>
-          </div>
-        </div>
-
-        <nav class="navigation">
-          <button class="home-page current">HOME</button>
-          <button class="library-page">MY LIBRARY</button>
-        </nav>
       </header>
     </div>
     <!-- End Header -->
