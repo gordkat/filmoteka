@@ -7,7 +7,7 @@
     .list {
         width: 100%;
         max-width: 768px;
-        background-color: #FFF;
+        background-color:$white-color;
         margin-top: 25px;
     }
 
@@ -17,7 +17,7 @@
 
 
     .list .item:hover {
-        background-color: black;
+        background-color: $primary-text-color;
     }
 }
 
@@ -38,26 +38,26 @@
         margin: 5px;
 
         transition: 0.5s;
-        color: #000000;
+        color:$primary-text-color;
 
-        font-family: 'Roboto', sans-serif;
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 1.33;
-        font-style: normal;
-        background-color: #FFF;
+        font-family: $font, sans-serif;
+        font-weight: $weight;
+        font-size: $size;
+        line-height: $height;
+        font-style: $style;
+        background-color: $white-color;
 
     }
 
     button:hover {
-        background-color: #FF6B08;
-        color: #FFFFFF;
+        background-color: $accent-color;
+        color:$white-color;
         border-radius: 5px;
     }
 
     button.active {
-        background-color: #FF6B08;
-        color: #FFFFFF;
+        background-color: $accent-color;
+        color:$white-color;
         border-radius: 5px;
     }
 }
@@ -82,12 +82,12 @@
 
 .arrow_left {
     background-repeat: no-repeat;
-    background-image: url('../images/sprite.svg#icon-arrow-left');
+    background-image: url('../images/arrow-left.svg');
 }
 
 .arrow_right { 
     background-repeat: no-repeat;
-    background-image: url('../images/sprite.svg#icon-arrow-right');
+    background-image: url('../images/arrow-right.svg');
 }
 
 .pagination__container_pages {
@@ -103,13 +103,13 @@
   margin: 5px;
   background-position: center;
   border:none;
-  background-color: #fff;
+  background-color:$white-color;
   transition: background-color 0.25s ease-in;
   border-radius: 5px;
 
   &:hover {
-        background-color: #FF6B08;
-        color: #FFFFFF;
+        background-color: $accent-color;
+        color: $white-color;
         border-radius: 5px;
   }
 
@@ -125,7 +125,7 @@
     margin: 5px;
     
     border:none;
-    background-color: #fff;
+    background-color: $white-color;
     display: inline-block;
     text-align: center;
     padding: 10px 5px 1px 5px;

@@ -1,11 +1,7 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-}
-
 .wrapper-btn {
   display: flex;
-  padding-top: 120px;
+  justify-content: center;
+  padding-top: 60px;
 }
 
 .btn-action {
@@ -24,11 +20,12 @@
   font-weight: $weight;
   font-size: 12px;
   line-height: $height;
-
-  &:hover {
-    background-color: $accent-color;
-    border: 1px solid $accent-color;
-  }
+  outline: none;
+}
+.active,
+.btn-action:hover {
+  background-color: $accent-color;
+  border: 1px solid $accent-color;
 }
 
 .watched {

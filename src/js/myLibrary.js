@@ -1,8 +1,9 @@
 import galleryTemplate from '../templates/film-card.hbs';
-// import { renderMovies, renderMovieCard } from './renderPopularMovies';
 import MovieApiService from './apiService';
+//import { renderPagination } from './pagination';
 
 const refs = {
+  headerContainer: document.querySelector('.main-container'),
   btnMyLibrary: document.querySelector('.library-page'),
   btnHome: document.querySelector('.home-page'),
   formSearch: document.querySelector('.form-search'),
@@ -10,80 +11,84 @@ const refs = {
   btnWatched: document.querySelector('.watched'),
   btnQueue: document.querySelector('.queue'),
   gallery: document.querySelector('.gallery-list'),
+  /*пагинация
+  paginationContainer: document.querySelector('.pagination__container'),*/
 };
 
-const isClassListContain = () => {
-  const isHiddenForm = refs.formSearch.classList.contains(
-    'form-search--hidden',
-  );
-  const isVisibleForm = !isHiddenForm;
-  const isVisibleBtnAction = !refs.btnAction.classList.contains(
-    'btn-my-library--hidden',
-  );
-  const isHiddenBtnAction = !isVisibleBtnAction;
-  return { isHiddenForm, isVisibleForm, isVisibleBtnAction, isHiddenBtnAction };
-};
-
+//Рендерим фильмы из массива объектов
 const renderMovieCard = results => {
   refs.gallery.insertAdjacentHTML('beforeend', galleryTemplate(results));
 };
 
+//Очищаем галлерею
 const clearAll = () => {
   refs.gallery.innerHTML = '';
 };
 
+//Колбек для кнопки Home
 const onHome = event => {
-  console.log('рендерятся популярные фильмы, резетится форма');
   refs.formSearch.reset();
-  const { isHiddenForm, isVisibleBtnAction } = isClassListContain();
-  if (isHiddenForm) {
-    refs.formSearch.classList.remove('form-search--hidden');
-  }
-  if (isVisibleBtnAction) {
-    refs.btnAction.classList.add('btn-my-library--hidden');
-  }
   clearAll();
+  refs.formSearch.classList.remove('form-search--hidden');
+  refs.btnAction.classList.add('btn-my-library--hidden');
+  refs.btnMyLibrary.classList.remove('current');
+  refs.btnHome.classList.add('current');
+  refs.headerContainer.classList.remove('library-main');
   const movieApiServie = new MovieApiService();
-  movieApiServie.renderMovies();
+  movieApiServie.renderPopularMovies();
+  // movieApiServie.fetchMovieById(464052);
 };
 
+//Колбек для кнопки My library
 const onMyLibrary = event => {
-  console.log(
-    'рендерятся из локалстораж просмотренные фильмы, скрывается поиск, появляются кнопки, меняется фон',
-  );
-  isClassListContain();
-  const { isVisibleForm, isHiddenBtnAction } = isClassListContain();
-  if (isVisibleForm) {
-    refs.formSearch.classList.add('form-search--hidden');
-  }
-  if (isHiddenBtnAction) {
-    refs.btnAction.classList.remove('btn-my-library--hidden');
-  }
+  refs.formSearch.classList.add('form-search--hidden');
+  refs.btnAction.classList.remove('btn-my-library--hidden');
+  refs.btnMyLibrary.classList.add('current');
+  refs.btnHome.classList.remove('current');
+  refs.headerContainer.classList.add('library-main');
   onWatched();
 };
 
+//Колбек для кнопки Watched
 const onWatched = () => {
   clearAll();
-  const watchedMovieArray = JSON.parse(localStorage.getItem('movie-to-watch')).slice(1);
+  refs.btnWatched.classList.add('active');
+  refs.btnQueue.classList.remove('active');
+  const watchedMovieArray = JSON.parse(
+    localStorage.getItem('movie-to-watch'),
+  ).slice(1);
+  /*пагинация 
+  if(localStorage.getItem('movie-to-watch').lenght) 
+  {renderMovieCard(localStorage.getItem('movie-to-watch').slice(0, 20))
+  .then(results => {
+      renderMovieCard(results);
+      refs.paginationContainer.style.display = 'block';})}
+      else {refs.paginationContainer.style.display = 'none';}*/
+
   renderMovieCard(watchedMovieArray);
 };
 
+//Колбек для кнопки Queue
 const onQueue = () => {
   clearAll();
-  const queueMovieArray = JSON.parse(localStorage.getItem('movie-to-queue')).slice(1);
+  refs.btnQueue.classList.add('active');
+  refs.btnWatched.classList.remove('active');
+  const queueMovieArray = JSON.parse(
+    localStorage.getItem('movie-to-queue'),
+  ).slice(1);
+ /*пагинация 
+  if(localStorage.getItem('movie-to-queue').lenght) 
+  {renderMovieCard(localStorage.getItem('movie-to-queue').slice(0, 20))
+  .then(results => {
+      renderMovieCard(results);
+      refs.paginationContainer.style.display = 'block';})}
+      else {refs.paginationContainer.style.display = 'none';}*/
+  
   renderMovieCard(queueMovieArray);
 };
 
+//Вешаем слушателей событий на кнопки
 refs.btnHome.addEventListener('click', onHome);
 refs.btnMyLibrary.addEventListener('click', onMyLibrary);
 refs.btnWatched.addEventListener('click', onWatched);
 refs.btnQueue.addEventListener('click', onQueue);
-
-
-// let buttons = document.querySelectorAll('nav > button')
-// buttons.forEach(button =>{
-//     button.addEventListener('click',function(){
-//         buttons.forEach(btn=>btn.classList.remove('current'))
-//         this.classList.add('current')
-//     })
-// })
