@@ -13,8 +13,13 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
       rel="stylesheet"
     />
+    <link 
+    rel='stylesheet prefetch' 
+    href='https://fonts.googleapis.com/css?family=Cabin:700'
+    />
   </head>
   <body>
+    
     <!-- Header -->
     <div class="main-container">
       <header class="header container">
@@ -53,6 +58,32 @@
       </header>
     </div>
     <!-- End Header -->
+    
+    <!-- Разметка переключателя темы -->
+      <div class="theme-switch">
+        <img class="theme-switch__icon"
+        src="./images/sunny.svg" alt="Иконка солнца">
+       
+        <div class="theme-switch__control">
+          <input
+            class="theme-switch__toggle"
+            type="checkbox"
+            name="theme"
+            id="codepen"
+            aria-label="Переключить между тёмной и светлой темой"
+          />
+          <label
+            aria-hidden="true"
+            class="theme-switch__track"
+            for="codepen"
+          >
+          </label>
+        </div>
+        <img class="theme-switch__icon" 
+        src="./images/moon.svg" alt="Иконка луны">
+      </div>
+    </div>
+    <!-- Конец разметка переключателя темы -->
 
     <!-- Gallery -->
     <main>
@@ -90,5 +121,16 @@
       </div>
     </footer>
     <!-- End Footer -->
+    
+    <!-- Up btn -->
+
+    <div class="up-btn-wrapper visually-hidden" data-up-btn>
+      <img class="up-btn__icon"
+      src="./images/up.svg" alt="Иконка вверх">
+
+</div>
+
+<!-- End Up btn -->
+
   </body>
 </html>
