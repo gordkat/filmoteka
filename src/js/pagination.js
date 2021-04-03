@@ -1,8 +1,11 @@
 import filmsCardTpl from '../templates/film-card.hbs';
 import MovieApiService from './apiService';
 import { BASE_URL, API_KEY } from './settings';
+import {Spinner} from 'spin.js';
 
 const movieApiService = new MovieApiService();
+const spinner = new Spinner().spin();
+
 
 const listElement = document.querySelector('.list');
 const paginationElement = document.getElementById('pagination');
@@ -10,6 +13,7 @@ const arrowLeft = document.querySelector('.arrow_left');
 const arrowRight = document.querySelector('.arrow_right');
 let currentPage = 1;
 const pagesOnWindow = 5;
+let pageCount;
 let rows = 20;
 
 fetchDataOfPopularFilms();
@@ -54,8 +58,8 @@ function fetchFilmsSearch(searchQuery) {
         displaySearchListByPage,
       );
     });
-}
-function renderFilmsCard(articles) {
+} 
+export function renderFilmsCard(articles) {
   listElement.innerHTML = filmsCardTpl(articles);
 }
 
@@ -69,18 +73,18 @@ function renderFilmsCard(articles) {
 // }
 
 ////////пропустила через нормалайз, пр пагинации всё подгружается
-function displayList(wrapper, page) {
+function displayList(wrapper, page, searchQuery) {
   wrapper.innerHTML = '';
   //Call normalizer списка жанры, год, noposter
   movieApiService
-    .fetchNormalizer(fetchPopularFilmsByPage(page))
+    .fetchNormalizer(fetchPopularFilmsByPage(page, searchQuery))
     .then(renderFilmsCard);
 }
-function displaySearchListByPage(wrapper, page) {
+function displaySearchListByPage(wrapper, page, searchQuery) {
   wrapper.innerHTML = '';
   //Call normalizer списка жанры, год, noposter
   movieApiService
-    .fetchNormalizer(fetchPopularFilmsByPage(page))
+    .fetchNormalizer(fetchPopularFilmsByPage(page, searchQuery))
     .then(renderFilmsCard);
 }
 
@@ -91,7 +95,7 @@ function renderPagination(totalPages, listItems, callback) {
   function setupPagination(items, wrapper, rowsPerPage) {
     wrapper.innerHTML = '';
 
-    let pageCount = totalPages;
+    pageCount = totalPages;
     let maxLeftPage = currentPage - Math.floor(pagesOnWindow / 2);
     let maxRightPage = currentPage + Math.floor(pagesOnWindow / 2);
 
@@ -151,16 +155,16 @@ function renderPagination(totalPages, listItems, callback) {
     threeDots.innerText = '...';
     return threeDots;
   }
-
-  function paginationButton(page, items) {
+  function paginationButton(page, items, searchQuery) {
     let button = document.createElement('button');
     button.innerText = page;
 
     if (currentPage == page) button.classList.add('active');
 
     button.addEventListener('click', function () {
+
       currentPage = page;
-      callback(listElement, currentPage);
+      callback(listElement, currentPage, searchQuery);
 
       let current_btn = document.querySelector('.pagenumbers button.active');
       current_btn.classList.remove('active');
@@ -174,7 +178,7 @@ function renderPagination(totalPages, listItems, callback) {
     if (currentPage > 1) {
       currentPage--;
       setupPagination(listItems, paginationElement, rows);
-      callback(listElement, currentPage);
+      callback(listElement, currentPage, searchQuery);
     }
   }
 
@@ -182,7 +186,7 @@ function renderPagination(totalPages, listItems, callback) {
     if (currentPage < totalPages) {
       currentPage++;
       setupPagination(listItems, paginationElement, rows);
-      callback(listElement, currentPage);
+      callback(listElement, currentPage, searchQuery);
     }
   }
 
