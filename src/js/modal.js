@@ -97,6 +97,12 @@ function openModal(event) {
           );
           const addToQueueBtnRef = document.querySelector('.add-to-queue-btn');
 
+          //Отображает статус кнопки "watched" при открытии модального окна
+          saveBtnStatusOnModalOpen(addedToWatchArray, addToWatchBtnRef, "watched");
+
+          //Отображает статус кнопки "queue" при открытии модального окна
+          saveBtnStatusOnModalOpen(addedToQueueArray, addToQueueBtnRef, "queue");
+
           //Вешает слушателей событий на кнопки "watch" и "queue" в модальном окне
           addToWatchBtnRef.addEventListener('click', handleAddToWatchBtn);
           addToQueueBtnRef.addEventListener('click', handleAddToQueueBtn);
@@ -104,8 +110,8 @@ function openModal(event) {
           function handleAddToWatchBtn() {
             const addedMovie = JSON.parse(localStorage.getItem('movie'));
             if (addToWatchBtnRef.classList.contains('add-to-watched-btn')) {
-              // Сохраняет фильм в local storage при нажатии на кнопку "Add to watched"
 
+              // Сохраняет фильм в local storage при нажатии на кнопку "Add to watched"
               addToWatchBtnRef.classList.remove('add-to-watched-btn');
               addToWatchBtnRef.classList.add('remove-from-watched-btn');
               addToWatchBtnRef.innerText = 'REMOVE FROM WATCHED';
@@ -199,3 +205,21 @@ function openModal(event) {
     return apiMovieCard(event.target.parentNode.dataset.id);
   }
 }
+
+function saveBtnStatusOnModalOpen(array, btnRef, className) {
+            const addedMovie = JSON.parse(localStorage.getItem('movie'));
+            const idArray = array.map(movie => {
+                if (!movie) {
+                  return;
+                }
+                return movie.id;
+              });
+
+          if (idArray.includes(addedMovie.id)) {
+
+            btnRef.classList.remove(`add-to-${className}-btn`);
+            btnRef.classList.add(`remove-from-${className}-btn`);
+            btnRef.innerText = `REMOVE FROM ${className.toUpperCase()}`;
+          }
+}
+

@@ -54,9 +54,12 @@ const onWatched = () => {
   clearAll();
   refs.btnWatched.classList.add('active');
   refs.btnQueue.classList.remove('active');
-  const watchedMovieArray = JSON.parse(
-    localStorage.getItem('movie-to-watch'),
-  ).slice(1);
+  let watchedMovieArray = JSON.parse(
+    localStorage.getItem('movie-to-watch'));
+    if (!watchedMovieArray) {
+    return
+  } watchedMovieArray = watchedMovieArray.slice(1);
+
   /*пагинация 
   if(localStorage.getItem('movie-to-watch').lenght) 
   {renderMovieCard(localStorage.getItem('movie-to-watch').slice(0, 20))
@@ -73,9 +76,13 @@ const onQueue = () => {
   clearAll();
   refs.btnQueue.classList.add('active');
   refs.btnWatched.classList.remove('active');
-  const queueMovieArray = JSON.parse(
-    localStorage.getItem('movie-to-queue'),
-  ).slice(1);
+  let queueMovieArray = JSON.parse(
+    localStorage.getItem('movie-to-queue'));
+  if (!queueMovieArray) {
+    return
+  }
+    queueMovieArray = queueMovieArray.slice(1);
+
  /*пагинация 
   if(localStorage.getItem('movie-to-queue').lenght) 
   {renderMovieCard(localStorage.getItem('movie-to-queue').slice(0, 20))
