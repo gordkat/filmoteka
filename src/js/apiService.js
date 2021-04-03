@@ -7,6 +7,8 @@ export default class MovieApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
+    this.genreId;
+    this.genre = '';
   }
 
   async fetchPopularMovies() {
@@ -23,6 +25,16 @@ export default class MovieApiService {
     const searchedMoviesObj = await response.json();
     const searchedMovies = await searchedMoviesObj.results;
     // console.log(searchedMovies);
+    return searchedMovies;
+  }
+
+  async fetchMoviesByGenre() {
+    const url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${this.genreId}`;
+    // ${this.genreId}
+    const response = await fetch(url);
+    const searchedMoviesObj = await response.json();
+    const searchedMovies = await searchedMoviesObj.results;
+
     return searchedMovies;
   }
 
@@ -79,33 +91,6 @@ export default class MovieApiService {
     return updatedMoviesarr;
   }
 
-  // fetchNormalizer(fetchedData) {
-  //   console.log(fetchedData);
-  //   return fetchedData.then(response => {
-  //     //Затем делам запрос к жанрам
-  //     return this.fetchGenres().then(genres => {
-  //       return response.map(movie => ({
-  //         ...movie,
-  //         ggenres: movie.genre_ids
-  //           // Для каждого id находим жанр и делаем один array
-  //           .flatMap(id => genres.filter(genre => genre.id === id)),
-  //         genres:
-  //           movie.genre_ids.length > 0
-  //             ? movie.genre_ids
-  //                 //Для каждого id находим жанр и делаем один array
-  //                 .flatMap(id => genres.filter(genre => genre.id === id))
-  //             : [{ name: 'No genres' }],
-  //         //Обрезам дату
-  //         release_date: movie.release_date.split('-')[0],
-  //         // подгружаем noPosterImg если с бэкэнда не прихожит картинка
-  //         poster_path: movie.poster_path
-  //           ? 'https://image.tmdb.org/t/p/w500' + movie.poster_path
-  //           : noposter,
-  //       }));
-  //     });
-  //   });
-  // }
-
   get query() {
     return this.searchQuery;
   }
@@ -128,6 +113,20 @@ export default class MovieApiService {
     return normalizedMovies;
   }
 
+  // // фильмы по жанрам, готовые к рендеру
+  async getMoviesByGenre(genre) {
+    const genresArray = await this.fetchGenres();
+    this.genre = genre;
+    const findId = genresArray
+      .filter(genresObj => genresObj.name === this.genre)
+      .map(obj => obj.id);
+    this.genreId = findId;
+    const fetchedMoviesByGenre = await this.fetchMoviesByGenre(genre);
+    const normalizedMovies = await this.fetchNormalizer(fetchedMoviesByGenre);
+
+    return normalizedMovies;
+  }
+
   async renderPopularMovies() {
     const normalizedMovies = await this.getPopularMovies();
     this.renderMovieCard(normalizedMovies);
@@ -135,6 +134,11 @@ export default class MovieApiService {
 
   async renderSerchedMovies() {
     const normalizedMovies = await this.searchMovies();
+    this.renderMovieCard(normalizedMovies);
+  }
+
+  async renderMoviesByGenre(genre) {
+    const normalizedMovies = await this.getMoviesByGenre(genre);
     this.renderMovieCard(normalizedMovies);
   }
 
@@ -152,3 +156,15 @@ export default class MovieApiService {
     this.page = 1;
   }
 }
+
+const movieApiService = new MovieApiService();
+
+// console.log(movieApiService.searchMoviesbyGenre());
+
+// console.log(movieApiService.searchMoviesbyGenre());
+// movieApiService.searchMoviesbyGenre('Action');
+// movieApiService.searchMoviesbyGenre('Horror');
+// console.log(movieApiService.searchMoviesbyGenre('Horror'));
+
+// console.log(movieApiService.fetchMovieByGenre(''));
+// console.log(movieApiService.searchMoviesbyGenre(''));
