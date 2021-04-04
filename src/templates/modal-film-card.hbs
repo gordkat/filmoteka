@@ -1,7 +1,7 @@
 <article class="modal-film-card">
   <button type="button" class="close-button">
-    <svg class="close-button__svg" xmlns="http://www.w3.org/2000/svg" width="30" height="30">
-      <path fill="none" stroke-width="2.133" stroke="#000" d="M8.533 8.533l14.933 14.933M8.533 23.467L23.466 8.534" />
+    <svg class="close-button__svg" xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+      <path stroke-width="2.133" stroke="#000" d="M8.533 8.533l14.933 14.933M8.533 23.467L23.466 8.534" />
     </svg>
   </button>
   <div class="modal__card-wrapper">
@@ -29,9 +29,9 @@
         </li>
         <li class="modal__info-list-item">
           <p class="modal__info-list-category">Genre</p>
-          <p class="film-card__genres">
+          <p class="modal__info-genres">
             {{#each this.genres}}
-            <span class="film-card__genre">{{this.name}}</span>
+            <span class="modal__info-genre">{{this.name}}</span>
             {{/each}}
           </p>
         </li>
