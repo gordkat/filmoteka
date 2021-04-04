@@ -2,6 +2,7 @@ import modalMarkup from '../templates/modal-film-card.hbs';
 import * as basicLightbox from 'basiclightbox';
 import noposter from '../images/no-poster.png';
 import MovieApiService from './apiService';
+import galleryTemplate from '../templates/film-card.hbs';
 
 const mainRef = document.querySelector('.gallery-list');
 
@@ -131,16 +132,13 @@ function openModal(event) {
                 'movie-to-watch',
                 JSON.stringify(addedToWatchArray),
               );
-              // addToWatchBtnRef.disabled = true;
             } else {
               // Удаляет фильм из local storage при нажатии на кнопку "Remove from watched"
-
               addToWatchBtnRef.classList.add('add-to-watched-btn');
               addToWatchBtnRef.classList.remove('remove-from-watched-btn');
               addToWatchBtnRef.innerText = 'ADD TO WATCHED';
 
               const idArray = addedToWatchArray.map(movie => {
-                console.log(movie);
                 if (!movie) {
                   return;
                 }
@@ -153,7 +151,11 @@ function openModal(event) {
                 'movie-to-watch',
                 JSON.stringify(addedToWatchArray),
               );
-              // addToWatchBtnRef.disabled = true;
+              // Проверяет на какой вкладке находимся
+              const homeRef = document.querySelector('.home-page');
+              if(!homeRef.classList.contains('current')){
+              // Рендерит разметку с новым массивом без удаленного фильма
+              pageRerender();}
             }
           }
 
@@ -185,19 +187,22 @@ function openModal(event) {
               addToQueueBtnRef.classList.remove('remove-from-queue-btn');
               addToQueueBtnRef.innerText = 'ADD TO QUEUE';
               const idArray = addedToQueueArray.map(movie => {
-                console.log(movie);
                 if (!movie) {
                   return;
                 }
                 return movie.id;
               });
               const index = idArray.indexOf(addedMovie.id);
-              console.log(index);
               addedToQueueArray.splice(index, 1);
               localStorage.setItem(
                 'movie-to-queue',
                 JSON.stringify(addedToQueueArray),
               );
+              // Проверяет на какой вкладке находимся
+              const homeRef = document.querySelector('.home-page');
+              if(!homeRef.classList.contains('current')){
+              // Рендерит разметку с новым массивом без удаленного фильма
+              pageRerender();}
             }
           }
         });
@@ -206,20 +211,40 @@ function openModal(event) {
   }
 }
 
+
 function saveBtnStatusOnModalOpen(array, btnRef, className) {
-            const addedMovie = JSON.parse(localStorage.getItem('movie'));
-            const idArray = array.map(movie => {
-                if (!movie) {
-                  return;
-                }
-                return movie.id;
-              });
+  const addedMovie = JSON.parse(localStorage.getItem('movie'));
+  const idArray = array.map(movie => {
+      if (!movie) {
+        return;
+      }
+      return movie.id;
+    });
 
-          if (idArray.includes(addedMovie.id)) {
+if (idArray.includes(addedMovie.id)) {
 
-            btnRef.classList.remove(`add-to-${className}-btn`);
-            btnRef.classList.add(`remove-from-${className}-btn`);
-            btnRef.innerText = `REMOVE FROM ${className.toUpperCase()}`;
-          }
+  btnRef.classList.remove(`add-to-${className}-btn`);
+  btnRef.classList.add(`remove-from-${className}-btn`);
+  btnRef.innerText = `REMOVE FROM ${className.toUpperCase()}`;
+}
 }
 
+
+function pageRerender() {
+  const galleryRef = document.querySelector('.gallery-list');
+  const clearAll = () => {
+  galleryRef.innerHTML = '';
+};
+  const renderMovieCard = results => {
+  galleryRef.insertAdjacentHTML('beforeend', galleryTemplate(results));
+              };
+              clearAll();
+    let movieArray = JSON.parse(
+    localStorage.getItem('movie-to-watch'));
+    if (!movieArray) {
+    return
+  }
+  movieArray = movieArray.slice(1);
+
+  renderMovieCard(movieArray);
+}
