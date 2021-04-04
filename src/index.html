@@ -13,41 +13,42 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link 
-    rel='stylesheet prefetch' 
-    href='https://fonts.googleapis.com/css?family=Cabin:700'
+    <link
+      rel="stylesheet prefetch"
+      href="https://fonts.googleapis.com/css?family=Cabin:700"
     />
   </head>
   <body>
     <!-- Разметка переключателя темы -->
-      <div class="theme-switch">
-        
-        <div class="theme-switch__control">
-          <input
-            class="theme-switch__toggle"
-            type="checkbox"
-            name="theme"
-            id="codepen"
-            aria-label="Переключить между тёмной и светлой темой"
-          />
-          <label
-            aria-hidden="true"
-            class="theme-switch__track"
-            for="codepen"
-          > <div class="theme__icon"><span><svg class="sunny__icon" >
-              <use
-                class=""
-                alt="иконка луны"
-                href="./images/sprite.svg#moon"
-              ></use></span>
-              <span><svg class="sunny__icon" >
-              <use
-                class=""
-                alt="иконка солнца"
-                href="./images/sprite.svg#sunny"
-              ></use></span></div>
-          </label>
-        </div>
+    <div class="theme-switch">
+      <div class="theme-switch__control">
+        <input
+          class="theme-switch__toggle"
+          type="checkbox"
+          name="theme"
+          id="codepen"
+          aria-label="Переключить между тёмной и светлой темой"
+        />
+        <label aria-hidden="true" class="theme-switch__track" for="codepen">
+          <div class="theme__icon">
+            <span
+              ><svg class="sunny__icon">
+                <use
+                  class=""
+                  alt="иконка луны"
+                  href="./images/sprite.svg#moon"
+                ></use></svg
+            ></span>
+            <span
+              ><svg class="sunny__icon">
+                <use
+                  class=""
+                  alt="иконка солнца"
+                  href="./images/sprite.svg#sunny"
+                ></use></svg
+            ></span>
+          </div>
+        </label>
       </div>
     </div>
     <!-- Конец разметка переключателя темы -->
@@ -92,8 +93,6 @@
       </header>
     </div>
     <!-- End Header -->
-    
-    
 
     <!-- Gallery -->
     <main>
@@ -131,27 +130,21 @@
       </div>
     </footer>
     <!-- End Footer -->
-    
+
     <!-- Up btn -->
 
     <div class="up-btn-wrapper visually-hidden" data-up-btn>
-      <svg class="up-btn__icon" >
-              <use
-                class=""
-                alt="иконка луны"
-                href="./images/sprite.svg#up"
-              ></use>
+      <svg class="up-btn__icon">
+        <use class="" alt="иконка луны" href="./images/sprite.svg#up"></use>
+      </svg>
+    </div>
 
-</div>
-
-<!-- End Up btn -->
-
+    <!-- End Up btn -->
 
     <!-- Modal spinner -->
     <div class="backdrop is-hidden" data-modal-spinner>
       <div id="foo"></div>
     </div>
     <!-- And modal spinner -->
-
   </body>
 </html>
