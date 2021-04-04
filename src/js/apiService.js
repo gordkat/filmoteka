@@ -30,7 +30,6 @@ export default class MovieApiService {
       throw new Error();
     }
     const popularMoviesObj = await response.json();
-    this.totalPages = popularMoviesObj.total_pages;
     const popularMovies = await popularMoviesObj.results;
 
     return popularMovies;
