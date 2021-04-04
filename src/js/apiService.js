@@ -39,6 +39,9 @@ export default class MovieApiService {
   async fetchMovieBySearch() {
     const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&page=${this.page}&language=en&query='${this.searchQuery}'`;
     const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error();
+    }
     const searchedMoviesObj = await response.json();
     const searchedMovies = await searchedMoviesObj.results;
     return searchedMovies;
@@ -48,6 +51,9 @@ export default class MovieApiService {
     const url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${this.genreId}`;
     // ${this.genreId}
     const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error();
+    }
     const searchedMoviesObj = await response.json();
     const searchedMovies = await searchedMoviesObj.results;
 
@@ -57,6 +63,9 @@ export default class MovieApiService {
   async fetchGenres() {
     const url = `${BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=en-US`;
     const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error();
+    }
     const genresObj = await response.json();
     const genres = await genresObj.genres;
     return genres;
@@ -65,6 +74,9 @@ export default class MovieApiService {
   async fetchMovieById(movieId) {
     const url = `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`;
     const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error();
+    }
     const movieById = await response.json();
     return movieById;
   }
@@ -153,18 +165,25 @@ export default class MovieApiService {
   }
 
   async renderSerchedMovies() {
-    const normalizedMovies = await this.searchMovies();
-    this.renderMovieCard(normalizedMovies);
+    try {
+      const normalizedMovies = await this.searchMovies();
+      this.renderMovieCard(normalizedMovies);
+    } catch {
+      notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
+    }
   }
 
   async renderMoviesByGenre(genre) {
-    const normalizedMovies = await this.getMoviesByGenre(genre);
-    this.renderMovieCard(normalizedMovies);
+    try {
+      const normalizedMovies = await this.getMoviesByGenre(genre);
+      this.renderMovieCard(normalizedMovies);
+    } catch {
+      notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
+    }
   }
 
   renderMovieCard(results) {
     const moviesMarkup = galleryTemplate(results);
-
     galleryRef.insertAdjacentHTML('beforeend', moviesMarkup);
   }
 
