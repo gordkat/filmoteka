@@ -155,7 +155,7 @@ function openModal(event) {
               const homeRef = document.querySelector('.home-page');
               if(!homeRef.classList.contains('current')){
               // Рендерит разметку с новым массивом без удаленного фильма
-              pageRerender();}
+              pageRerender('movie-to-watch');}
             }
           }
 
@@ -200,9 +200,10 @@ function openModal(event) {
               );
               // Проверяет на какой вкладке находимся
               const homeRef = document.querySelector('.home-page');
-              if(!homeRef.classList.contains('current')){
+              const queueRef = document.querySelector('.queue');
+              if(!homeRef.classList.contains('current') && queueRef.classList.contains('queue')){
               // Рендерит разметку с новым массивом без удаленного фильма
-              pageRerender();}
+              pageRerender('movie-to-queue');}
             }
           }
         });
@@ -230,7 +231,7 @@ if (idArray.includes(addedMovie.id)) {
 }
 
 
-function pageRerender() {
+function pageRerender(localStorageKey) {
   const galleryRef = document.querySelector('.gallery-list');
   const clearAll = () => {
   galleryRef.innerHTML = '';
@@ -240,7 +241,7 @@ function pageRerender() {
               };
               clearAll();
     let movieArray = JSON.parse(
-    localStorage.getItem('movie-to-watch'));
+    localStorage.getItem(`${localStorageKey}`));
     if (!movieArray) {
     return
   }
