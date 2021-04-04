@@ -19,7 +19,38 @@
     />
   </head>
   <body>
-    
+    <!-- Разметка переключателя темы -->
+      <div class="theme-switch">
+        
+        <div class="theme-switch__control">
+          <input
+            class="theme-switch__toggle"
+            type="checkbox"
+            name="theme"
+            id="codepen"
+            aria-label="Переключить между тёмной и светлой темой"
+          />
+          <label
+            aria-hidden="true"
+            class="theme-switch__track"
+            for="codepen"
+          > <div class="theme__icon"><span><svg class="sunny__icon" >
+              <use
+                class=""
+                alt="иконка луны"
+                href="./images/sprite.svg#moon"
+              ></use></span>
+              <span><svg class="sunny__icon" >
+              <use
+                class=""
+                alt="иконка солнца"
+                href="./images/sprite.svg#sunny"
+              ></use></span></div>
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- Конец разметка переключателя темы -->
     <!-- Header -->
     <div class="main-container">
       <header class="header container">
@@ -62,31 +93,7 @@
     </div>
     <!-- End Header -->
     
-    <!-- Разметка переключателя темы -->
-      <div class="theme-switch">
-        <img class="theme-switch__icon"
-        src="./images/sunny.svg" alt="Иконка солнца">
-       
-        <div class="theme-switch__control">
-          <input
-            class="theme-switch__toggle"
-            type="checkbox"
-            name="theme"
-            id="codepen"
-            aria-label="Переключить между тёмной и светлой темой"
-          />
-          <label
-            aria-hidden="true"
-            class="theme-switch__track"
-            for="codepen"
-          >
-          </label>
-        </div>
-        <img class="theme-switch__icon" 
-        src="./images/moon.svg" alt="Иконка луны">
-      </div>
-    </div>
-    <!-- Конец разметка переключателя темы -->
+    
 
     <!-- Gallery -->
     <main>
@@ -108,7 +115,7 @@
     <footer class="footer">
       <div class="container">
         <div class="footer__page">
-          <p class="copyright">&copy; 2020 | All Rights Reserved |&nbsp;</p>
+          <p class="copyright">&copy; 2021 | All Rights Reserved |&nbsp;</p>
           <div class="developers">
             <p>Developed with</p>
             <svg class="footer__image" height="14" width="13">
@@ -128,8 +135,12 @@
     <!-- Up btn -->
 
     <div class="up-btn-wrapper visually-hidden" data-up-btn>
-      <img class="up-btn__icon"
-      src="./images/up.svg" alt="Иконка вверх">
+      <svg class="up-btn__icon" >
+              <use
+                class=""
+                alt="иконка луны"
+                href="./images/sprite.svg#up"
+              ></use>
 
 </div>
 

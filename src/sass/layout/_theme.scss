@@ -5,24 +5,34 @@ body.light-theme {
 body.dark-theme {
   background-color: $svg-header-color;
 }
-/* THEME SWITCH */
+
 .theme-switch {
   position: absolute;
-  top: 205px;
-  left: 205px;
+  top: 15px;
+  right: 10%;
   display: flex;
   align-items: center;
 
-  @media screen and (min-width: 767px) {
-    top: 250px;
-    left: 0;
-  }
   @media screen and (min-width: 1024px) {
-    top: 250px;
+    right: 20%;
   }
 }
 .theme-switch__toggle {
   display: none;
+}
+.theme__icon {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sunny__icon {
+  margin-left: 2px;
+  height: 17px;
+  width: 17px;
+  @media screen and (min-width: 768px) {
+    height: 25px;
+    width: 25px;
+  }
 }
 
 .theme-switch__toggle + label {
@@ -34,8 +44,8 @@ body.dark-theme {
       to right,
       $accent-color 0,
       #fc8b34 45%,
-      #7fd03e 55%,
-      $green 100%
+      $text-color 55%,
+      $text-color 100%
     )
     0 0;
   background-size: (($switchWidthMob * 2) + 50) 100%;
@@ -53,14 +63,14 @@ body.dark-theme {
   }
 
   &:before {
-    content: 'Off';
+    content: '';
     width: $btnWidthMob;
     height: $btnWidthMob;
     position: absolute;
     left: $paddingMob;
     right: $paddingMob;
     border-radius: 100%;
-    background: #fff;
+    background: wheat;
     text-align: center;
     line-height: 16px;
     font-family: 'Cabin', sans-serif;
@@ -90,7 +100,7 @@ body.dark-theme {
     background-position-x: -($switchWidth + 50);
   }
   &:before {
-    content: 'On';
+    content: '';
     color: $green;
     left: ($switchWidthMob - $btnWidthMob - $paddingMob);
     @media screen and (min-width: 768px) {
