@@ -1,11 +1,10 @@
 import filmsCardTpl from '../templates/film-card.hbs';
 import MovieApiService from './apiService';
 import { BASE_URL, API_KEY } from './settings';
-import {Spinner} from 'spin.js';
+import { Spinner } from 'spin.js';
 
 const movieApiService = new MovieApiService();
 const spinner = new Spinner().spin();
-
 
 const listElement = document.querySelector('.list');
 const paginationElement = document.getElementById('pagination');
@@ -25,8 +24,10 @@ function fetchDataOfPopularFilms() {
       return response.json();
     })
     .then(results => {
+      console.log(results);
       renderPagination(results.total_pages, results.results, displayList);
     });
+  // movieApiService.renderPopularMovies();
 }
 
 function fetchPopularFilmsByPage(page) {
@@ -34,6 +35,7 @@ function fetchPopularFilmsByPage(page) {
   return fetch(url)
     .then(response => response.json())
     .then(({ results }) => {
+      console.log('results', results);
       return results;
     });
 }
@@ -58,7 +60,7 @@ function fetchFilmsSearch(searchQuery) {
         displaySearchListByPage,
       );
     });
-} 
+}
 export function renderFilmsCard(articles) {
   listElement.innerHTML = filmsCardTpl(articles);
 }
@@ -162,7 +164,6 @@ function renderPagination(totalPages, listItems, callback) {
     if (currentPage == page) button.classList.add('active');
 
     button.addEventListener('click', function () {
-
       currentPage = page;
       callback(listElement, currentPage, searchQuery);
 

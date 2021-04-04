@@ -1,5 +1,6 @@
 import galleryTemplate from '../templates/film-card.hbs';
 import MovieApiService from './apiService';
+
 //import { renderPagination } from './pagination';
 
 const refs = {
@@ -26,7 +27,7 @@ const clearAll = () => {
 };
 
 //Колбек для кнопки Home
-const onHome = event => {
+const onHome = () => {
   refs.formSearch.reset();
   clearAll();
   refs.formSearch.classList.remove('form-search--hidden');
@@ -36,6 +37,7 @@ const onHome = event => {
   refs.headerContainer.classList.remove('library-main');
   const movieApiServie = new MovieApiService();
   movieApiServie.renderPopularMovies();
+
   // movieApiServie.fetchMovieById(464052);
 };
 
@@ -54,11 +56,11 @@ const onWatched = () => {
   clearAll();
   refs.btnWatched.classList.add('active');
   refs.btnQueue.classList.remove('active');
-  let watchedMovieArray = JSON.parse(
-    localStorage.getItem('movie-to-watch'));
-    if (!watchedMovieArray) {
-    return
-  } watchedMovieArray = watchedMovieArray.slice(1);
+  let watchedMovieArray = JSON.parse(localStorage.getItem('movie-to-watch'));
+  if (!watchedMovieArray) {
+    return;
+  }
+  watchedMovieArray = watchedMovieArray.slice(1);
 
   /*пагинация 
   if(localStorage.getItem('movie-to-watch').lenght) 
@@ -76,21 +78,20 @@ const onQueue = () => {
   clearAll();
   refs.btnQueue.classList.add('active');
   refs.btnWatched.classList.remove('active');
-  let queueMovieArray = JSON.parse(
-    localStorage.getItem('movie-to-queue'));
+  let queueMovieArray = JSON.parse(localStorage.getItem('movie-to-queue'));
   if (!queueMovieArray) {
-    return
+    return;
   }
-    queueMovieArray = queueMovieArray.slice(1);
+  queueMovieArray = queueMovieArray.slice(1);
 
- /*пагинация 
+  /*пагинация 
   if(localStorage.getItem('movie-to-queue').lenght) 
   {renderMovieCard(localStorage.getItem('movie-to-queue').slice(0, 20))
   .then(results => {
       renderMovieCard(results);
       refs.paginationContainer.style.display = 'block';})}
       else {refs.paginationContainer.style.display = 'none';}*/
-  
+
   renderMovieCard(queueMovieArray);
 };
 
