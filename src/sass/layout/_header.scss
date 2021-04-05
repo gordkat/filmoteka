@@ -1,3 +1,19 @@
+.main-container {
+  background-color: black;
+}
+
+.header {
+  background-image: url(../images/mobile-home.jpg);
+  height: 230px;
+}
+
+@media screen and (min-device-pixel-ratio: 2),
+  screen and (min-resolution: 192dpi),
+  screen and (min-resolution: 2dppx) {
+  .header {
+    background-image: url(../images/mobile-home@2x.jpg);
+  }
+}
 .logo {
   display: flex;
   text-decoration: none;
@@ -11,42 +27,29 @@
   margin-top: 41px;
   font-size: 30px;
   color: $white-color;
-}
-.main-container {
-  background-image: url(../images/desktop-home.jpg);
-  height: 230px;
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-@media screen and (min-device-pixel-ratio: 2),
-  screen and (min-resolution: 192dpi),
-  screen and (min-resolution: 2dppx) {
-  .main-container {
-    background-image: url(../images/desktop-home@2x.jpg);
-  }
-}
-.library-main {
-  background-image: url(../images/desktop-library.jpg);
-  height: 230px;
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
+  display: none;
 }
 
+.library-main {
+  background-image: url(../images/mobile-library.jpg);
+  height: 230px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 @media screen and (min-device-pixel-ratio: 2),
   screen and (min-resolution: 192dpi),
   screen and (min-resolution: 2dppx) {
   .library-main {
-    background-image: url(../images/desktop-library@2x.jpg);
+    background-image: url(../images/mobile-library@2x.jpg);
   }
 }
 .header-nav {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
 }
 .navigation {
-  padding-top: 58px;
   height: 0;
 }
 .home-page {
@@ -59,7 +62,6 @@
   font-weight: 500;
   font-size: 12px;
   border: none;
-  height: 20px;
 }
 .library-page {
   cursor: pointer;
@@ -70,7 +72,6 @@
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
-  height: 20px;
 }
 
 input::-webkit-input-placeholder {
@@ -78,15 +79,16 @@ input::-webkit-input-placeholder {
 }
 .form-search {
   display: flex;
+  justify-content: center;
   margin-top: 40px;
   font-size: 14px;
-  margin-left: 275px;
 }
 
 .input-text {
+  font-size: 14px;
+  width: 280px;
   color: $white-color;
   padding-bottom: 4px;
-  width: 336px;
   background-color: transparent;
   border-top: transparent;
   border-left: transparent;
@@ -103,13 +105,13 @@ input::-webkit-input-placeholder {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-  .main-container {
+  .header {
     background-image: url(../images/tablet-home.jpg);
   }
   @media screen and (min-device-pixel-ratio: 2),
     screen and (min-resolution: 192dpi),
     screen and (min-resolution: 2dppx) {
-    .main-container {
+    .header {
       background-image: url(../images/tablet-home@2x.jpg);
     }
   }
@@ -123,48 +125,43 @@ input::-webkit-input-placeholder {
       background-image: url(../images/tablet-library@2x.jpg);
     }
   }
-  .navigation {
-    display: flex;
+
+  .logo-name {
+    display: block;
   }
-  .form-search {
-    margin-left: 140px;
+  .input-text {
+    width: 336px;
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) {
-  .main-container {
-    background-image: url(../images/mobile-home.jpg);
+@media screen and (min-width: 1024px) and (max-width: 1800px) {
+  .header {
+    background-image: url(../images/desktop-home.jpg);
+    background-size: cover;
   }
   @media screen and (min-device-pixel-ratio: 2),
     screen and (min-resolution: 192dpi),
     screen and (min-resolution: 2dppx) {
-    .main-container {
-      background-image: url(../images/mobile-home@2x.jpg);
+    .header {
+      background-image: url(../images/desktop-home@2x.jpg);
     }
   }
   .library-main {
-    background-image: url(../images/mobile-library.jpg);
+    background-image: url(../images/desktop-library.jpg);
   }
   @media screen and (min-device-pixel-ratio: 2),
     screen and (min-resolution: 192dpi),
     screen and (min-resolution: 2dppx) {
     .library-main {
-      background-image: url(../images/mobile-library@2x.jpg);
+      background-image: url(../images/desktop-library@2x.jpg);
     }
   }
   .input-text {
-    width: 280px;
+    width: 336px;
   }
 
   .logo-name {
-    display: none;
-  }
-  .header-nav {
-    align-items: baseline;
-  }
-  .form-search {
-    margin: 0;
-    margin-top: 38px;
+    display: block;
   }
 }
 
