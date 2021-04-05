@@ -45,8 +45,6 @@ function openModal(event) {
         .then(result => {
           const instance = basicLightbox.create(result);
           instance.show();
-          const imgRef = document.querySelector('.modal__poster');
-          imgRef.setAttribute('src', event.target.src);
           const articleRef = document.querySelector('article');
           const btnRef = document.querySelector('.close-button');
           articleRef.classList.add('modal-film-card-active');
