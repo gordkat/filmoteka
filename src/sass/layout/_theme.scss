@@ -2,20 +2,41 @@ body.light-theme {
   background-color: $white-color;
 }
 
-body.dark-theme {
-  background-color: $svg-header-color;
+body.dark-theme,
+footer.dark-theme {
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
+.gallery-list.dark-theme {
+  h3 {
+    color: $white-color;
+  }
+}
+.footer__page.dark-theme,
+.up-btn__icon.dark-theme {
+  color: $white-color;
+  fill: $white-color;
+}
+.pagination__container_pages.dark-theme {
+  .arrow_left,
+  .arrow_right {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
+.pagenumbers.dark-theme {
+  button,
+  div {
+    color: $white-color;
+  }
+}
 .theme-switch {
-  position: absolute;
-  top: 15px;
-  right: 10%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+.theme-switch__control {
   display: flex;
   align-items: center;
-
-  @media screen and (min-width: 1024px) {
-    right: 20%;
-  }
 }
 .theme-switch__toggle {
   display: none;
