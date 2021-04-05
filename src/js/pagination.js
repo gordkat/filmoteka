@@ -192,6 +192,6 @@ function renderPagination(totalPages, listItems, callback) {
   }
 
   setupPagination(listItems, paginationElement, rows);
-  arrowLeft.addEventListener('click', onArrowLeftClick);
-  arrowRight.addEventListener('click', onArrowRightClick);
+  // arrowLeft.addEventListener('click', onArrowLeftClick);
+  // arrowRight.addEventListener('click', onArrowRightClick);
 }

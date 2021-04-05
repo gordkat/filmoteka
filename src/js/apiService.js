@@ -6,6 +6,7 @@ import '@pnotify/core/dist/BrightTheme.css';
 import '@pnotify/core/dist/PNotify.css';
 
 const galleryRef = document.querySelector('.gallery-list');
+const lastBtnRef = document.querySelector('[data-number="last-page"]');
 
 const notice = message => {
   error({
@@ -16,11 +17,65 @@ const notice = message => {
 };
 
 export default class MovieApiService {
+  #movies = [];
   constructor() {
+    this.#movies = [];
     this.searchQuery = '';
     this.page = 1;
+    this.totalPages = 0;
     this.genreId;
     this.genre = '';
+    this.goToPrevPage = this.goToPrevPage.bind(this);
+    this.goToNextPage = this.goToNextPage.bind(this);
+  }
+
+  get movies() {
+    return this.#movies;
+  }
+
+  set movies(movieList) {
+    this.#movies = movieList;
+    this.renderMovies();
+  }
+
+  async goToPrevPage() {
+    if (this.page === 1) return;
+    this.page -= 1;
+    try {
+      this.movies = await this.getPopularMovies();
+    } catch {
+      notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
+    }
+
+    console.log('left');
+    console.log(this.movies);
+  }
+
+  async goToNextPage() {
+    if (this.page === this.totalPages) return;
+    this.page += 1;
+    try {
+      this.movies = await this.getPopularMovies();
+    } catch {
+      notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
+    }
+
+    console.log('right');
+    console.log(this.movies);
+  }
+
+  async goToNumberPage() {
+    try {
+      console.log(this.page);
+      this.movies = await this.getPopularMovies();
+    } catch {
+      notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
+    }
+  }
+
+  renderMovies() {
+    const moviesMarkup = galleryTemplate(this.movies);
+    galleryRef.innerHTML = moviesMarkup;
   }
 
   async fetchPopularMovies() {
@@ -30,8 +85,9 @@ export default class MovieApiService {
       throw new Error();
     }
     const popularMoviesObj = await response.json();
+    this.totalPages = popularMoviesObj.total_pages;
+    lastBtnRef.textContent = this.totalPages;
     const popularMovies = await popularMoviesObj.results;
-
     return popularMovies;
   }
 

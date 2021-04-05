@@ -104,9 +104,19 @@
     <!-- Pagination-->
     <div class="pagination__container">
       <div class="pagination__container_pages">
-        <div class="pag-arrow arrow_left"></div>
-        <div class="pagenumbers" id="pagination"></div>
-        <div class="pag-arrow arrow_right"></div>
+        <div class="pag-arrow arrow_left" data-action="prev-page"></div>
+        <div class="pagenumbers" id="pagination">
+          <button class="active" data-action="number-page" data-number="first">
+            1
+          </button>
+          <button data-action="number-page" data-number="second">2</button>
+          <button data-action="number-page" data-number="center">3</button>
+          <button data-action="number-page" data-number="fourth">4</button>
+          <button data-action="number-page" data-number="fifth">5</button>
+          <div class="threeDots end">...</div>
+          <button data-action="number-page" data-number="last-page">500</button>
+        </div>
+        <div class="pag-arrow arrow_right" data-action="next-page"></div>
       </div>
     </div>
     <!-- End Pagination-->
