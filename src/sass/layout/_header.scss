@@ -1,12 +1,18 @@
 .main-container {
   background: black;
-    background-image: radial-gradient(circle, rgba(0,0,0,1) 78%, rgba(45,36,29,1) 95%);
+  background-image: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 78%,
+    rgba(45, 36, 29, 1) 95%
+  );
 }
-
 
 .header {
   background-image: url(../images/mobile-home.jpg);
   height: 230px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 @media screen and (min-device-pixel-ratio: 2),
@@ -136,10 +142,12 @@ input::-webkit-input-placeholder {
   }
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1800px) {
+@media screen and (min-width: 1024px) {
   .header {
     background-image: url(../images/desktop-home.jpg);
     background-size: cover;
+    max-width: 1600px;
+    margin: 0 auto;
   }
   @media screen and (min-device-pixel-ratio: 2),
     screen and (min-resolution: 192dpi),
@@ -149,6 +157,8 @@ input::-webkit-input-placeholder {
     }
   }
   .library-main {
+    max-width: 1600px;
+    margin: 0 auto;
     background-image: url(../images/desktop-library.jpg);
   }
   @media screen and (min-device-pixel-ratio: 2),
@@ -182,3 +192,13 @@ input::-webkit-input-placeholder {
     border-radius: 2px;
   }
 }
+// @media screen and (min-width: 1801px) {
+//   .header {
+//     max-width: 1800px;
+//     background-image: url(../images/desktop-home.jpg);
+//   }
+//   .library-main {
+//     max-width: 1800px;
+//     background-image: url(../images/desktop-library.jpg);
+//   }
+// }
