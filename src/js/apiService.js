@@ -6,6 +6,7 @@ import '@pnotify/core/dist/BrightTheme.css';
 import '@pnotify/core/dist/PNotify.css';
 
 const galleryRef = document.querySelector('.gallery-list');
+const endBtnRef = document.querySelector('[data-number="end-page"]');
 
 const notice = message => {
   error({
@@ -16,11 +17,58 @@ const notice = message => {
 };
 
 export default class MovieApiService {
+  #movies = [];
   constructor() {
+    this.#movies = [];
     this.searchQuery = '';
     this.page = 1;
+    this.totalPages = 0;
     this.genreId;
     this.genre = '';
+    this.goToPrevPage = this.goToPrevPage.bind(this);
+    this.goToNextPage = this.goToNextPage.bind(this);
+  }
+
+  get movies() {
+    return this.#movies;
+  }
+
+  set movies(movieList) {
+    this.#movies = movieList;
+    this.renderMovies();
+  }
+
+  async goToPrevPage() {
+    if (this.page === 1) return;
+    this.page -= 1;
+    try {
+      this.movies = await this.getPopularMovies();
+    } catch {
+      notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
+    }
+  }
+
+  async goToNextPage() {
+    if (this.page === this.totalPages) return;
+    this.page += 1;
+    try {
+      this.movies = await this.getPopularMovies();
+    } catch {
+      notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
+    }
+  }
+
+  async goToNumberPage() {
+    try {
+      this.movies = await this.getPopularMovies();
+    } catch {
+      notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
+    }
+  }
+
+  renderMovies() {
+    const moviesMarkup = galleryTemplate(this.movies);
+    galleryRef.innerHTML = moviesMarkup;
   }
 
   async fetchPopularMovies() {
@@ -30,8 +78,9 @@ export default class MovieApiService {
       throw new Error();
     }
     const popularMoviesObj = await response.json();
+    this.totalPages = popularMoviesObj.total_pages;
+    endBtnRef.textContent = this.totalPages;
     const popularMovies = await popularMoviesObj.results;
-
     return popularMovies;
   }
 
@@ -200,7 +249,19 @@ export default class MovieApiService {
     this.page = 1;
   }
 }
-
+// function makeMarkupPagination(totalPages) {
+//   const markupPagination = `
+// <button class="active" data-action="number-page" data-number="first">1
+//           </button>
+//           <button data-action="number-page" data-number="second">2</button>
+//           <button data-action="number-page" data-number="center">3</button>
+//           <button data-action="number-page" data-number="fourth">4</button>
+//           <button data-action="number-page" data-number="fifth">5</button>
+//           <div class="threeDots end">...</div>
+//           <button data-action="number-page" data-number="end-page">${totalPages}</button>`;
+//   console.log(markupPagination);
+//   pageNambersRef.innerHTML = markupPagination;
+// }
 const movieApiService = new MovieApiService();
 
 // console.log(movieApiService.searchMoviesbyGenre());
