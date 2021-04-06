@@ -79,7 +79,7 @@ export function renderMovieCard(results) {
     }, 1800);
 
     setTimeout(() => {
-      refs.heder.removeChild(error);
+      refs.form.removeChild(error);
     }, 2300);
 
     setTimeout(() => {
