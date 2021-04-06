@@ -22,79 +22,93 @@
     <!-- Header -->
     <div class="main-container">
       <header class="header">
-  <div class="container">
-    <div class="header-nav">
-      <a href="" class="logo">
-        <svg type="image/svg+xml" width="24" height="24" class="logo-film">
-          <use
-            type="image/svg+xml"
-            class="icon-cross"
-            href="./images/sprite.svg#icon-film"
-          ></use>
-        </svg>
-        <span class="logo-name">Filmoteka</span>
-      </a>
-      <nav class="navigation">
-        <button class="home-page current">HOME</button>
-        <button class="library-page">MY LIBRARY</button>
-      </nav>
-    </div>
-    <div class="btn-my-library btn-my-library--hidden">
-      <div class="wrapper-btn">
-        <button class="btn-action watched active">watched</button>
-        <button class="btn-action queue">queue</button>
-      </div>
-    </div>
-    <form class="form-search">
-      <input
-        type="search"
-        placeholder="Search"
-        name="search"
-        class="input-text"
-      />
-      <svg type="image/svg+xml" width="12" height="12" class="logo-search">
-        <use
-          type="image/svg+xml"
-          class="icon-cross"
-          href="./images/sprite.svg#icon-search"
-        ></use>
-      </svg>
-    </form>
-    <!-- Разметка переключателя темы -->
-    <div class="theme-switch">
-      <div class="theme-switch__control">
-        <input
-          class="theme-switch__toggle"
-          type="checkbox"
-          name="theme"
-          id="codepen"
-          aria-label="Переключить между тёмной и светлой темой"
-        />
-        <label aria-hidden="true" class="theme-switch__track" for="codepen">
-          <div class="theme__icon">
-            <span
-              ><svg type="image/svg+xml" class="sunny__icon">
+        <div class="container">
+          <div class="header-nav">
+            <a href="" class="logo">
+              <svg
+                type="image/svg+xml"
+                width="24"
+                height="24"
+                class="logo-film"
+              >
                 <use
                   type="image/svg+xml"
-                  class=""
-                  alt="иконка луны"
-                  href="./images/sprite.svg#moon"
-                ></use></svg
-            ></span>
-            <span
-              ><svg type="image/svg+xml" class="sunny__icon">
-                <use
-                  type="image/svg+xml"
-                  class=""
-                  alt="иконка солнца"
-                  href="./images/sprite.svg#sunny"
-                ></use></svg
-            ></span>
+                  class="icon-cross"
+                  href="./images/sprite.svg#icon-film"
+                ></use>
+              </svg>
+              <span class="logo-name">Filmoteka</span>
+            </a>
+            <nav class="navigation">
+              <button class="home-page current">HOME</button>
+              <button class="library-page">MY LIBRARY</button>
+            </nav>
           </div>
-        </label>
-      </div>
-    </div>
-  </div>
+          <div class="btn-my-library btn-my-library--hidden">
+            <div class="wrapper-btn">
+              <button class="btn-action watched active">watched</button>
+              <button class="btn-action queue">queue</button>
+            </div>
+          </div>
+          <form class="form-search">
+            <input
+              type="search"
+              placeholder="Search"
+              name="search"
+              class="input-text"
+            />
+            <svg
+              type="image/svg+xml"
+              width="12"
+              height="12"
+              class="logo-search"
+            >
+              <use
+                type="image/svg+xml"
+                class="icon-cross"
+                href="./images/sprite.svg#icon-search"
+              ></use>
+            </svg>
+          </form>
+          <!-- Разметка переключателя темы -->
+          <div class="theme-switch">
+            <div class="theme-switch__control">
+              <input
+                class="theme-switch__toggle"
+                type="checkbox"
+                name="theme"
+                id="codepen"
+                aria-label="Переключить между тёмной и светлой темой"
+              />
+              <label
+                aria-hidden="true"
+                class="theme-switch__track"
+                for="codepen"
+              >
+                <div class="theme__icon">
+                  <span
+                    ><svg type="image/svg+xml" class="sunny__icon">
+                      <use
+                        type="image/svg+xml"
+                        class=""
+                        alt="иконка луны"
+                        href="./images/sprite.svg#moon"
+                      ></use></svg
+                  ></span>
+                  <span
+                    ><svg type="image/svg+xml" class="sunny__icon">
+                      <use
+                        type="image/svg+xml"
+                        class=""
+                        alt="иконка солнца"
+                        href="./images/sprite.svg#sunny"
+                      ></use></svg
+                  ></span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
         <!-- Конец разметка переключателя темы -->
       </header>
     </div>
@@ -112,7 +126,7 @@
       <div class="pagination__container_pages">
         <div class="pag-arrow arrow_left" data-action="prev-page"></div>
         <div class="pagenumbers" id="pagination">
-          <button class="active" data-action="number-page" data-number="first">
+          <!-- <button class="active" data-action="number-page" data-number="first">
             1
           </button>
           <button data-action="number-page" data-number="second">2</button>
@@ -120,7 +134,7 @@
           <button data-action="number-page" data-number="fourth">4</button>
           <button data-action="number-page" data-number="fifth">5</button>
           <div class="threeDots end">...</div>
-          <button data-action="number-page" data-number="end-page">500</button>
+          <button data-action="number-page" data-number="end-page">500</button> -->
         </div>
         <div class="pag-arrow arrow_right" data-action="next-page"></div>
       </div>
@@ -152,9 +166,6 @@
       </div>
     </footer>
     <!-- End Footer -->
-
-
-
 
     <!-- Up btn -->
 

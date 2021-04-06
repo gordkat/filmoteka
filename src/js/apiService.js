@@ -6,7 +6,7 @@ import '@pnotify/core/dist/BrightTheme.css';
 import '@pnotify/core/dist/PNotify.css';
 
 const galleryRef = document.querySelector('.gallery-list');
-const endBtnRef = document.querySelector('[data-number="end-page"]');
+// const endBtnRef = document.querySelector('[data-number="end-page"]');
 
 const notice = message => {
   error({
@@ -79,7 +79,7 @@ export default class MovieApiService {
     }
     const popularMoviesObj = await response.json();
     this.totalPages = popularMoviesObj.total_pages;
-    endBtnRef.textContent = this.totalPages;
+    // endBtnRef.textContent = this.totalPages;
     const popularMovies = await popularMoviesObj.results;
     return popularMovies;
   }
@@ -249,20 +249,8 @@ export default class MovieApiService {
     this.page = 1;
   }
 }
-// function makeMarkupPagination(totalPages) {
-//   const markupPagination = `
-// <button class="active" data-action="number-page" data-number="first">1
-//           </button>
-//           <button data-action="number-page" data-number="second">2</button>
-//           <button data-action="number-page" data-number="center">3</button>
-//           <button data-action="number-page" data-number="fourth">4</button>
-//           <button data-action="number-page" data-number="fifth">5</button>
-//           <div class="threeDots end">...</div>
-//           <button data-action="number-page" data-number="end-page">${totalPages}</button>`;
-//   console.log(markupPagination);
-//   pageNambersRef.innerHTML = markupPagination;
-// }
-const movieApiService = new MovieApiService();
+
+// const movieApiService = new MovieApiService();
 
 // console.log(movieApiService.searchMoviesbyGenre());
 
