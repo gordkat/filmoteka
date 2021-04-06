@@ -43,6 +43,7 @@ const galleryContainerRef = document.querySelector('.cards-container');
 
 let observerRef = '';
 let genre = '';
+let observer;
 
 function filterRender(e) {
   if (e.target.parentNode.nodeName === 'P') {
@@ -52,18 +53,17 @@ function filterRender(e) {
     movieApiService.increamentPage();
     galleryRef.innerHTML = '';
 
-    // для возврата отображения пагинации нужно удалить только функцию infinitScroll()
-    infinitScroll();
+    // для возврата отображения пагинации нужно удалить только функцию setinfinitScroll()
+    setInfiniteScroll();
   }
 }
 
-function infinitScroll() {
+function setInfiniteScroll() {
   paginationRef.classList.add('visually-hidden');
   const observerEl = document.createElement('div');
   observerEl.classList.add('observer');
   galleryContainerRef.after(observerEl);
   observerRef = document.querySelector('.observer');
-
   const onEntry = (entries, observer) => {
     {
       entries.forEach(entry => {
@@ -74,8 +74,13 @@ function infinitScroll() {
       });
     }
   };
-
-  const observer = new IntersectionObserver(onEntry);
-
+  observer = new IntersectionObserver(onEntry);
   observer.observe(observerRef);
+}
+
+export default function unsetInfiniteScroll() {
+  paginationRef.classList.remove('visually-hidden');
+  if (observer) {
+    observer.disconnect();
+  }
 }
