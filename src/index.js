@@ -1,4 +1,5 @@
 import './sass/main.scss';
+import './js/refs.js';
 import './js/modal';
 import './js/apiService';
 import './js/renderPopularMovies';
