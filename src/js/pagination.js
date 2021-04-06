@@ -24,7 +24,7 @@ function fetchDataOfPopularFilms() {
       return response.json();
     })
     .then(results => {
-      console.log(results);
+      // console.log(results);
       renderPagination(results.total_pages, results.results, displayList);
     });
   // movieApiService.renderPopularMovies();
@@ -179,7 +179,7 @@ function renderPagination(totalPages, listItems, callback) {
     if (currentPage > 1) {
       currentPage--;
       setupPagination(listItems, paginationElement, rows);
-      callback(listElement, currentPage, searchQuery);
+      callback(listElement, currentPage);
     }
   }
 
@@ -187,7 +187,7 @@ function renderPagination(totalPages, listItems, callback) {
     if (currentPage < totalPages) {
       currentPage++;
       setupPagination(listItems, paginationElement, rows);
-      callback(listElement, currentPage, searchQuery);
+      callback(listElement, currentPage);
     }
   }
 

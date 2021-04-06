@@ -96,7 +96,7 @@ export default class MovieApiService {
   }
 
   async fetchMoviesByGenre() {
-    const url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=${this.genreId}`;
+    const url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&page=${this.page}&with_genres=${this.genreId}`;
     // ${this.genreId}
     const response = await fetch(url);
     if (!response.ok) {
@@ -152,7 +152,11 @@ export default class MovieApiService {
       });
 
       //Обрезаем дату
-      const release_date = movie.release_date.split('-')[0];
+      // const release_date = movie.release_date.split('-')[0];
+
+      const release_date = movie.release_date
+        ? movie.release_date.split('-')[0]
+        : 'NA';
 
       // Подгружаем noPosterImg если с бэкэнда не прихожит картинка
       const poster_path = movie.poster_path
@@ -207,8 +211,9 @@ export default class MovieApiService {
     try {
       const normalizedMovies = await this.getPopularMovies();
       this.renderMovieCard(normalizedMovies);
-    } catch {
+    } catch (error) {
       notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
+      console.log(error);
     }
   }
 
@@ -225,8 +230,9 @@ export default class MovieApiService {
     try {
       const normalizedMovies = await this.getMoviesByGenre(genre);
       this.renderMovieCard(normalizedMovies);
-    } catch {
+    } catch (error) {
       notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
+      console.log(error);
     }
   }
 

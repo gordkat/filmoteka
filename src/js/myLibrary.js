@@ -1,10 +1,11 @@
 import galleryTemplate from '../templates/film-card.hbs';
 import MovieApiService from './apiService';
-
 //import { renderPagination } from './pagination';
 
+// console.log(addObserverDiv);
+
 const refs = {
-  headerContainer: document.querySelector('.main-container'),
+  headerContainer: document.querySelector('.header'),
   btnMyLibrary: document.querySelector('.library-page'),
   btnHome: document.querySelector('.home-page'),
   formSearch: document.querySelector('.form-search'),

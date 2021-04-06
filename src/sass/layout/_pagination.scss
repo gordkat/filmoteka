@@ -29,7 +29,6 @@
   button {
     width: 40px;
     height: 40px;
-
     appearance: none;
     border: none;
     outline: none;
@@ -69,12 +68,9 @@
 }
 
 @media screen and (max-width: 320px) {
-  .pagination__container {
-    min-width: 280px;
-  }
   .pagenumbers button {
-    width: 35px;
-    height: 35px;
+    width: 32px;
+    height: 32px;
     margin: 1px;
   }
 }
@@ -102,7 +98,9 @@
   margin: 5px;
   background-position: center;
   border: none;
-  background-color: $white-color;
+
+  background-color: #f7f7f7;
+
   transition: background-color 0.25s ease-in;
   border-radius: 5px;
 
@@ -116,13 +114,18 @@
     background-color: green;
   }
 }
-
+@media screen and (max-width: 320px) {
+  .pag-arrow {
+    width: 32px;
+    height: 32px;
+    margin: 1px;
+  }
+}
 .threeDots {
   display: flex;
   width: 40px;
   height: 40px;
   margin: 5px;
-
   border: none;
   background-color: $white-color;
   display: inline-block;
