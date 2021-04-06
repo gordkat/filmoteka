@@ -195,3 +195,26 @@ function renderPagination(totalPages, listItems, callback) {
   // arrowLeft.addEventListener('click', onArrowLeftClick);
   // arrowRight.addEventListener('click', onArrowRightClick);
 }
+/* отключение стрелок на первой и последней странице
+paginationElement.addEventListener('click', disableArrowBtnAfterPageClick);
+
+  function disableArrowBtnAfterPageClick(event) {
+    if (event.target.tagName != 'BUTTON') {
+      return;
+    } else {
+      disableArrowBtn(pageCount);
+    }
+  }
+  function disableArrowBtn(totalPages) {
+    if (currentPage === 1) {
+      arrowLeft.classList.add('disabled-arrow');
+    } else {
+      arrowLeft.classList.remove('disabled-arrow');
+    }
+  
+    if (currentPage === totalPages) {
+      arrowRight.classList.add('disabled-arrow');
+    } else {
+      arrowRight.classList.remove('disabled-arrow');
+    }
+  }*/
