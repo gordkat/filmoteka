@@ -72,7 +72,7 @@ export function renderMovieCard(results) {
     error.classList.add('error-message');
     error.textContent =
       'Search result not successful. Enter the correct movie name and try again';
-    refs.heder.append(error);
+    refs.form.append(error);
 
     setTimeout(() => {
       refs.inputForm.value = '';
