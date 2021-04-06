@@ -1,6 +1,5 @@
 import './sass/main.scss';
 import './js/modal';
-// import './js/pagination';
 import './js/apiService';
 import './js/renderPopularMovies';
 import './js/search';

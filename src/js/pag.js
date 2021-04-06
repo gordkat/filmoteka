@@ -8,146 +8,117 @@ const refs = {
   centerBtn: document.querySelector('[data-number="center"]'),
   fourthBtn: document.querySelector('[data-number="fourth"]'),
   fifthBtn: document.querySelector('[data-number="fifth"]'),
-  lastBtn: document.querySelector('[data-number="last-page"]'),
+  endBtn: document.querySelector('[data-number="end-page"]'),
   endDots: document.querySelector('.end'),
 };
 
 const movieApiService = new MovieApiService();
 movieApiService.renderPopularMovies();
+
 const onBtnPagination = event => {
   const pressedBtn = event.target;
   const btnDataAction = event.target.dataset.action;
+
+  //Убираем активный класс у предыдущей страницы
+  const pastActiveBtn = refs.btnPagination.querySelector('.active');
+  pastActiveBtn.classList.remove('active');
+  const pastActiveBtnNumber = Number(pastActiveBtn.textContent);
+
   switch (btnDataAction) {
     case 'next-page':
+      if (pastActiveBtnNumber === movieApiService.totalPages) {
+        pastActiveBtn.classList.add('active');
+        return;
+      }
+      makePaginationPages(pastActiveBtnNumber + 1);
       movieApiService.goToNextPage();
       break;
 
     case 'prev-page':
+      console.log(pastActiveBtnNumber === 1);
+      if (pastActiveBtnNumber === 1) {
+        pastActiveBtn.classList.add('active');
+        return;
+      }
+      makePaginationPages(pastActiveBtnNumber - 1);
       movieApiService.goToPrevPage();
       break;
 
     case 'number-page':
-      //Получаем номер нажатой страницы и убираем активный класс у предыдущей страницы
-      const btnNumber = Number(pressedBtn.textContent);
-      const pastActiveBtn = refs.btnPagination.querySelector('.active');
-      pastActiveBtn.classList.remove('active');
+      //Получаем номер нажатой страницы
+      const btnNumberPressed = Number(pressedBtn.textContent);
 
-      if (btnNumber === 1) {
-        removeStartPage();
-        removeStartDot();
-        changeNumbersByStart();
-        refs.firstBtn.classList.add('active');
-      }
-
-      if (btnNumber === 2) {
-        removeStartPage();
-        removeStartDot();
-        changeNumbersByStart();
-        refs.secondBtn.classList.add('active');
-      }
-
-      if (btnNumber === 3) {
-        removeStartPage();
-        removeStartDot();
-        changeNumbersByStart();
-        refs.centerBtn.classList.add('active');
-      }
-
-      //Если нажата страница с номером 4, добавляем блок с точками вначало, если его там еще нет
-      if (btnNumber === 4) {
-        addStartDot();
-        removeStartPage();
-        changeNumbersByCenter(btnNumber);
-      }
-
-      //Если нажата страница с номером 5 или больше и не последняя страница, добавляем блок с первой страницой
-      const isLastPage = pressedBtn.dataset.number === 'last-page';
-      if (btnNumber >= 5 && !isLastPage) {
-        changeNumbersByCenter(btnNumber);
-        addStartDot();
-        addStartPage();
-      }
-      //Если нажата последняя страница удаляем вконце блок с точками и последнюю страницу
-      if (btnNumber === movieApiService.totalPages) {
-        console.log(movieApiService.totalPages);
-        changeNumbersByEnd(movieApiService.totalPages);
-        refs.endDots.remove();
-        refs.lastBtn.remove();
-        addStartDot();
-        addStartPage();
-        refs.fifthBtn.classList.add('active');
-      }
-      if (btnNumber === movieApiService.totalPages - 1) {
-        console.log(btnNumber);
-        refs.endDots.remove();
-        refs.lastBtn.remove();
-        changeNumbersByEnd(movieApiService.totalPages);
-        refs.fourthBtn.classList.add('active');
-      }
-      if (btnNumber === movieApiService.totalPages - 2) {
-        console.log(btnNumber);
-        refs.endDots.remove();
-        refs.lastBtn.remove();
-        changeNumbersByEnd(movieApiService.totalPages);
-        refs.centerBtn.classList.add('active');
-      }
-      if (btnNumber === movieApiService.totalPages - 3) {
-        addEndDot();
-        refs.lastBtn.remove();
-        changeNumbersByCenter(movieApiService.totalPages);
-        changeNumbersByCenter(btnNumber);
-        refs.secondBtn.classList.add('active');
-      }
+      //Меняем номера страниц в зависимости от нажатой страницы
+      makePaginationPages(btnNumberPressed);
 
       //Меняем номер текущей страницы в movieApiService и рендерим фильмы
-      movieApiService.page = btnNumber;
+      movieApiService.page = btnNumberPressed;
       movieApiService.goToNumberPage();
       break;
   }
 };
 
-function removeStartDot() {
-  const startDot = document.querySelector('.start');
-  if (startDot) {
-    startDot.remove();
+function removeStartDots() {
+  const startDots = document.querySelector('.start');
+  if (startDots) {
+    startDots.remove();
+  }
+}
+function removeEndtDots() {
+  const endDots = document.querySelector('.end');
+  if (endDots) {
+    endDots.remove();
   }
 }
 
 function removeStartPage() {
-  const startPage = document.querySelector('.start-page');
+  const startPage = document.querySelector('[data-number="start-page"]');
   if (startPage) {
     startPage.remove();
   }
 }
+function removeEndPage() {
+  const endPage = document.querySelector('[data-number="end-page"]');
+  if (endPage) {
+    endPage.remove();
+  }
+}
 
-function addStartDot() {
-  const startDot = document.querySelector('.start');
-  if (!startDot) {
+function addStartDots() {
+  const startDots = document.querySelector('.start');
+  if (!startDots) {
     const markupDots = '<div class="threeDots start">...</div>';
     refs.pageNumbers.insertAdjacentHTML('afterbegin', markupDots);
   }
 }
 
-function addEndDot() {
-  const startDot = document.querySelector('.end');
-  if (!startDot) {
+function addEndDots() {
+  const endDots = document.querySelector('.end');
+  if (!endDots) {
     const markupDots = '<div class="threeDots end">...</div>';
     refs.pageNumbers.insertAdjacentHTML('beforeend', markupDots);
   }
 }
 
 function addStartPage() {
-  const startPage = document.querySelector('.start-page');
+  const startPage = document.querySelector('[data-number="start-page"]');
   if (!startPage) {
     const markupStartPage =
-      '<button class="start-page" data-action="number-page">1</button>';
+      '<button data-action="number-page" data-number="start-page">1</button>';
     refs.pageNumbers.insertAdjacentHTML('afterbegin', markupStartPage);
+  }
+}
+
+function addEndPage() {
+  const endPage = document.querySelector('[data-number="end-page"]');
+  if (!endPage) {
+    const markupEndPage = `<button data-action="number-page" data-number="end-page">${movieApiService.totalPages}</button>`;
+    refs.pageNumbers.insertAdjacentHTML('beforeend', markupEndPage);
   }
 }
 
 //Добавляем активный класс на центральную страницу и меняем номера страниц
 function changeNumbersByCenter(number) {
-  refs.centerBtn.classList.add('active');
   refs.centerBtn.textContent = number;
   refs.firstBtn.textContent = number - 2;
   refs.secondBtn.textContent = number - 1;
@@ -171,6 +142,60 @@ function changeNumbersByStart() {
   refs.fifthBtn.textContent = 5;
 }
 
-// arrowLeft.addEventListener('click', movieApiService.goToPrevPage);
-// arrowRight.addEventListener('click', onRightArrow);
+function makePaginationPages(btnNumber) {
+  if (btnNumber === 1) {
+    changeNumbersByStart();
+    refs.firstBtn.classList.add('active');
+    removeStartPage();
+    removeStartDots();
+  }
+
+  if (btnNumber === 2) {
+    changeNumbersByStart();
+    refs.secondBtn.classList.add('active');
+    removeStartPage();
+    removeStartDots();
+  }
+
+  if (btnNumber === 3) {
+    changeNumbersByStart();
+    refs.centerBtn.classList.add('active');
+    removeStartPage();
+    removeStartDots();
+  }
+
+  //Если нажата страница с номером 4 или больше и не последняя страница, добавляем блок с первой страницой
+  const fourthPagByEnd = movieApiService.totalPages - 3;
+  if (btnNumber >= 4 && btnNumber <= fourthPagByEnd) {
+    refs.centerBtn.classList.add('active');
+    changeNumbersByCenter(btnNumber);
+    addStartDots();
+    addStartPage();
+    addEndDots();
+    addEndPage();
+  }
+  //Если нажата последняя страница удаляем вконце блок с точками и последнюю страницу
+  if (btnNumber === movieApiService.totalPages) {
+    changeNumbersByEnd(movieApiService.totalPages);
+    removeEndtDots();
+    removeEndPage();
+    addStartDots();
+    addStartPage();
+
+    refs.fifthBtn.classList.add('active');
+  }
+  if (btnNumber === movieApiService.totalPages - 1) {
+    removeEndtDots();
+    removeEndPage();
+    changeNumbersByEnd(movieApiService.totalPages);
+    refs.fourthBtn.classList.add('active');
+  }
+  if (btnNumber === movieApiService.totalPages - 2) {
+    removeEndtDots();
+    removeEndPage();
+    changeNumbersByEnd(movieApiService.totalPages);
+    refs.centerBtn.classList.add('active');
+  }
+}
+
 refs.btnPagination.addEventListener('click', onBtnPagination);
