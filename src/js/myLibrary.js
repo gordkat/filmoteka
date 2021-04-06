@@ -1,7 +1,8 @@
 import galleryTemplate from '../templates/film-card.hbs';
 import MovieApiService from './apiService';
-
 //import { renderPagination } from './pagination';
+
+// console.log(addObserverDiv);
 
 const refs = {
   headerContainer: document.querySelector('.header'),

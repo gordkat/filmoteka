@@ -24,7 +24,7 @@ function fetchDataOfPopularFilms() {
       return response.json();
     })
     .then(results => {
-      console.log(results);
+      // console.log(results);
       renderPagination(results.total_pages, results.results, displayList);
     });
   // movieApiService.renderPopularMovies();
