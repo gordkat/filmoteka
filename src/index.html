@@ -21,78 +21,80 @@
   <body>
     <!-- Header -->
     <div class="main-container">
-      <header class="header container">
-        <div class="header-nav">
-          <a href="" class="logo">
-            <svg type="image/svg+xml" width="24" height="24" class="logo-film">
-              <use
-                type="image/svg+xml"
-                class="icon-cross"
-                href="./images/sprite.svg#icon-film"
-              ></use>
-            </svg>
-            <span class="logo-name">Filmoteka</span>
-          </a>
-          <nav class="navigation">
-            <button class="home-page current">HOME</button>
-            <button class="library-page">MY LIBRARY</button>
-          </nav>
-        </div>
-        <div class="btn-my-library btn-my-library--hidden">
-          <div class="wrapper-btn">
-            <button class="btn-action watched active">watched</button>
-            <button class="btn-action queue">queue</button>
+      <header class="header">
+  <div class="container">
+    <div class="header-nav">
+      <a href="" class="logo">
+        <svg type="image/svg+xml" width="24" height="24" class="logo-film">
+          <use
+            type="image/svg+xml"
+            class="icon-cross"
+            href="./images/sprite.svg#icon-film"
+          ></use>
+        </svg>
+        <span class="logo-name">Filmoteka</span>
+      </a>
+      <nav class="navigation">
+        <button class="home-page current">HOME</button>
+        <button class="library-page">MY LIBRARY</button>
+      </nav>
+    </div>
+    <div class="btn-my-library btn-my-library--hidden">
+      <div class="wrapper-btn">
+        <button class="btn-action watched active">watched</button>
+        <button class="btn-action queue">queue</button>
+      </div>
+    </div>
+    <form class="form-search">
+      <input
+        type="search"
+        placeholder="Search"
+        name="search"
+        class="input-text"
+      />
+      <svg type="image/svg+xml" width="12" height="12" class="logo-search">
+        <use
+          type="image/svg+xml"
+          class="icon-cross"
+          href="./images/sprite.svg#icon-search"
+        ></use>
+      </svg>
+    </form>
+    <!-- Разметка переключателя темы -->
+    <div class="theme-switch">
+      <div class="theme-switch__control">
+        <input
+          class="theme-switch__toggle"
+          type="checkbox"
+          name="theme"
+          id="codepen"
+          aria-label="Переключить между тёмной и светлой темой"
+        />
+        <label aria-hidden="true" class="theme-switch__track" for="codepen">
+          <div class="theme__icon">
+            <span
+              ><svg type="image/svg+xml" class="sunny__icon">
+                <use
+                  type="image/svg+xml"
+                  class=""
+                  alt="иконка луны"
+                  href="./images/sprite.svg#moon"
+                ></use></svg
+            ></span>
+            <span
+              ><svg type="image/svg+xml" class="sunny__icon">
+                <use
+                  type="image/svg+xml"
+                  class=""
+                  alt="иконка солнца"
+                  href="./images/sprite.svg#sunny"
+                ></use></svg
+            ></span>
           </div>
-        </div>
-        <form class="form-search">
-          <input
-            type="search"
-            placeholder="Search"
-            name="search"
-            class="input-text"
-          />
-          <svg type="image/svg+xml" width="12" height="12" class="logo-search">
-            <use
-              type="image/svg+xml"
-              class="icon-cross"
-              href="./images/sprite.svg#icon-search"
-            ></use>
-          </svg>
-        </form>
-        <!-- Разметка переключателя темы -->
-        <div class="theme-switch">
-          <div class="theme-switch__control">
-            <input
-              class="theme-switch__toggle"
-              type="checkbox"
-              name="theme"
-              id="codepen"
-              aria-label="Переключить между тёмной и светлой темой"
-            />
-            <label aria-hidden="true" class="theme-switch__track" for="codepen">
-              <div class="theme__icon">
-                <span
-                  ><svg type="image/svg+xml" class="sunny__icon">
-                    <use
-                      type="image/svg+xml"
-                      class=""
-                      alt="иконка луны"
-                      href="./images/sprite.svg#moon"
-                    ></use></svg
-                ></span>
-                <span
-                  ><svg type="image/svg+xml" class="sunny__icon">
-                    <use
-                      type="image/svg+xml"
-                      class=""
-                      alt="иконка солнца"
-                      href="./images/sprite.svg#sunny"
-                    ></use></svg
-                ></span>
-              </div>
-            </label>
-          </div>
-        </div>
+        </label>
+      </div>
+    </div>
+  </div>
         <!-- Конец разметка переключателя темы -->
       </header>
     </div>
@@ -140,6 +142,9 @@
       </div>
     </footer>
     <!-- End Footer -->
+
+
+
 
     <!-- Up btn -->
 
