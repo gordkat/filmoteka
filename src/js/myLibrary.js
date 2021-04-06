@@ -1,5 +1,9 @@
 import galleryTemplate from '../templates/film-card.hbs';
 import MovieApiService from './apiService';
+import unsetInfiniteScroll from './genresSearch';
+
+// console.log(document.querySelector('.observer'));
+
 //import { renderPagination } from './pagination';
 
 // console.log(addObserverDiv);
@@ -20,10 +24,12 @@ const refs = {
 //Рендерим фильмы из массива объектов
 const renderMovieCard = results => {
   refs.gallery.insertAdjacentHTML('beforeend', galleryTemplate(results));
+  console.log(results);
 };
 
 //Очищаем галлерею
 const clearAll = () => {
+    unsetInfiniteScroll();
   refs.gallery.innerHTML = '';
 };
 
@@ -31,7 +37,7 @@ const clearAll = () => {
 const onHome = () => {
   refs.formSearch.reset();
   clearAll();
-  refs.formSearch.classList.remove('form-search--hidden');
+   refs.formSearch.classList.remove('form-search--hidden');
   refs.btnAction.classList.add('btn-my-library--hidden');
   refs.btnMyLibrary.classList.remove('current');
   refs.btnHome.classList.add('current');
@@ -44,6 +50,7 @@ const onHome = () => {
 
 //Колбек для кнопки My library
 const onMyLibrary = event => {
+  clearAll();
   refs.formSearch.classList.add('form-search--hidden');
   refs.btnAction.classList.remove('btn-my-library--hidden');
   refs.btnMyLibrary.classList.add('current');
