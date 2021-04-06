@@ -40,8 +40,8 @@ function fetchPopularFilmsByPage(page) {
     });
 }
 
-function fetchSearchFilmsByPage(page) {
-  const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=true`;
+ function fetchSearchFilmsByPage(page) {
+  const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=true&query=${searchQuery}`;
   return fetch(url)
     .then(response => response.json())
     .then(({ results }) => {
@@ -49,7 +49,7 @@ function fetchSearchFilmsByPage(page) {
     });
 }
 
-function fetchFilmsSearch(searchQuery) {
+export default function fetchFilmsSearch(searchQuery) {
   const url = `${BASE_URL}/search/movie?api_key=${KEY}&query=${searchQuery}`;
   return fetch(url)
     .then(response => response.json())
@@ -86,7 +86,7 @@ function displaySearchListByPage(wrapper, page, searchQuery) {
   wrapper.innerHTML = '';
   //Call normalizer списка жанры, год, noposter
   movieApiService
-    .fetchNormalizer(fetchPopularFilmsByPage(page, searchQuery))
+    .fetchNormalizer(fetchSearchFilmsByPage(page, searchQuery))
     .then(renderFilmsCard);
 }
 
