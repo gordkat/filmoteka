@@ -6,90 +6,62 @@ import { fetchFilmsSearch } from './pagination';
 import { BASE_URL, API_KEY } from './settings';
 import spinnerModal from './spinner'; //Функция которая добавляет или убирает клас is-hidden (toggle)
 
-// import { notice, error } from '@pnotify/core';
-
 const movieApiService = new MovieApiService();
-
-// const refs = {
-//   heder: document.querySelector('.main-container'),
-//   inputForm: document.querySelector('.input-text'),
-//   gallery: document.querySelector('.gallery-list'),
-//   form: document.querySelector('.form-search'),
-//   lensSearch: document.querySelector('.logo-search'),
-// };
 
 refs.lensSearch.addEventListener('click', onSearch);
 refs.form.addEventListener('submit', onSearch);
 export let searchName = '';
-
 function onSearch(e) {
   spinnerModal(); //Убирает клас is-hidden
   e.preventDefault();
   if (refs.inputForm.value === '') {
     refs.gallery.innerHTML = '';
-    //  window.location.reload();
     return movieApiService.getPopularMovies().then(renderMovieCard);
+  }
 
-    movieApiService.resetPage();
-    movieApiService.query = refs.inputForm.value.trim();
-    // const find = searchMovie.query;
-    console.log(movieApiService.query);
+  movieApiService.resetPage();
+  movieApiService.query = refs.inputForm.value.trim();
+  console.log(movieApiService.query);
 
-    searchName = movieApiService.query;
+  searchName = movieApiService.query;
+  refs.gallery.innerHTML = '';
+  movieApiService.searchMovies().then(checkedResult);
 
-    refs.gallery.innerHTML = '';
-
-    movieApiService.searchMovies().then(checkedResult);
-
-    /*для пагинации
-  function displaySearchListByPage(wrapper, page, searchQuery) {
-    wrapper.innerHTML = '';
-    fetchSearchFilmsByPage(page, searchQuery)
-      .then(renderFilmsCard)
-}*/
-
-    // export function checkedResult(results){
-    //   if (results.length == 0) {
-    //     searchMovie.query = Auto(searchMovie.query);
-
-    // }
-    // searchMovie.searchMovies().then(renderMovieCard);
-    // }
-
-    function checkedResult(results) {
-      if (results.length === 0) {
-        movieApiService.query = Auto(movieApiService.query);
-        refs.inputForm.value = movieApiService.query;
-      }
-      movieApiService.searchMovies().then(secondCheckedResult);
+  function checkedResult(results) {
+    if (results.length === 0) {
+      movieApiService.query = Auto(movieApiService.query);
+      refs.inputForm.value = movieApiService.query;
+      searchName = movieApiService.query;
     }
+    movieApiService.searchMovies().then(secondCheckedResult);
+    fetchFilmsSearch(movieApiService.query);
+  }
 
-    function secondCheckedResult(results) {
-      if (results.length === 0) {
-        movieApiService.query = AutofromRus(movieApiService.query);
-        refs.inputForm.value = movieApiService.query;
-      }
-      movieApiService.searchMovies().then(renderMovieCard);
-      fetchFilmsSearch(movieApiService.query);
+  function secondCheckedResult(results) {
+    if (results.length === 0) {
+      movieApiService.query = AutofromRus(movieApiService.query);
+      refs.inputForm.value = movieApiService.query;
+      searchName = movieApiService.query;
     }
+    movieApiService.searchMovies().then(renderMovieCard);
+    fetchFilmsSearch(movieApiService.query);
+  }
 
-    function renderMovieCard(results) {
-      if (results.length == 0) {
-        const error = document.createElement('p');
-        error.classList.add('error-message');
-        error.textContent =
-          'Search result not successful. Enter the correct movie name and try again';
-        refs.form.append(error);
+  function renderMovieCard(results) {
+    if (results.length == 0) {
+      const error = document.createElement('p');
+      error.classList.add('error-message');
+      error.textContent =
+        'Search result not successful. Enter the correct movie name and try again';
+      refs.form.append(error);
 
-        setTimeout(() => {
-          refs.form.removeChild(error);
-        }, 2300);
+      setTimeout(() => {
+        refs.inputForm.value = '';
+      }, 1800);
 
-        setTimeout(() => {
-          spinnerModal(); //Убирает клас is-hidden
-          movieApiService.getPopularMovies().then(renderMovieCard);
-        }, 2500);
-      }
+      setTimeout(() => {
+        refs.form.removeChild(error);
+      }, 2300);
 
       setTimeout(() => {
         spinnerModal(); //Убирает клас is-hidden
@@ -258,31 +230,4 @@ function onSearch(e) {
     }
     return str;
   }
-  //для пагинации ()
-  /*
-  function fetchDataOfSearchFilms(searchQuery) {
-    searchMovie.query = searchQuery;
-  
-    searchMovie
-      .fetchMovieBySearch()
-      .then(results => {
-        renderPagination(
-          results.total_pages,
-          results.results,
-          displaySearchListByPage,
-          searchQuery,
-        );
-        if (results.total_pages === 0) {
-          cardFetch.fetchDataOfPopularFilms();
-          return;
-        }
-        
-      })
-  }
-  function fetchSearchFilmsByPage(page, searchQuery) {
-  searchMovie.pageNum = page;
-  searchMovie.query = searchQuery;
-  return searchMovie.insertGenresToSearchObj();}
-  
-  */
 }

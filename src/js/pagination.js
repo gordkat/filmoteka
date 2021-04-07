@@ -2,6 +2,7 @@ import filmsCardTpl from '../templates/film-card.hbs';
 import MovieApiService from './apiService';
 import { BASE_URL, API_KEY } from './settings';
 import { Spinner } from 'spin.js';
+import { searchName } from './search';
 
 const movieApiService = new MovieApiService();
 const spinner = new Spinner().spin();
@@ -40,13 +41,7 @@ function fetchPopularFilmsByPage(page) {
     });
 }
 
-
-import {searchName} from './search';
-
- function fetchSearchFilmsByPage(page) {
-   
-  
-
+function fetchSearchFilmsByPage(page) {
   const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=true&query=${searchName}`;
   return fetch(url)
     .then(response => response.json())
@@ -198,32 +193,29 @@ function renderPagination(totalPages, listItems, callback) {
   }
 
   setupPagination(listItems, paginationElement, rows);
-  // arrowLeft.addEventListener('click', onArrowLeftClick);
-  // arrowRight.addEventListener('click', onArrowRightClick);
+  arrowLeft.addEventListener('click', onArrowLeftClick);
+  arrowRight.addEventListener('click', onArrowRightClick);
 }
-/* отключение стрелок на первой и последней странице
+// отключение стрелок на первой и последней странице
 paginationElement.addEventListener('click', disableArrowBtnAfterPageClick);
-  function disableArrowBtnAfterPageClick(event) {
-    if (event.target.tagName != 'BUTTON') {
-      return;
-    } else {
-      disableArrowBtn(pageCount);
-    }
+
+function disableArrowBtnAfterPageClick(event) {
+  if (event.target.tagName != 'BUTTON') {
+    return;
+  } else {
+    disableArrowBtn(pageCount);
   }
-  function disableArrowBtn(totalPages) {
-    if (currentPage === 1) {
-      arrowLeft.classList.add('disabled-arrow');
-    } else {
-      arrowLeft.classList.remove('disabled-arrow');
-    }
+}
+function disableArrowBtn(totalPages) {
+  if (currentPage === 1) {
+    arrowLeft.classList.add('disabled-arrow');
+  } else {
+    arrowLeft.classList.remove('disabled-arrow');
+  }
 
-    if (currentPage === totalPages) {
-      arrowRight.classList.add('disabled-arrow');
-    } else {
-      arrowRight.classList.remove('disabled-arrow');
-    }
-  }*/
-
-
-
-
+  if (currentPage === totalPages) {
+    arrowRight.classList.add('disabled-arrow');
+  } else {
+    arrowRight.classList.remove('disabled-arrow');
+  }
+}
