@@ -40,9 +40,13 @@ function fetchPopularFilmsByPage(page) {
     });
 }
 
-import { searchName } from './search';
 
-function fetchSearchFilmsByPage(page) {
+import {searchName} from './search';
+
+ function fetchSearchFilmsByPage(page) {
+   
+  
+
   const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=true&query=${searchName}`;
   return fetch(url)
     .then(response => response.json())
@@ -219,3 +223,7 @@ paginationElement.addEventListener('click', disableArrowBtnAfterPageClick);
       arrowRight.classList.remove('disabled-arrow');
     }
   }*/
+
+
+
+
