@@ -57,7 +57,7 @@ function onSearch(e) {
 
 
 
-export function checkedResult(results){
+function checkedResult(results){
   if (results.length == 0) {
     searchMovie.query = Auto(searchMovie.query);
     refs.inputForm.value = searchMovie.query;
@@ -66,7 +66,7 @@ export function checkedResult(results){
 searchMovie.searchMovies().then(secondCheckedResult);
 }
 
-export function secondCheckedResult(results){
+function secondCheckedResult(results){
   if (results.length == 0) {
     searchMovie.query = AutofromRus(searchMovie.query);
     refs.inputForm.value = searchMovie.query;
@@ -75,8 +75,7 @@ export function secondCheckedResult(results){
 searchMovie.searchMovies().then(renderMovieCard);
 }
 
-
-export function renderMovieCard(results) {
+function renderMovieCard(results) {
   if (results.length == 0) {
     const error = document.createElement('p');
     error.classList.add('error-message');
