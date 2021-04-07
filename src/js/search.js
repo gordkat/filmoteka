@@ -2,6 +2,9 @@ import MovieApiService from './apiService';
 import galleryTemplate from '../templates/film-card.hbs';
 import '@pnotify/core/dist/BrightTheme.css';
 import refs from './refs.js';
+//import { renderPagination } from './pagination';
+
+
 import spinnerModal from './spinner'; //Функция которая добавляет или убирает клас is-hidden (toggle)
 
 // import { notice, error } from '@pnotify/core';
@@ -36,8 +39,13 @@ function onSearch(e) {
   refs.gallery.innerHTML = '';
   searchMovie.searchMovies().then(checkedResult);
   
+  /*для пагинации
+  function displaySearchListByPage(wrapper, page, searchQuery) {
+    wrapper.innerHTML = '';
+    fetchSearchFilmsByPage(page, searchQuery)
+      .then(renderFilmsCard)
 
-}
+}*/
 
 // export function checkedResult(results){
 //   if (results.length == 0) {
@@ -46,6 +54,8 @@ function onSearch(e) {
 // }
 // searchMovie.searchMovies().then(renderMovieCard);
 // }
+
+
 
 export function checkedResult(results){
   if (results.length == 0) {
@@ -134,4 +144,32 @@ function Auto(str)
     }
       return str
     }
+    //для пагинации ()
+    /*
+    function fetchDataOfSearchFilms(searchQuery) {
+      searchMovie.query = searchQuery;
+    
+      searchMovie
+        .fetchMovieBySearch()
+        .then(results => {
+          renderPagination(
+            results.total_pages,
+            results.results,
+            displaySearchListByPage,
+            searchQuery,
+          );
+          if (results.total_pages === 0) {
 
+            cardFetch.fetchDataOfPopularFilms();
+            return;
+          }
+          
+        })
+    }
+    function fetchSearchFilmsByPage(page, searchQuery) {
+    searchMovie.pageNum = page;
+    searchMovie.query = searchQuery;
+    return searchMovie.insertGenresToSearchObj();}
+    
+    */
+  }
