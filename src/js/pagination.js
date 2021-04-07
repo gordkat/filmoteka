@@ -2,6 +2,7 @@ import filmsCardTpl from '../templates/film-card.hbs';
 import MovieApiService from './apiService';
 import { BASE_URL, API_KEY } from './settings';
 import { Spinner } from 'spin.js';
+import {searchName} from './search';
 
 const movieApiService = new MovieApiService();
 const spinner = new Spinner().spin();
@@ -40,7 +41,7 @@ function fetchPopularFilmsByPage(page) {
     });
 }
 
-import {searchName} from './search';
+
 
  function fetchSearchFilmsByPage(page) {
    
@@ -196,10 +197,10 @@ function renderPagination(totalPages, listItems, callback) {
   }
 
   setupPagination(listItems, paginationElement, rows);
-  // arrowLeft.addEventListener('click', onArrowLeftClick);
-  // arrowRight.addEventListener('click', onArrowRightClick);
+  arrowLeft.addEventListener('click', onArrowLeftClick);
+  arrowRight.addEventListener('click', onArrowRightClick);
 }
-/* отключение стрелок на первой и последней странице
+// отключение стрелок на первой и последней странице
 paginationElement.addEventListener('click', disableArrowBtnAfterPageClick);
 
   function disableArrowBtnAfterPageClick(event) {
@@ -221,7 +222,7 @@ paginationElement.addEventListener('click', disableArrowBtnAfterPageClick);
     } else {
       arrowRight.classList.remove('disabled-arrow');
     }
-  }*/
+  }
 
 
 
