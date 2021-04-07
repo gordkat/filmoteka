@@ -1,7 +1,9 @@
 import MovieApiService from './apiService';
 import galleryTemplate from '../templates/film-card.hbs';
 import '@pnotify/core/dist/BrightTheme.css';
+import refs from './refs.js';
 //import { renderPagination } from './pagination';
+
 
 import spinnerModal from './spinner'; //Функция которая добавляет или убирает клас is-hidden (toggle)
 
@@ -9,13 +11,13 @@ import spinnerModal from './spinner'; //Функция которая добав
 
 const searchMovie = new MovieApiService();
 
-const refs = {
-  heder: document.querySelector('.main-container'),
-  inputForm: document.querySelector('.input-text'),
-  gallery: document.querySelector('.gallery-list'),
-  form: document.querySelector('.form-search'),
-  lensSearch: document.querySelector('.logo-search'),
-};
+// const refs = {
+//   heder: document.querySelector('.main-container'),
+//   inputForm: document.querySelector('.input-text'),
+//   gallery: document.querySelector('.gallery-list'),
+//   form: document.querySelector('.form-search'),
+//   lensSearch: document.querySelector('.logo-search'),
+// };
 
 refs.lensSearch.addEventListener('click', onSearch);
 refs.form.addEventListener('submit', onSearch);

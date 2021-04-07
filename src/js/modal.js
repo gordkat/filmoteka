@@ -4,6 +4,7 @@ import noposter from '../images/no-poster.png';
 import MovieApiService from './apiService';
 import galleryTemplate from '../templates/film-card.hbs';
 
+
 const mainRef = document.querySelector('.gallery-list');
 
 const addedToWatchArray = [
