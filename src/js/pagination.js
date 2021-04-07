@@ -40,8 +40,8 @@ function fetchPopularFilmsByPage(page) {
     });
 }
 
-function fetchSearchFilmsByPage(page) {
-  const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=true`;
+ function fetchSearchFilmsByPage(page) {
+  const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=true&query=${searchQuery}`;
   return fetch(url)
     .then(response => response.json())
     .then(({ results }) => {
@@ -49,7 +49,7 @@ function fetchSearchFilmsByPage(page) {
     });
 }
 
-function fetchFilmsSearch(searchQuery) {
+export default function fetchFilmsSearch(searchQuery) {
   const url = `${BASE_URL}/search/movie?api_key=${KEY}&query=${searchQuery}`;
   return fetch(url)
     .then(response => response.json())
@@ -86,7 +86,7 @@ function displaySearchListByPage(wrapper, page, searchQuery) {
   wrapper.innerHTML = '';
   //Call normalizer списка жанры, год, noposter
   movieApiService
-    .fetchNormalizer(fetchPopularFilmsByPage(page, searchQuery))
+    .fetchNormalizer(fetchSearchFilmsByPage(page, searchQuery))
     .then(renderFilmsCard);
 }
 
@@ -195,3 +195,26 @@ function renderPagination(totalPages, listItems, callback) {
   // arrowLeft.addEventListener('click', onArrowLeftClick);
   // arrowRight.addEventListener('click', onArrowRightClick);
 }
+/* отключение стрелок на первой и последней странице
+paginationElement.addEventListener('click', disableArrowBtnAfterPageClick);
+
+  function disableArrowBtnAfterPageClick(event) {
+    if (event.target.tagName != 'BUTTON') {
+      return;
+    } else {
+      disableArrowBtn(pageCount);
+    }
+  }
+  function disableArrowBtn(totalPages) {
+    if (currentPage === 1) {
+      arrowLeft.classList.add('disabled-arrow');
+    } else {
+      arrowLeft.classList.remove('disabled-arrow');
+    }
+  
+    if (currentPage === totalPages) {
+      arrowRight.classList.add('disabled-arrow');
+    } else {
+      arrowRight.classList.remove('disabled-arrow');
+    }
+  }*/
