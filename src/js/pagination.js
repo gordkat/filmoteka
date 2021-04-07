@@ -40,8 +40,12 @@ function fetchPopularFilmsByPage(page) {
     });
 }
 
+import {searchName} from './search';
+
  function fetchSearchFilmsByPage(page) {
-  const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=true&query=${searchQuery}`;
+   
+  
+  const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=true&query=${searchName}`;
   return fetch(url)
     .then(response => response.json())
     .then(({ results }) => {
@@ -49,8 +53,8 @@ function fetchPopularFilmsByPage(page) {
     });
 }
 
-export default function fetchFilmsSearch(searchQuery) {
-  const url = `${BASE_URL}/search/movie?api_key=${KEY}&query=${searchQuery}`;
+export function fetchFilmsSearch(searchQuery) {
+  const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${searchQuery}`;
   return fetch(url)
     .then(response => response.json())
     .then(results => {
@@ -218,3 +222,7 @@ paginationElement.addEventListener('click', disableArrowBtnAfterPageClick);
       arrowRight.classList.remove('disabled-arrow');
     }
   }*/
+
+
+
+

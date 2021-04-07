@@ -91,6 +91,7 @@ export default class MovieApiService {
       throw new Error();
     }
     const searchedMoviesObj = await response.json();
+        this.totalPages = searchedMoviesObj.total_pages;
     const searchedMovies = await searchedMoviesObj.results;
     return searchedMovies;
   }
