@@ -40,8 +40,10 @@ function fetchPopularFilmsByPage(page) {
     });
 }
 
- function fetchSearchFilmsByPage(page) {
-  const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=true&query=${searchQuery}`;
+import { searchName } from './search';
+
+function fetchSearchFilmsByPage(page) {
+  const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&page=${page}&include_adult=true&query=${searchName}`;
   return fetch(url)
     .then(response => response.json())
     .then(({ results }) => {
@@ -49,8 +51,8 @@ function fetchPopularFilmsByPage(page) {
     });
 }
 
-export default function fetchFilmsSearch(searchQuery) {
-  const url = `${BASE_URL}/search/movie?api_key=${KEY}&query=${searchQuery}`;
+export function fetchFilmsSearch(searchQuery) {
+  const url = `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${searchQuery}`;
   return fetch(url)
     .then(response => response.json())
     .then(results => {
@@ -197,7 +199,6 @@ function renderPagination(totalPages, listItems, callback) {
 }
 /* отключение стрелок на первой и последней странице
 paginationElement.addEventListener('click', disableArrowBtnAfterPageClick);
-
   function disableArrowBtnAfterPageClick(event) {
     if (event.target.tagName != 'BUTTON') {
       return;
@@ -211,7 +212,7 @@ paginationElement.addEventListener('click', disableArrowBtnAfterPageClick);
     } else {
       arrowLeft.classList.remove('disabled-arrow');
     }
-  
+
     if (currentPage === totalPages) {
       arrowRight.classList.add('disabled-arrow');
     } else {
