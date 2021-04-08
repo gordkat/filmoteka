@@ -3,9 +3,13 @@ import * as basicLightbox from 'basiclightbox';
 import noposter from '../images/no-poster.png';
 import MovieApiService from './apiService';
 import galleryTemplate from '../templates/film-card.hbs';
+import refs from './refs';
+import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/BrightTheme.css';
+import { error } from '@pnotify/core';
+import { defaults } from '@pnotify/core';
+defaults.closerHover = false;
 
-
-const mainRef = document.querySelector('.gallery-list');
 
 const addedToWatchArray = [
   ...JSON.parse(localStorage.getItem('movie-to-watch')),
@@ -14,7 +18,7 @@ const addedToQueueArray = [
   ...JSON.parse(localStorage.getItem('movie-to-queue')),
 ];
 
-mainRef.addEventListener('click', openModal);
+refs.gallery.addEventListener('click', openModal);
 
 function openModal(event) {
   if (event.target.parentNode.nodeName === 'LI') {
@@ -48,38 +52,47 @@ function openModal(event) {
           instance.show();
           const articleRef = document.querySelector('article');
           const btnRef = document.querySelector('.close-button');
-          articleRef.classList.add('modal-film-card-active');
+          articleRef.classList.add('modal-active');
           btnRef.addEventListener('click', closeModal);
           window.addEventListener('keydown', escapeBtn);
-          enableTrailerLink();
+          const searchRef = document.querySelector('.trailer-Q')
+          searchRef.addEventListener('click', enableTrailerLink)
 
           function closeModal() {
             instance.close();
-            articleRef.classList.remove('modal-film-card-active');
+            articleRef.classList.remove('modal-active');
           }
 
           function escapeBtn(event) {
             if (
               event.code === 'Escape' &&
-              articleRef.classList.contains('modal-film-card-active')
+              articleRef.classList.contains('modal-active')
             ) {
               closeModal();
             }
           }
 
-          if (!articleRef.classList.contains('modal-film-card-active')) {
+          if (!articleRef.classList.contains('modal-active')) {
             window.removeEventListener('click', escapeBtn);
             btnRef.removeEventListener('click', closeModal);
           }
 
           function enableTrailerLink() {
-            const targetName = document.querySelector('.title').textContent;
+            const targetName = document.querySelector('.modal__film-title').textContent;
             const trailerLinkRef = document.querySelector('.trailer-link');
+            trailerLinkRef.classList.add('enable');
 
             const youtubeKeyApi = 'AIzaSyDJJjQz7c6w4qaiZdybkdQTYOdfJPDLMsE';
             const baseYoutubeUrl = `https://www.googleapis.com/youtube/v3/search?q=${targetName}+official+trailer&key=${youtubeKeyApi}&part=snippet,id&kind='youtube#video'order=date&maxResults=1`;
             fetch(baseYoutubeUrl)
-              .then(response => response.json())
+              .then(response => {
+                if (!response.ok) {
+                    
+                    trailerLinkRef.target = '_self';
+                    document.querySelector('.trailer-link__text').textContent = 'Sorry, CURRENTLY UNAVAILABLE'
+                }
+                return response.json();
+              })
               .then(data => {
                 const movieId = data.items[0].id.videoId;
                 return movieId;
