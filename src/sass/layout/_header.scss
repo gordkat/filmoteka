@@ -71,6 +71,17 @@
   font-size: 12px;
   border: none;
 }
+.home-page:hover,
+.library-page:hover,
+.team__modal:hover{
+  // color: $accent-color;
+  // opacity: 0.9;
+  transform: scale(1.1);
+}
+.input-text:hover{
+  border-color: $accent-color;
+  opacity: 0.9;
+}
 .library-page {
   cursor: pointer;
   margin-right: 39px;
