@@ -173,9 +173,12 @@ function renderPagination(totalPages, listItems, callback) {
 
       button.classList.add('active');
       setupPagination(listItems, paginationElement, rows);
+      
     });
     return button;
   }
+  
+
   function onArrowLeftClick() {
     if (currentPage > 1) {
       currentPage--;
@@ -184,12 +187,14 @@ function renderPagination(totalPages, listItems, callback) {
     }
   }
 
+  
   function onArrowRightClick() {
     if (currentPage < totalPages) {
       currentPage++;
       setupPagination(listItems, paginationElement, rows);
       callback(listElement, currentPage);
     }
+    
   }
 
   setupPagination(listItems, paginationElement, rows);
