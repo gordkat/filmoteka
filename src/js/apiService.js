@@ -1,11 +1,12 @@
 import galleryTemplate from '../templates/film-card.hbs';
 import { BASE_URL, API_KEY } from './settings';
 import noposter from '../images/no-poster.png';
+import refs from './refs.js';
 import { error } from '@pnotify/core';
 import '@pnotify/core/dist/BrightTheme.css';
 import '@pnotify/core/dist/PNotify.css';
 
-const galleryRef = document.querySelector('.gallery-list');
+
 
 const notice = message => {
   error({
@@ -67,7 +68,7 @@ export default class MovieApiService {
 
   renderMovies() {
     const moviesMarkup = galleryTemplate(this.movies);
-    galleryRef.innerHTML = moviesMarkup;
+    refs.gallery.innerHTML = moviesMarkup;
   }
 
   async fetchPopularMovies() {
@@ -91,7 +92,7 @@ export default class MovieApiService {
     }
     const searchedMoviesObj = await response.json();
 
-        this.totalPages = searchedMoviesObj.total_pages;
+    this.totalPages = searchedMoviesObj.total_pages;
 
     const searchedMovies = await searchedMoviesObj.results;
     return searchedMovies;
@@ -99,7 +100,6 @@ export default class MovieApiService {
 
   async fetchMoviesByGenre() {
     const url = `${BASE_URL}/discover/movie?api_key=${API_KEY}&page=${this.page}&with_genres=${this.genreId}`;
-    // ${this.genreId}
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error();
@@ -154,8 +154,6 @@ export default class MovieApiService {
       });
 
       //Обрезаем дату
-      // const release_date = movie.release_date.split('-')[0];
-
       const release_date = movie.release_date
         ? movie.release_date.split('-')[0]
         : 'NA';
@@ -240,7 +238,7 @@ export default class MovieApiService {
 
   renderMovieCard(results) {
     const moviesMarkup = galleryTemplate(results);
-    galleryRef.insertAdjacentHTML('beforeend', moviesMarkup);
+    refs.gallery.insertAdjacentHTML('beforeend', moviesMarkup);
   }
 
   increamentPage() {
@@ -251,15 +249,3 @@ export default class MovieApiService {
     this.page = 1;
   }
 }
-
-// const movieApiService = new MovieApiService();
-
-// console.log(movieApiService.searchMoviesbyGenre());
-
-// console.log(movieApiService.searchMoviesbyGenre());
-// movieApiService.searchMoviesbyGenre('Action');
-// movieApiService.searchMoviesbyGenre('Horror');
-// console.log(movieApiService.searchMoviesbyGenre('Horror'));
-
-// console.log(movieApiService.fetchMovieByGenre(''));
-// console.log(movieApiService.searchMoviesbyGenre(''));
