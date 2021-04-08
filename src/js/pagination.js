@@ -25,7 +25,6 @@ function fetchDataOfPopularFilms() {
       return response.json();
     })
     .then(results => {
-      // console.log(results);
       renderPagination(results.total_pages, results.results, displayList);
     });
   // movieApiService.renderPopularMovies();
@@ -36,7 +35,6 @@ function fetchPopularFilmsByPage(page) {
   return fetch(url)
     .then(response => response.json())
     .then(({ results }) => {
-      console.log('results', results);
       return results;
     });
 }
@@ -92,8 +90,6 @@ function displaySearchListByPage(wrapper, page, searchQuery) {
 }
 
 function renderPagination(totalPages, listItems, callback) {
-  arrowLeft.removeEventListener('click', onArrowLeftClick);
-  arrowRight.removeEventListener('click', onArrowRightClick);
   paginationElement.innerHTML = '';
   currentPage = 1;
 
@@ -188,17 +184,17 @@ function renderPagination(totalPages, listItems, callback) {
 
   function onArrowRightClick() {
     if (currentPage < totalPages) {
-      console.log(currentPage, totalPages);
       currentPage++;
-      console.log(currentPage, totalPages);
       setupPagination(listItems, paginationElement, rows);
       callback(listElement, currentPage);
     }
   }
 
   setupPagination(listItems, paginationElement, rows);
-  arrowLeft.addEventListener('click', onArrowLeftClick);
-  arrowRight.addEventListener('click', onArrowRightClick);
+  // arrowLeft.addEventListener('click', onArrowLeftClick);
+  // arrowRight.addEventListener('click', onArrowRightClick);
+  arrowLeft.onclick = onArrowLeftClick;
+  arrowRight.onclick = onArrowRightClick;
 }
 // отключение стрелок на первой и последней странице
 paginationElement.addEventListener('click', disableArrowBtnAfterPageClick);
@@ -223,3 +219,10 @@ function disableArrowBtn(totalPages) {
     arrowRight.classList.remove('disabled-arrow');
   }
 }
+
+// function resetCurrentPage() { currentPage = 1 }
+// export function renderPagination(total Pages, listItem, callback, searchQuery) {
+//   pagination Element.innerHTMK = '';
+//   resetCurrentPage();
+//   arrowKeft.removeEventListener()
+// }
