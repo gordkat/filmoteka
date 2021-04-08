@@ -6,7 +6,7 @@ import { error } from '@pnotify/core';
 import '@pnotify/core/dist/BrightTheme.css';
 import '@pnotify/core/dist/PNotify.css';
 
-// const endBtnRef = document.querySelector('[data-number="end-page"]');
+
 
 const notice = message => {
   error({

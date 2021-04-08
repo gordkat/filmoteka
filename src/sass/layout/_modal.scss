@@ -65,7 +65,7 @@
   transform: scale(1);
 }
 
-.modal-film-card {
+.modal {
   width: 280px;
   background-color: $white-color;
   padding-top: 48px;
@@ -91,6 +91,37 @@
   }
 }
 
+.upper-case {
+  text-transform: uppercase;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: $white-color;
+  border: none;
+}
+
+.close-button__svg {
+  width: 30px;
+  height: 30px;
+}
+
+.close-button:hover {
+  transform: scale(1.08);
+  border: 2px solid $accent-color;
+  border-radius: 5px;
+}
+
+.modal__content {
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
+}
+
 .modal__poster {
   width: 240px;
   object-fit: cover;
@@ -112,15 +143,21 @@
 
     &:hover {
       height: 100%;
-      margin-top: -20px;
+      margin-top: -30px;
       box-shadow: 0px -2px 20px 1px rgba(0, 0, 0, 0.69);
     }
   }
 }
 
-.modal__card-wrapper {
+.modal__info {
+  display: block;
+
   @media screen and (min-width: 768px) {
-    display: flex;
+    width: 264px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 396px;
   }
 }
 
@@ -133,32 +170,20 @@
   }
 }
 
-.modal__info-wrapper {
-  display: block;
-
-  @media screen and (min-width: 768px) {
-    width: 264px;
-  }
-
-  @media screen and (min-width: 1024px) {
-    width: 396px;
-  }
-}
-
 .modal__info-list {
   margin-bottom: 20px;
 }
 
-.modal__info-list-item {
+.info-list__item {
   display: flex;
   font-size: 12px;
 }
 
-.modal__info-list-item:not(:last-child) {
+.info-list__item:not(:last-child) {
   margin-bottom: 10px;
 }
 
-.modal__info-list-category {
+.info-list__category {
   width: 69px;
   color: $modal-item;
   margin-right: 39px;
@@ -168,10 +193,11 @@
   }
 }
 
-.modal__info-list-data {
+.info-list__data {
   display: flex;
   width: 132px;
   align-items: center;
+  flex-wrap: wrap;
 
   @media screen and (min-width: 768px) {
     width: 156px;
@@ -182,18 +208,51 @@
   }
 }
 
+.info-list__va {
+  display: block;
+  width: 36px;
+  height: 16px;
+  background-color: $accent-color;
+  border-radius: 5px;
+  text-align: center;
+  color: $white-color;
+  padding-top: 1.5px;
+}
+
+.info-list__line {
+  color: $modal-item;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.info-list__vc {
+  display: block;
+  width: 36px;
+  height: 16px;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 1.5px;
+}
+
+.info-list__genre:not(:last-child):after {
+  content: ',';
+  margin-right: 2px;
+}
+
 .modal__description {
   margin-bottom: 21px;
 }
 
-.modal__description-header {
+.description__header {
   margin-bottom: 10px;
 }
 
-.modal__description-content {
+.description__content {
   line-height: 20px;
 }
-.modal__buttons-wrapper {
+
+.modal__buttons {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 30px;
@@ -230,66 +289,14 @@
   }
 }
 
-.upper-case {
-  text-transform: uppercase;
-}
-
 .modal__btn:hover {
   background-color: $accent-color;
   color: $white-color;
   border: none;
 }
 
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  background-color: $white-color;
-  border: none;
-}
-
-.close-button__svg {
-  width: 30px;
-  height: 30px;
-}
-
-.close-button:hover {
-  transform: scale(1.08);
-  border: 2px solid $accent-color;
-  border-radius: 5px;
-}
-
-.modal__info-list-data-va {
-  display: block;
-  width: 36px;
-  height: 16px;
-  background-color: $accent-color;
-  border-radius: 5px;
-  text-align: center;
-  color: $white-color;
-  padding-top: 1.5px;
-}
-
-.line {
-  color: $modal-item;
-  margin-left: 3px;
-  margin-right: 3px;
-}
-
-.modal__info-list-data-vc {
-  display: block;
-  width: 36px;
-  height: 16px;
-  background-color: #f7f7f7;
-  border-radius: 5px;
-  text-align: center;
-  padding-top: 1.5px;
-}
-
 .trailer-link {
-  display: block;
+  display: none;
   width: 100%;
   height: 50px;
   font-weight: 700;
@@ -312,7 +319,7 @@
   transform: scale(1.08);
 }
 
-.trailer-link__wrapper {
+.trailer-link__text {
   position: relative;
 }
 
@@ -322,7 +329,27 @@
   right: -55px;
 }
 
-.modal__info-genre:not(:last-child):after {
-  content: ',';
-  margin-right: 2px;
+
+.trailer-Q {
+  display: block;
+  width: 100%;
+  height: 50px;
+  font-weight: 700;
+  line-height: 30px;
+  border: 2px solid $accent-color;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+
+  @media screen and (min-width: 768px) {
+    padding: 10px 35px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    padding: 10px 100px;
+  }
+}
+
+.enable {
+  display: block;
 }
