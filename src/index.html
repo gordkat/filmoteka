@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge" /> -->
     <title>Filmoteka</title>
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-auth.js"></script> -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.css"
@@ -187,5 +190,18 @@
       <div id="foo"></div>
     </div>
     <!-- And modal spinner -->
+    <!-- Firebase -->
+    <div class="firebase__wrapper container">
+    <div class="firebase__wrapper-input">
+    <input id="txtEmail" class="firebase__input-email input-text" type="email" placeholder="Email">
+    <input id="txtPassword" class="firebase__input-pass input-text" type="password" placeholder="Password">
+  </div>
+    <div class="firebase__wrapper-btn">
+    <button id="btnLogin" class ="firebase__btn-login btn-action modal__btn">Log in</button>
+    <button id="btnSignUp" class ="firebase__btn-signup btn-action modal__btn">Sign Up</button>
+    <button id="btnLogout" class="firebase__btn btn-logout btn-action modal__btn hide">Log out</button>
+  </div>
+</div>
+    <!-- End firebase -->
   </body>
 </html>
