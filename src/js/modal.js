@@ -55,7 +55,8 @@ function openModal(event) {
           articleRef.classList.add('modal-active');
           btnRef.addEventListener('click', closeModal);
           window.addEventListener('keydown', escapeBtn);
-          enableTrailerLink();
+          const searchRef = document.querySelector('.trailer-Q')
+          searchRef.addEventListener('click', enableTrailerLink)
 
           function closeModal() {
             instance.close();
@@ -79,6 +80,7 @@ function openModal(event) {
           function enableTrailerLink() {
             const targetName = document.querySelector('.modal__film-title').textContent;
             const trailerLinkRef = document.querySelector('.trailer-link');
+            trailerLinkRef.classList.add('enable');
 
             const youtubeKeyApi = 'AIzaSyDJJjQz7c6w4qaiZdybkdQTYOdfJPDLMsE';
             const baseYoutubeUrl = `https://www.googleapis.com/youtube/v3/search?q=${targetName}+official+trailer&key=${youtubeKeyApi}&part=snippet,id&kind='youtube#video'order=date&maxResults=1`;
@@ -87,6 +89,7 @@ function openModal(event) {
                 if (!response.ok) {
                     
                     trailerLinkRef.target = '_self';
+                    document.querySelector('.trailer-link__text').textContent = 'Sorry, CURRENTLY UNAVAILABLE'
                 }
                 return response.json();
               })
