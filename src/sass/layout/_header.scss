@@ -73,6 +73,17 @@
 }
 .library-page {
   cursor: pointer;
+  margin-right: 39px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  color: $white-color;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+}
+.sign-in {
+  cursor: pointer;
   outline: none;
   border: none;
   background-color: transparent;
