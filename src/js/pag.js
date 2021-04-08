@@ -1,7 +1,7 @@
-import MovieApiService from './apiService';
+// import MovieApiService from './apiService';
 
 // import filmsCardTpl from '../templates/film-card.hbs';
-export const refs = {
+export const ref = {
   btnPagination: document.querySelector('.pagination__container_pages'),
   pageNumbers: document.querySelector('.pagenumbers'),
   firstBtn: document.querySelector('[data-number="first"]'),
@@ -13,7 +13,7 @@ export const refs = {
   endDots: document.querySelector('.end'),
 };
 
-const movieApiService = new MovieApiService();
+// const movieApiService = new MovieApiService();
 
 function onBtnPagination(event) {
   const pressedBtn = event.target;

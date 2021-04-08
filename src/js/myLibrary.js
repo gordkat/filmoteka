@@ -1,24 +1,18 @@
 import galleryTemplate from '../templates/film-card.hbs';
 import MovieApiService from './apiService';
+import empty from '../images/empty.jpg';
+import { notice } from '@pnotify/core';
+import '@pnotify/core/dist/BrightTheme.css';
+import '@pnotify/core/dist/PNotify.css';
+import refs from './refs';
 import unsetInfiniteScroll from './genresSearch';
 
-// console.log(document.querySelector('.observer'));
-
-//import { renderPagination } from './pagination';
-
-// console.log(addObserverDiv);
-
-const refs = {
-  headerContainer: document.querySelector('.header'),
-  btnMyLibrary: document.querySelector('.library-page'),
-  btnHome: document.querySelector('.home-page'),
-  formSearch: document.querySelector('.form-search'),
-  btnAction: document.querySelector('.btn-my-library'),
-  btnWatched: document.querySelector('.watched'),
-  btnQueue: document.querySelector('.queue'),
-  gallery: document.querySelector('.gallery-list'),
-  /*пагинация
-  paginationContainer: document.querySelector('.pagination__container'),*/
+const news = message => {
+  notice({
+    text: message,
+    maxTextHeight: null,
+    delay: 2000,
+  });
 };
 
 //Рендерим фильмы из массива объектов
@@ -29,29 +23,29 @@ const renderMovieCard = results => {
 
 //Очищаем галлерею
 const clearAll = () => {
-    unsetInfiniteScroll();
+  unsetInfiniteScroll();
   refs.gallery.innerHTML = '';
 };
 
 //Колбек для кнопки Home
 const onHome = () => {
-  refs.formSearch.reset();
+  refs.form.reset();
   clearAll();
-   refs.formSearch.classList.remove('form-search--hidden');
+  refs.paginationContainer.style.display = 'block';
+  refs.form.classList.remove('form-search--hidden');
   refs.btnAction.classList.add('btn-my-library--hidden');
   refs.btnMyLibrary.classList.remove('current');
   refs.btnHome.classList.add('current');
   refs.headerContainer.classList.remove('library-main');
   const movieApiServie = new MovieApiService();
   movieApiServie.renderPopularMovies();
-
-  // movieApiServie.fetchMovieById(464052);
 };
 
 //Колбек для кнопки My library
-const onMyLibrary = event => {
+const onMyLibrary = () => {
   clearAll();
-  refs.formSearch.classList.add('form-search--hidden');
+  refs.paginationContainer.style.display = 'none';
+  refs.form.classList.add('form-search--hidden');
   refs.btnAction.classList.remove('btn-my-library--hidden');
   refs.btnMyLibrary.classList.add('current');
   refs.btnHome.classList.remove('current');
@@ -65,19 +59,13 @@ const onWatched = () => {
   refs.btnWatched.classList.add('active');
   refs.btnQueue.classList.remove('active');
   let watchedMovieArray = JSON.parse(localStorage.getItem('movie-to-watch'));
-  if (!watchedMovieArray) {
+  if (!watchedMovieArray || (!watchedMovieArray[0] && !watchedMovieArray[1])) {
+    refs.gallery.innerHTML = `<img src="${empty}"  alt="There is nothing" />`;
+    news('There is nothing her');
     return;
   }
+
   watchedMovieArray = watchedMovieArray.slice(1);
-
-  /*пагинация 
-  if(localStorage.getItem('movie-to-watch').lenght) 
-  {renderMovieCard(localStorage.getItem('movie-to-watch').slice(0, 20))
-  .then(results => {
-      renderMovieCard(results);
-      refs.paginationContainer.style.display = 'block';})}
-      else {refs.paginationContainer.style.display = 'none';}*/
-
   renderMovieCard(watchedMovieArray);
 };
 
@@ -87,19 +75,12 @@ const onQueue = () => {
   refs.btnQueue.classList.add('active');
   refs.btnWatched.classList.remove('active');
   let queueMovieArray = JSON.parse(localStorage.getItem('movie-to-queue'));
-  if (!queueMovieArray) {
+  if (!queueMovieArray || (!queueMovieArray[0] && !queueMovieArray[1])) {
+    refs.gallery.innerHTML = `<img src="${empty}"  alt="There is nothing" />`;
+    news('There is nothing her');
     return;
   }
   queueMovieArray = queueMovieArray.slice(1);
-
-  /*пагинация 
-  if(localStorage.getItem('movie-to-queue').lenght) 
-  {renderMovieCard(localStorage.getItem('movie-to-queue').slice(0, 20))
-  .then(results => {
-      renderMovieCard(results);
-      refs.paginationContainer.style.display = 'block';})}
-      else {refs.paginationContainer.style.display = 'none';}*/
-
   renderMovieCard(queueMovieArray);
 };
 
