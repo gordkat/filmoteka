@@ -25,7 +25,6 @@ function fetchDataOfPopularFilms() {
       return response.json();
     })
     .then(results => {
-      // console.log(results);
       renderPagination(results.total_pages, results.results, displayList);
     });
   // movieApiService.renderPopularMovies();
@@ -36,7 +35,6 @@ function fetchPopularFilmsByPage(page) {
   return fetch(url)
     .then(response => response.json())
     .then(({ results }) => {
-      console.log('results', results);
       return results;
     });
 }
@@ -193,8 +191,10 @@ function renderPagination(totalPages, listItems, callback) {
   }
 
   setupPagination(listItems, paginationElement, rows);
-  arrowLeft.addEventListener('click', onArrowLeftClick);
-  arrowRight.addEventListener('click', onArrowRightClick);
+  // arrowLeft.addEventListener('click', onArrowLeftClick);
+  // arrowRight.addEventListener('click', onArrowRightClick);
+  arrowLeft.onclick = onArrowLeftClick;
+  arrowRight.onclick = onArrowRightClick;
 }
 // отключение стрелок на первой и последней странице
 paginationElement.addEventListener('click', disableArrowBtnAfterPageClick);
@@ -219,3 +219,10 @@ function disableArrowBtn(totalPages) {
     arrowRight.classList.remove('disabled-arrow');
   }
 }
+
+// function resetCurrentPage() { currentPage = 1 }
+// export function renderPagination(total Pages, listItem, callback, searchQuery) {
+//   pagination Element.innerHTMK = '';
+//   resetCurrentPage();
+//   arrowKeft.removeEventListener()
+// }
