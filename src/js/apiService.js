@@ -5,6 +5,7 @@ import refs from './refs.js';
 import { error } from '@pnotify/core';
 import '@pnotify/core/dist/BrightTheme.css';
 import '@pnotify/core/dist/PNotify.css';
+import spinnerModal from './spinner'; //Функция которая добавляет или убирает клас is-hidden (toggle)
 
 
 
@@ -208,12 +209,15 @@ export default class MovieApiService {
   }
 
   async renderPopularMovies() {
+    spinnerModal(); //Убирает клас is-hidden
     try {
       const normalizedMovies = await this.getPopularMovies();
       this.renderMovieCard(normalizedMovies);
+      spinnerModal(); //Добавляет клас is-hidden
     } catch (error) {
       notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
       console.log(error);
+      spinnerModal(); //Добавляет клас is-hidden
     }
   }
 
