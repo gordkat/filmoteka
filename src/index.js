@@ -12,4 +12,4 @@ import './js/up-btn';
 import './js/spinner';
 import './js/genresSearch';
 // import './js/pag';
-import './js/firebase.js';
+// import './js/firebase.js';
