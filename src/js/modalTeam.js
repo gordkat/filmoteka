@@ -149,7 +149,7 @@ const markup = `<ul class="team__wrapper">
                         type="image/svg+xml" class="logo__icon" width="16" height="16">
                         <use type="image/svg+xml" href="${social}#github"></use>
                     </svg></a></li>
-            <li class="team__icon list"><a class="team__git" href="https://linkedin.com" target="_blank"><svg
+            <li class="team__icon list"><a class="team__git" href="https://www.linkedin.com/in/elena-kichinskaia-191a02206/" target="_blank"><svg
                         type="image/svg+xml" class="logo__icon" width="16" height="16">
                         <use type="image/svg+xml" type="image/svg+xml" href="${social}#linkedin"></use>
                     </svg></a></li>
