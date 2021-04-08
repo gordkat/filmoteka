@@ -92,6 +92,8 @@ function displaySearchListByPage(wrapper, page, searchQuery) {
 }
 
 function renderPagination(totalPages, listItems, callback) {
+  arrowLeft.removeEventListener('click', onArrowLeftClick);
+  arrowRight.removeEventListener('click', onArrowRightClick);
   paginationElement.innerHTML = '';
   currentPage = 1;
 
@@ -186,7 +188,9 @@ function renderPagination(totalPages, listItems, callback) {
 
   function onArrowRightClick() {
     if (currentPage < totalPages) {
+      console.log(currentPage, totalPages);
       currentPage++;
+      console.log(currentPage, totalPages);
       setupPagination(listItems, paginationElement, rows);
       callback(listElement, currentPage);
     }
