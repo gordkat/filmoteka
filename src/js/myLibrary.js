@@ -24,8 +24,7 @@ const refs = {
 //Рендерим фильмы из массива объектов
 const renderMovieCard = results => {
   refs.gallery.insertAdjacentHTML('beforeend', galleryTemplate(results));
-  console.log(results);
-};
+ };
 
 //Очищаем галлерею
 const clearAll = () => {

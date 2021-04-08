@@ -5,6 +5,9 @@ import refs from './refs.js';
 import { fetchFilmsSearch } from './pagination';
 import { BASE_URL, API_KEY } from './settings';
 import spinnerModal from './spinner'; //Функция которая добавляет или убирает клас is-hidden (toggle)
+import unsetInfiniteScroll from './genresSearch';
+
+
 
 const movieApiService = new MovieApiService();
 
@@ -19,6 +22,7 @@ function onSearch(e) {
     return movieApiService.getPopularMovies().then(renderMovieCard);
   }
 
+  unsetInfiniteScroll()
   movieApiService.resetPage();
   movieApiService.query = refs.inputForm.value.trim();
   console.log(movieApiService.query);
