@@ -3,6 +3,8 @@ import MovieApiService from './apiService';
 import { BASE_URL, API_KEY } from './settings';
 import { Spinner } from 'spin.js';
 import { searchName } from './search';
+import { toPageTopOnClick } from './up-btn';
+console.log(toPageTopOnClick);
 
 const movieApiService = new MovieApiService();
 const spinner = new Spinner().spin();
@@ -171,28 +173,27 @@ function renderPagination(totalPages, listItems, callback) {
 
       button.classList.add('active');
       setupPagination(listItems, paginationElement, rows);
-      
+      toPageTopOnClick();
     });
     return button;
   }
-  
 
   function onArrowLeftClick() {
     if (currentPage > 1) {
       currentPage--;
       setupPagination(listItems, paginationElement, rows);
       callback(listElement, currentPage);
+      toPageTopOnClick();
     }
   }
 
-  
   function onArrowRightClick() {
     if (currentPage < totalPages) {
       currentPage++;
       setupPagination(listItems, paginationElement, rows);
       callback(listElement, currentPage);
+      toPageTopOnClick();
     }
-    
   }
 
   setupPagination(listItems, paginationElement, rows);
