@@ -6,7 +6,6 @@ import '@pnotify/core/dist/BrightTheme.css';
 import '@pnotify/core/dist/PNotify.css';
 
 const galleryRef = document.querySelector('.gallery-list');
-// const endBtnRef = document.querySelector('[data-number="end-page"]');
 
 const notice = message => {
   error({
