@@ -5,26 +5,26 @@ const Theme = {
   DARK: 'dark-theme',
 };
 
+loadingThem();
+refs.switchToggle.addEventListener('change', chengeTheme);
 
-refs.switchToggle.addEventListener('change', checkedTheme);
+function chengeTheme() {
+  refs.body.classList.toggle(Theme.DARK);
+  refs.body.classList.toggle(Theme.LIGHT);
 
-removeTheme();
-
-function checkedTheme() {
-  if (refs.switchToggle.checked) {
-    refs.body.classList.remove(Theme.LIGHT);
-    refs.body.classList.add(Theme.DARK);
-    localStorage.setItem('theme', Theme.DARK)
-  } else {
-    refs.body.classList.remove(Theme.DARK);
-    refs.body.classList.add(Theme.LIGHT);
-    localStorage.setItem('theme', Theme.LIGHT)
-  }
+  getCurrentTheme(refs.body.classList);
 }
 
-function removeTheme() {
-  if (localStorage.getItem('theme') !== Theme.LIGHT) {
-    refs.body.classList.add(Theme.DARK);
+function getCurrentTheme(currentThem) {
+  localStorage.setItem('Theme', currentThem);
+}
+
+function loadingThem() {
+  const savedThem = localStorage.getItem('Theme');
+  if (savedThem === Theme.DARK) {
+    refs.body.classList.add(savedThem);
     refs.switchToggle.checked = true;
-  } 
+  } else {
+    refs.body.classList.add(Theme.LIGHT);
+  }
 }
