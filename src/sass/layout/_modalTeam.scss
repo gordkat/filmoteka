@@ -93,8 +93,14 @@
 .team__modal {
   text-decoration: underline;
 }
+.team__social {
+  display: flex;
+  :not(:first-child) {
+    margin-left: 7px;
+  }
+}
 
-.team__git {
+.team__icon {
   transform: scale(1);
 
   &:hover,
