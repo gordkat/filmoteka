@@ -11,6 +11,6 @@ import './js/theme';
 import './js/up-btn';
 import './js/spinner';
 import './js/genresSearch';
-import './js/scrollPagination';
+// import './js/scrollPagination';
 // import './js/pag';
 // import './js/firebase.js';
