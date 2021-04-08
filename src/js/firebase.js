@@ -1,5 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import '@pnotify/core/dist/BrightTheme.css';
+import '@pnotify/core/dist/PNotify.css';
+import { error } from '@pnotify/core';
 // import * as firebase from 'firebase'
 // import { EntryPlugin } from 'webpack';
 var firebaseConfig = {
@@ -32,7 +35,12 @@ refs.btnLogin.addEventListener('click', e => {
 
 //sign in
     const promise = auth.signInWithEmailAndPassword(email, pass);
-    promise.catch(e => console.log(e))
+    promise.catch(e => {
+         error({
+    text: 'There is no user with such email and password, please, sign up',
+    delay: 2000,
+  });
+    })
  
 })
 
@@ -46,13 +54,19 @@ refs.btnSignUp.addEventListener('click', e => {
     const promise = auth.createUserWithEmailAndPassword(email, pass);
     promise
         // .then(user =>console.log(user))
-        .catch(e => console.log(e))
+        .catch(e => {
+            error({
+    text: 'You are already signed up!',
+    delay: 2000,
+  });
+        })
 });
 
     
     refs.btnLogout.addEventListener('click', e => {
         firebase.default.auth().signOut()
         // refs.btnLogout.classList.add('hide');
+
     })
 
     //add a real time listener
@@ -61,8 +75,10 @@ refs.btnSignUp.addEventListener('click', e => {
         if (firebaseUser) {
             console.log(firebaseUser);
             refs.btnLogout.classList.remove('hide');
+            refs.btnLogin.textContent = 'Logged'
         } else {
             console.log('not logged in');
             refs.btnLogout.classList.add('hide');
+            refs.btnLogin.textContent = 'Log in'
         }
     })
