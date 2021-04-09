@@ -4,7 +4,6 @@ import { BASE_URL, API_KEY } from './settings';
 import { Spinner } from 'spin.js';
 import { searchName } from './search';
 import { toPageTopOnClick } from './up-btn';
-console.log(toPageTopOnClick);
 
 const movieApiService = new MovieApiService();
 const spinner = new Spinner().spin();
@@ -165,6 +164,7 @@ function renderPagination(totalPages, listItems, callback) {
     if (currentPage == page) button.classList.add('active');
 
     button.addEventListener('click', function () {
+      toPageTopOnClick();
       currentPage = page;
       callback(listElement, currentPage, searchQuery);
 
@@ -173,26 +173,25 @@ function renderPagination(totalPages, listItems, callback) {
 
       button.classList.add('active');
       setupPagination(listItems, paginationElement, rows);
-      toPageTopOnClick();
     });
     return button;
   }
 
   function onArrowLeftClick() {
     if (currentPage > 1) {
+      toPageTopOnClick();
       currentPage--;
       setupPagination(listItems, paginationElement, rows);
       callback(listElement, currentPage);
-      toPageTopOnClick();
     }
   }
 
   function onArrowRightClick() {
     if (currentPage < totalPages) {
+      toPageTopOnClick();
       currentPage++;
       setupPagination(listItems, paginationElement, rows);
       callback(listElement, currentPage);
-      toPageTopOnClick();
     }
   }
 

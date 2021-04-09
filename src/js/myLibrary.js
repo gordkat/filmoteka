@@ -18,7 +18,7 @@ const news = message => {
 //Рендерим фильмы из массива объектов
 const renderMovieCard = results => {
   refs.gallery.insertAdjacentHTML('beforeend', galleryTemplate(results));
- };
+};
 
 //Очищаем галлерею
 const clearAll = () => {
@@ -76,7 +76,7 @@ const onQueue = () => {
   let queueMovieArray = JSON.parse(localStorage.getItem('movie-to-queue'));
   if (!queueMovieArray || (!queueMovieArray[0] && !queueMovieArray[1])) {
     refs.gallery.innerHTML = `<img src="${empty}"  alt="There is nothing" />`;
-    news('There is nothing her');
+    news('There is nothing here');
     return;
   }
   queueMovieArray = queueMovieArray.slice(1);
