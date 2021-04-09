@@ -7,8 +7,6 @@ import '@pnotify/core/dist/BrightTheme.css';
 import '@pnotify/core/dist/PNotify.css';
 import spinnerModal from './spinner'; //Функция которая добавляет или убирает клас is-hidden (toggle)
 
-
-
 const notice = message => {
   error({
     text: message,
@@ -18,59 +16,59 @@ const notice = message => {
 };
 
 export default class MovieApiService {
-  #movies = [];
+  // #movies = [];
   constructor() {
-    this.#movies = [];
+    // this.#movies = [];
     this.searchQuery = '';
     this.page = 1;
-    this.totalPages = 0;
+    // this.totalPages = 0;
     this.genreId;
     this.genre = '';
-    this.goToPrevPage = this.goToPrevPage.bind(this);
-    this.goToNextPage = this.goToNextPage.bind(this);
+    // this.goToPrevPage = this.goToPrevPage.bind(this);
+    // this.goToNextPage = this.goToNextPage.bind(this);
   }
 
-  get movies() {
-    return this.#movies;
-  }
+  // get movies() {
+  //   return this.#movies;
+  // }
 
-  set movies(movieList) {
-    this.#movies = movieList;
-    this.renderMovies();
-  }
+  // set movies(movieList) {
+  //   this.#movies = movieList;
+  //   this.renderMovies();
+  // }
 
-  async goToPrevPage() {
-    if (this.page === 1) return;
-    this.page -= 1;
-    try {
-      this.movies = await this.getPopularMovies();
-    } catch {
-      notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
-    }
-  }
+  // async goToPrevPage() {
+  //   if (this.page === 1) return;
+  //   this.page -= 1;
+  //   try {
+  //     this.movies = await this.getPopularMovies();
+  //   } catch {
+  //     notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
+  //   }
+  // }
 
-  async goToNextPage() {
-    if (this.page === this.totalPages) return;
-    this.page += 1;
-    try {
-      this.movies = await this.getPopularMovies();
-    } catch {
-      notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
-    }
-  }
+  // async goToNextPage() {
+  //   if (this.page === this.totalPages) return;
+  //   this.page += 1;
+  //   try {
+  //     this.movies = await this.getPopularMovies();
+  //   } catch {
+  //     notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
+  //   }
+  // }
 
-  async goToNumberPage() {
-    try {
-      this.movies = await this.getPopularMovies();
-    } catch {
-      notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
-    }
-  }
+  // async goToNumberPage() {
+  //   try {
+  //     this.movies = await this.getPopularMovies();
+  //   } catch {
+  //     notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
+  //   }
+  // }
 
-  renderMovies() {
-    const moviesMarkup = galleryTemplate(this.movies);
-    refs.gallery.innerHTML = moviesMarkup;
-  }
+  // renderMovies() {
+  //   const moviesMarkup = galleryTemplate(this.movies);
+  //   refs.gallery.innerHTML = moviesMarkup;
+  // }
 
   async fetchPopularMovies() {
     const url = `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=${this.page}`;
@@ -79,7 +77,7 @@ export default class MovieApiService {
       throw new Error();
     }
     const popularMoviesObj = await response.json();
-    this.totalPages = popularMoviesObj.total_pages;
+    // this.totalPages = popularMoviesObj.total_pages;
     // endBtnRef.textContent = this.totalPages;
     const popularMovies = await popularMoviesObj.results;
     return popularMovies;
@@ -93,7 +91,7 @@ export default class MovieApiService {
     }
     const searchedMoviesObj = await response.json();
 
-    this.totalPages = searchedMoviesObj.total_pages;
+    // this.totalPages = searchedMoviesObj.total_pages;
 
     const searchedMovies = await searchedMoviesObj.results;
     return searchedMovies;
@@ -107,7 +105,6 @@ export default class MovieApiService {
     }
     const searchedMoviesObj = await response.json();
     const searchedMovies = await searchedMoviesObj.results;
-
     return searchedMovies;
   }
 
@@ -180,14 +177,14 @@ export default class MovieApiService {
     this.searchQuery = newQuery;
   }
 
-  // // популярные фильмы, готовые к рендеру
+  // популярные фильмы, готовые к рендеру
   async getPopularMovies() {
     const fetchedPopularMovies = await this.fetchPopularMovies();
     const normalizedMovies = await this.fetchNormalizer(fetchedPopularMovies);
     return normalizedMovies;
   }
 
-  // // фильмы из поиска, готовые к рендеру
+  // фильмы из поиска, готовые к рендеру
   async searchMovies() {
     const fetchedMovieBySearch = await this.fetchMovieBySearch();
     const normalizedMovies = await this.fetchNormalizer(fetchedMovieBySearch);
@@ -215,28 +212,26 @@ export default class MovieApiService {
       this.renderMovieCard(normalizedMovies);
       spinnerModal(); //Добавляет клас is-hidden
     } catch (error) {
-      notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
-      console.log(error);
+      notice('Oops! Something went wrong!');
       spinnerModal(); //Добавляет клас is-hidden
     }
   }
 
-  async renderSerchedMovies() {
-    try {
-      const normalizedMovies = await this.searchMovies();
-      this.renderMovieCard(normalizedMovies);
-    } catch {
-      notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
-    }
-  }
+  // async renderSerchedMovies() {
+  //   try {
+  //     const normalizedMovies = await this.searchMovies();
+  //     this.renderMovieCard(normalizedMovies);
+  //   } catch {
+  //     notice('Oops! Something went wrong!');
+  //   }
+  // }
 
   async renderMoviesByGenre(genre) {
     try {
       const normalizedMovies = await this.getMoviesByGenre(genre);
       this.renderMovieCard(normalizedMovies);
     } catch (error) {
-      notice('Упс! Что-то пошло не так. Попробуйте еще раз!');
-      console.log(error);
+      notice('Oops! Something went wrong!');
     }
   }
 
