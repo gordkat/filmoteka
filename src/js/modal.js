@@ -115,10 +115,8 @@ function openModal(event) {
           addToQueueBtn: document.querySelector('.add-to-queue-btn'),
           }
 
-          //Отображает статус кнопки "watched" при открытии модального окна
+          //Отображает статус кнопки "watched" и "queue" при открытии модального окна
           saveBtnStatusOnModalOpen(addedToWatchArray, refs.addToWatchBtn, "watched");
-
-          //Отображает статус кнопки "queue" при открытии модального окна
           saveBtnStatusOnModalOpen(addedToQueueArray, refs.addToQueueBtn, "queue");
 
           //Вешает слушателей событий на кнопки "watch" и "queue" в модальном окне
@@ -149,7 +147,6 @@ function openModal(event) {
                 'movie-to-watch',
                 JSON.stringify(addedToWatchArray),
               );
-              refs.addToQueueBtn.disabled = true;
             } else {
               // Удаляет фильм из local storage при нажатии на кнопку "Remove from watched"
               refs.addToWatchBtn.classList.add('add-to-watched-btn');
@@ -172,16 +169,11 @@ function openModal(event) {
               // Проверяет на какой вкладке находимся
               const homeRef = document.querySelector('.home-page');
               if(!homeRef.classList.contains('current')){
-              // Рендерит разметку с новым массивом без удаленного фильма
+                // Рендерит разметку с новым массивом без удаленного фильма
                 pageRerender('movie-to-watch');
-                if (addedToWatchArray.length === 1) {
-                const refs = {
-                  gallery: document.querySelector('.gallery-list'),
-                }
-                refs.gallery.innerHTML = `<img src="${empty}"  alt="There is nothing" />`;
-                }
+                //Добавляет картинку при удалении последнего фильма из local storage
+                addDefaultPuctureOnLastMovieRemoval(addedToWatchArray);
               }
-              refs.addToQueueBtn.disabled = false;
             }
           }
 
@@ -207,7 +199,6 @@ function openModal(event) {
                 'movie-to-queue',
                 JSON.stringify(addedToQueueArray),
               );
-              refs.addToWatchBtn.disabled = true;
             } else {
               // Удаляет фильм из local storage при нажатии на кнопку "Remove from queue"
               refs.addToQueueBtn.classList.add('add-to-queue-btn');
@@ -233,14 +224,9 @@ function openModal(event) {
               if(!homeRef.classList.contains('current') && queueRef.classList.contains('queue')){
               // Рендерит разметку с новым массивом без удаленного фильма
                 pageRerender('movie-to-queue');
-              if (addedToQueueArray.length === 1) {
-                const refs = {
-                  gallery: document.querySelector('.gallery-list'),
-                }
-                refs.gallery.innerHTML = `<img src="${empty}"  alt="There is nothing" />`;
-                }
+              //Добавляет картинку при удалении последнего фильма из local storage
+                addDefaultPuctureOnLastMovieRemoval(addedToQueueArray);
               }
-              refs.addToWatchBtn.disabled = false;
             }
           }
         });
@@ -268,11 +254,6 @@ if (idArray.includes(addedMovie.id)) {
   btnRef.classList.remove(`add-to-${className}-btn`);
   btnRef.classList.add(`remove-from-${className}-btn`);
   btnRef.innerText = `REMOVE FROM ${className.toUpperCase()}`;
-  if (className === 'watched') {
-    refs.addToQueueBtn.disabled = true;
-  } if (className === 'queue') {
-    refs.addToWatchBtn.disabled = true;
-  }
 }
 }
 
@@ -294,4 +275,14 @@ function pageRerender(localStorageKey) {
   movieArray = movieArray.slice(1);
 
   renderMovieCard(movieArray);
+}
+
+//Добавляет картинку при удалении последнего фильма из local storage
+function addDefaultPuctureOnLastMovieRemoval(array) { 
+  if (array.length === 1) {
+  const refs = {
+    gallery: document.querySelector('.gallery-list'),
+  }
+  refs.gallery.innerHTML = `<img src="${empty}"  alt="There is nothing" />`;
+  }
 }
