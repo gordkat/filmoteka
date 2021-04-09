@@ -96,6 +96,9 @@
   }
 }
 @media screen and (min-width: 768px) and (max-width: 1023px) {
+    .poster{
+    width: 274px;
+  }
   .container {
     width: 618px;
     margin: 0 auto;
@@ -122,6 +125,9 @@
   }
 }
 @media screen and (min-width: 1024px) {
+    .poster{
+    width: 274px;
+  }
   .gallery-list {
     display: flex;
     flex-wrap: wrap;
