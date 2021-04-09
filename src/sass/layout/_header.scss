@@ -1,12 +1,13 @@
 .main-container {
+  padding: 0px 5px;
+  min-width: 280px;
   background: black;
-  background-image: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 1) 78%,
-    rgba(45, 36, 29, 1) 95%
-  );
+  // background-image: radial-gradient(
+  //   circle,
+  //   rgba(0, 0, 0, 1) 78%,
+  //   rgba(45, 36, 29, 1) 95%
+  // );
 }
-
 .header {
   background-image: url(../images/mobile-home.jpg);
   height: 230px;
