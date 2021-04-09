@@ -55,7 +55,7 @@ function openModal(event) {
           articleRef.classList.add('modal-active');
           btnRef.addEventListener('click', closeModal);
           window.addEventListener('keydown', escapeBtn);
-          const searchRef = document.querySelector('.trailer-Q')
+          const searchRef = document.querySelector('.search-for-trailer')
           searchRef.addEventListener('click', enableTrailerLink)
 
           function closeModal() {
@@ -80,6 +80,8 @@ function openModal(event) {
           function enableTrailerLink() {
             const targetName = document.querySelector('.modal__film-title').textContent;
             const trailerLinkRef = document.querySelector('.trailer-link');
+            const trailerTextRef = document.querySelector('.trailer-link__text')
+            searchRef.classList.add('unable')
             trailerLinkRef.classList.add('enable');
 
             const youtubeKeyApi = 'AIzaSyDJJjQz7c6w4qaiZdybkdQTYOdfJPDLMsE';
@@ -87,10 +89,12 @@ function openModal(event) {
             fetch(baseYoutubeUrl)
               .then(response => {
                 if (!response.ok) {
-                    
                     trailerLinkRef.target = '_self';
-                    document.querySelector('.trailer-link__text').textContent = 'Sorry, CURRENTLY UNAVAILABLE'
+                    trailerTextRef.textContent = 'Sorry, CURRENTLY UNAVAILABLE';
+                    trailerLinkRef.title='The request cannot be completed because the youtube quota is exceeded';
+                    return;
                 }
+
                 return response.json();
               })
               .then(data => {
@@ -99,7 +103,7 @@ function openModal(event) {
               })
               .then(data => {
                 trailerLinkRef.addEventListener('click', function () {
-                  trailerLinkRef.href = `https://www.youtube.com/embed/${data}?enablejsapi=1`;
+                trailerLinkRef.href = `https://www.youtube.com/embed/${data}?enablejsapi=1`;
                 });
               });
           }
