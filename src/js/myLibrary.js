@@ -60,7 +60,7 @@ const onWatched = () => {
   let watchedMovieArray = JSON.parse(localStorage.getItem('movie-to-watch'));
   if (!watchedMovieArray || (!watchedMovieArray[0] && !watchedMovieArray[1])) {
     refs.gallery.innerHTML = `<img src="${empty}"  alt="There is nothing" />`;
-    news('There is nothing her');
+    news('There is nothing here');
     return;
   }
 
