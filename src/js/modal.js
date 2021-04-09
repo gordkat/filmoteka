@@ -9,6 +9,7 @@ import '@pnotify/core/dist/BrightTheme.css';
 import { error } from '@pnotify/core';
 import { defaults } from '@pnotify/core';
 defaults.closerHover = false;
+import empty from '../images/empty.jpg';
 
 
 const addedToWatchArray = [
@@ -169,6 +170,12 @@ function openModal(event) {
               if(!homeRef.classList.contains('current')){
               // Рендерит разметку с новым массивом без удаленного фильма
                 pageRerender('movie-to-watch');
+                if (addedToWatchArray.length === 1) {
+                const refs = {
+                  gallery: document.querySelector('.gallery-list'),
+                }
+                refs.gallery.innerHTML = `<img src="${empty}"  alt="There is nothing" />`;
+                }
               }
               refs.addToQueueBtn.disabled = false;
             }
@@ -203,11 +210,13 @@ function openModal(event) {
               refs.addToQueueBtn.classList.remove('remove-from-queue-btn');
               refs.addToQueueBtn.innerText = 'ADD TO QUEUE';
               const idArray = addedToQueueArray.map(movie => {
+
                 if (!movie) {
                   return;
                 }
                 return movie.id;
               });
+
               const index = idArray.indexOf(addedMovie.id);
               addedToQueueArray.splice(index, 1);
               localStorage.setItem(
@@ -220,6 +229,12 @@ function openModal(event) {
               if(!homeRef.classList.contains('current') && queueRef.classList.contains('queue')){
               // Рендерит разметку с новым массивом без удаленного фильма
                 pageRerender('movie-to-queue');
+              if (addedToQueueArray.length === 1) {
+                const refs = {
+                  gallery: document.querySelector('.gallery-list'),
+                }
+                refs.gallery.innerHTML = `<img src="${empty}"  alt="There is nothing" />`;
+                }
               }
               refs.addToWatchBtn.disabled = false;
             }
